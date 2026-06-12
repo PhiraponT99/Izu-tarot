@@ -21,10 +21,10 @@ The app uses `audio.loop = true` so the sound will repeat seamlessly.
 
 ## og-image.png
 
-Add the social share preview image at:
+The social share preview image is available at:
 ```
 /public/og-image.png
 ```
 
-Recommended size: 1200 × 630 pixels. The Open Graph and Twitter metadata in
-`index.html` already reference this production asset.
+Size: 1200 × 630 pixels. The Open Graph and Twitter metadata in `index.html`
+reference this asset.
