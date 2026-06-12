@@ -254,7 +254,7 @@ const RevealModal: React.FC<RevealModalProps> = ({
           animate={{ opacity: 1 }}
           exit={{ opacity: 0 }}
           transition={{ duration: 0.4 }}
-          className="fixed inset-0 z-50 flex items-center justify-center p-4 modal-backdrop"
+          className="modal-backdrop fixed inset-0 z-50 flex items-center justify-center p-2 sm:p-4"
           style={{ backgroundColor: 'rgba(8, 14, 26, 0.85)' }}
           onClick={handleBackdropClick}
           role="dialog"
@@ -267,7 +267,7 @@ const RevealModal: React.FC<RevealModalProps> = ({
             animate={{ opacity: 1, scale: 1, y: 0 }}
             exit={{ opacity: 0, scale: 0.85, y: 30 }}
             transition={{ type: 'spring', stiffness: 200, damping: 25 }}
-            className="relative w-full max-w-3xl max-h-[90vh] overflow-y-auto rounded-2xl"
+            className="relative max-h-[calc(100dvh-1rem)] w-full max-w-3xl overflow-y-auto rounded-2xl sm:max-h-[90vh]"
             style={{
               background:
                 'linear-gradient(145deg, rgba(30,27,75,0.95) 0%, rgba(15,23,42,0.98) 100%)',
@@ -278,7 +278,7 @@ const RevealModal: React.FC<RevealModalProps> = ({
             onClick={(e) => e.stopPropagation()}
           >
             {/* Modal header */}
-            <div className="relative px-8 pt-8 pb-4 text-center">
+            <div className="relative px-4 pb-3 pt-6 text-center sm:px-8 sm:pb-4 sm:pt-8">
               {/* Top decorative line */}
               <div
                 className="absolute top-0 left-1/2 -translate-x-1/2 w-24 h-px"
@@ -311,7 +311,7 @@ const RevealModal: React.FC<RevealModalProps> = ({
             </div>
 
             {/* Cards row */}
-            <div className="flex flex-col sm:flex-row items-center sm:items-start justify-center gap-8 sm:gap-6 px-6 pb-6 pt-4">
+            <div className="flex flex-col items-center justify-center gap-6 px-4 pb-6 pt-3 sm:flex-row sm:items-start sm:gap-6 sm:px-6 sm:pt-4">
               {selectedCards.map((card, i) => (
                 <RevealedCard
                   key={card.id}
@@ -331,7 +331,7 @@ const RevealModal: React.FC<RevealModalProps> = ({
                   initial={{ opacity: 0, y: 10 }}
                   animate={{ opacity: 1, y: 0 }}
                   transition={{ delay: 0.3 }}
-                  className="px-8 pb-4 text-center"
+                  className="px-4 pb-4 text-center sm:px-8"
                 >
                   <div
                     className="h-px mb-4"
@@ -353,7 +353,7 @@ const RevealModal: React.FC<RevealModalProps> = ({
             </AnimatePresence>
 
             {/* Close button */}
-            <div className="flex justify-center pb-8">
+            <div className="sticky bottom-0 z-20 flex justify-center bg-gradient-to-t from-slate-950 via-slate-950/95 to-transparent px-4 pb-5 pt-8 sm:pb-8">
               <button
                 id="modal-close-btn"
                 onClick={handleClose}

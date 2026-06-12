@@ -106,7 +106,7 @@ const TarotBoard: React.FC<TarotBoardProps> = ({
      * gap-5 on desktop / gap-3 on mobile gives breathing room without
      * pushing the fan too far from the surrounding text.
      */
-    <div className="flex flex-col items-center gap-5 w-full">
+    <div className="flex w-full flex-col items-center gap-4 sm:gap-5">
 
       {/* ── Subtitle / mode tagline ── */}
       <motion.p
@@ -130,7 +130,7 @@ const TarotBoard: React.FC<TarotBoardProps> = ({
           exit={{ opacity: 0, y: 6 }}
           transition={{ duration: 0.35 }}
           className={[
-            'font-cormorant text-lg italic text-center px-4 min-h-[1.75rem]',
+            'min-h-[1.75rem] px-4 text-center font-cormorant text-base italic sm:text-lg',
             izuMode ? 'text-purple-glow text-glow-purple' : 'text-purple-light/80',
           ].join(' ')}
         >
@@ -139,7 +139,7 @@ const TarotBoard: React.FC<TarotBoardProps> = ({
       </AnimatePresence>
 
       {/* Spacer to prevent selected cards from overlapping instruction text */}
-      <div className="h-12 flex-shrink-0" aria-hidden="true" />
+      <div className="h-8 flex-shrink-0 sm:h-12" aria-hidden="true" />
 
       {/* ── Fan container ──
           Height is the pixel budget for the pivot zone at the bottom.
@@ -176,7 +176,7 @@ const TarotBoard: React.FC<TarotBoardProps> = ({
         })}
       </div>
 
-      <div className="-mt-16">
+      <div className="-mt-6 sm:-mt-16">
         <SelectedCardsTray
           selectedCards={selectedCards}
           onDeselect={onCardClick}
@@ -193,14 +193,14 @@ const TarotBoard: React.FC<TarotBoardProps> = ({
             animate={{ opacity: 1, scale: 1, y: 0 }}
             exit={{ opacity: 0, scale: 0.85, y: 16 }}
             transition={{ type: 'spring', stiffness: 220, damping: 22 }}
-            className="flex flex-col items-center gap-3"
+            className="flex w-full flex-col items-center gap-3 px-4"
           >
             {/* Primary CTA */}
             <button
               id="reveal-btn"
               onClick={onReveal}
               className={[
-                'relative px-10 py-4 rounded-full font-cinzel text-sm tracking-widest uppercase',
+                'relative w-full max-w-sm rounded-full px-5 py-4 font-cinzel text-xs uppercase tracking-widest sm:px-10 sm:text-sm',
                 'transition-all duration-300',
                 'focus:outline-none focus-visible:ring-2 focus-visible:ring-offset-2',
                 izuMode

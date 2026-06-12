@@ -284,17 +284,8 @@
 
 @media (max-width: 540px) {
   .fan-container {
-    transform: scale(0.68);
-    transform-origin: center bottom;
-    margin-top: -70px;
-  }
-}
-
-@media (max-width: 380px) {
-  .fan-container {
     transform: scale(0.54);
     transform-origin: center bottom;
     margin-top: -100px;
   }
 }
-

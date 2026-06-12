@@ -105,7 +105,7 @@ const App: React.FC = () => {
       />
 
       {/* ── Header — absolute so it never pushes content down ── */}
-      <header className="absolute top-0 left-0 right-0 z-20 flex items-center justify-between px-4 sm:px-8 pt-5 pb-3">
+      <header className="absolute top-0 left-0 right-0 z-20 flex items-center justify-between px-3 pt-4 pb-3 sm:px-8 sm:pt-5">
         {/* Logo */}
         <div className="flex flex-col">
           <motion.h1
@@ -113,7 +113,7 @@ const App: React.FC = () => {
             animate={{ opacity: 1, x: 0 }}
             transition={{ duration: 0.8, ease: 'easeOut' }}
             className={[
-              'font-cinzel text-xl sm:text-2xl tracking-widest',
+              'font-cinzel text-lg tracking-widest sm:text-2xl',
               izuMode ? 'text-purple-glow text-glow-purple' : 'text-gold text-glow-gold',
             ].join(' ')}
           >
@@ -123,13 +123,13 @@ const App: React.FC = () => {
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             transition={{ delay: 0.3, duration: 0.6 }}
-            className="font-cormorant italic text-xs text-purple-light/50 tracking-wider"
+            className="hidden font-cormorant text-xs italic tracking-wider text-purple-light/50 min-[430px]:block"
           >
             {language === 'th' ? 'ประสบการณ์การอ่านไพ่ทาโรต์อันน่าค้นหา' : 'A mystical reading experience'}
           </motion.p>
         </div>
 
-        <div className="absolute left-1/2 top-[72px] -translate-x-1/2 md:top-5">
+        <div className="absolute left-1/2 top-[64px] -translate-x-1/2 min-[430px]:top-[72px] md:top-5">
           <ModeSelector mode={readingMode} onChange={handleModeChange} language={language} />
         </div>
 
@@ -138,7 +138,7 @@ const App: React.FC = () => {
           initial={{ opacity: 0, x: 20 }}
           animate={{ opacity: 1, x: 0 }}
           transition={{ duration: 0.8, ease: 'easeOut' }}
-          className="flex items-center gap-3"
+          className="flex items-center gap-2 sm:gap-3"
         >
           {/* Language toggle */}
           <button
@@ -147,7 +147,7 @@ const App: React.FC = () => {
             aria-label={language === 'en' ? 'Switch to Thai' : 'Switch to English'}
             title={language === 'en' ? 'Switch to Thai' : 'Switch to English'}
             className={[
-              'flex items-center gap-1.5 px-3 py-1.5 rounded-full text-xs font-inter border transition-all duration-300 focus:outline-none focus-visible:ring-2',
+              'flex items-center gap-1 px-2 py-1.5 rounded-full text-xs font-inter border transition-all duration-300 focus:outline-none focus-visible:ring-2 sm:gap-1.5 sm:px-3',
               'bg-white/5 border-white/15 text-white/70 hover:text-gold hover:border-gold/40 focus-visible:ring-gold',
             ].join(' ')}
           >
@@ -165,7 +165,7 @@ const App: React.FC = () => {
               ? (izuMode ? 'ปิดโหมดอิซุ' : 'เปิดโหมดอิซุ')
               : (izuMode ? 'Disable Izu Mode' : 'Enable Izu Mode')}
             className={[
-              'flex items-center gap-2 px-3 py-1.5 rounded-full text-xs font-inter',
+              'flex items-center gap-1.5 px-2 py-1.5 rounded-full text-xs font-inter sm:gap-2 sm:px-3',
               'border transition-all duration-300 focus:outline-none focus-visible:ring-2',
               izuMode
                 ? 'bg-purple-mystic/20 border-purple-light/50 text-purple-light focus-visible:ring-purple-light'
@@ -220,7 +220,7 @@ const App: React.FC = () => {
                   : 'Place ambient.mp3 in /public to enable sound')
             }
             className={[
-              'flex items-center justify-center w-9 h-9 rounded-full',
+              'flex h-8 w-8 items-center justify-center rounded-full sm:h-9 sm:w-9',
               'border transition-all duration-300 focus:outline-none focus-visible:ring-2',
               isPlaying
                 ? 'bg-gold/10 border-gold/40 text-gold focus-visible:ring-gold'
@@ -238,7 +238,7 @@ const App: React.FC = () => {
 
       {/* ── Main — fills viewport, centres the board both axes ── */}
       <main
-        className="relative z-10 flex min-h-screen flex-col items-center justify-center px-2 pb-20 pt-[136px] md:pt-[104px]"
+        className="relative z-10 flex min-h-screen flex-col items-center justify-center px-2 pb-20 pt-[124px] min-[430px]:pt-[136px] md:pt-[104px]"
       >
         <AnimatePresence mode="wait">
           {readingMode === 'daily' ? (

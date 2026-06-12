@@ -18,7 +18,7 @@ const SelectedCardsTray: React.FC<SelectedCardsTrayProps> = ({
   language,
 }) => (
   <div
-    className="flex items-center justify-center gap-4 sm:gap-6"
+    className="flex items-center justify-center gap-3 sm:gap-6"
     aria-label={language === 'th' ? 'ไพ่ที่เลือก' : 'Selected cards'}
   >
     {Array.from({ length: SLOT_COUNT }, (_, index) => {

@@ -118,7 +118,7 @@ const DailyTarotMode: React.FC<DailyTarotModeProps> = ({ cards, language, izuMod
           initial={{ opacity: 0, y: 12 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.5, duration: 0.5 }}
-          className="max-w-md space-y-3"
+          className="w-full max-w-md space-y-3"
         >
           <p className="font-inter text-xs uppercase tracking-widest text-white/35">
             {COPY[language].keyword}
@@ -154,7 +154,7 @@ const DailyTarotMode: React.FC<DailyTarotModeProps> = ({ cards, language, izuMod
           whileHover={{ y: -2, scale: 1.02 }}
           whileTap={{ scale: 0.98 }}
           className={[
-            'rounded-full px-8 py-3 font-cinzel text-xs uppercase tracking-widest transition-colors focus:outline-none focus-visible:ring-2',
+            'w-full max-w-xs rounded-full px-5 py-3 font-cinzel text-xs uppercase tracking-widest transition-colors focus:outline-none focus-visible:ring-2 sm:px-8',
             izuMode
               ? 'border border-purple-light/40 bg-purple-mystic/20 text-purple-glow focus-visible:ring-purple-light'
               : 'border border-gold/50 bg-gold/10 text-gold focus-visible:ring-gold',
