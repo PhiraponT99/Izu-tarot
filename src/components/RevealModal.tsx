@@ -13,6 +13,12 @@
 import React, { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import AskIzuPanel from './ask-izu/AskIzuPanel';
+
+/**
+ * Feature flag: Ask Izu is disabled in production while OpenAI billing is inactive.
+ * To re-enable Ask Izu, set VITE_ASK_IZU_ENABLED=true in your .env / Vercel env vars.
+ */
+const ASK_IZU_ENABLED = import.meta.env.VITE_ASK_IZU_ENABLED === 'true';
 import type { TarotCardData, Language } from '../../shared/tarotData';
 
 interface RevealModalProps {
@@ -352,11 +358,13 @@ const RevealModal: React.FC<RevealModalProps> = ({
                     </p>
                   </motion.div>
 
-                  <AskIzuPanel
-                    cards={selectedCards}
-                    language={language}
-                    izuMode={izuMode}
-                  />
+                  {ASK_IZU_ENABLED && (
+                    <AskIzuPanel
+                      cards={selectedCards}
+                      language={language}
+                      izuMode={izuMode}
+                    />
+                  )}
                 </>
               )}
             </AnimatePresence>
