@@ -18,3 +18,13 @@ This file is used by the ambient sound toggle button in the UI.
 The app uses `audio.loop = true` so the sound will repeat seamlessly.
 
 > Note: The sound button will show but gracefully remain silent if the file is missing.
+
+## og-image.png
+
+Add the social share preview image at:
+```
+/public/og-image.png
+```
+
+Recommended size: 1200 × 630 pixels. The Open Graph and Twitter metadata in
+`index.html` already reference this production asset.
