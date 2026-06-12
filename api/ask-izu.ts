@@ -1,5 +1,5 @@
 import { randomUUID } from 'node:crypto';
-import OpenAI from 'openai';
+import OpenAI, { APIError } from 'openai';
 import { zodTextFormat } from 'openai/helpers/zod';
 import type { VercelRequest, VercelResponse } from '@vercel/node';
 import { z } from 'zod';
@@ -145,7 +145,9 @@ export default async function handler(request: VercelRequest, response: VercelRe
     return response.status(400).json({ error: 'Invalid tarot card selection.' });
   }
 
-  const openai = new OpenAI({ apiKey: process.env.OPENAI_API_KEY });
+  // maxRetries: 1 prevents the SDK from silently retrying 429s 3× before
+  // surfacing the error, which caused Vercel to log 3 moderation calls.
+  const openai = new OpenAI({ apiKey: process.env.OPENAI_API_KEY, maxRetries: 1 });
   const { language } = parsedRequest.data;
 
   // ── Step 1: Moderate the user question only (V2.0: one moderation per request) ──
@@ -158,9 +160,16 @@ export default async function handler(request: VercelRequest, response: VercelRe
     });
     moderationResult = moderation.results[0];
   } catch (err) {
-    // Moderation provider error — log a safe diagnostic, do not expose details to client.
-    const message = err instanceof Error ? err.message : String(err);
-    console.error('[ask-izu] moderation error:', message.slice(0, 200));
+    // Detect rate-limit errors and surface HTTP 429 to the caller.
+    if (err instanceof APIError) {
+      console.error(`[ask-izu] moderation API error: status=${err.status}`);
+      if (err.status === 429) {
+        return response.status(429).json({ error: 'Ask Izu is temporarily rate limited. Please try again later.' });
+      }
+    } else {
+      const message = err instanceof Error ? err.message : String(err);
+      console.error('[ask-izu] moderation error:', message.slice(0, 200));
+    }
     return response.status(502).json({ error: 'Content check unavailable. Please try again.' });
   }
 
@@ -215,9 +224,16 @@ export default async function handler(request: VercelRequest, response: VercelRe
     };
     return response.status(200).json(body);
   } catch (err) {
-    // Generation error — log model name and a safe excerpt, do not leak prompt or API key.
-    const message = err instanceof Error ? err.message : String(err);
-    console.error(`[ask-izu] generation error (model=${model}):`, message.slice(0, 200));
+    // Detect rate-limit errors and surface HTTP 429 to the caller.
+    if (err instanceof APIError) {
+      console.error(`[ask-izu] generation API error: status=${err.status} model=${model}`);
+      if (err.status === 429) {
+        return response.status(429).json({ error: 'Ask Izu is temporarily rate limited. Please try again later.' });
+      }
+    } else {
+      const message = err instanceof Error ? err.message : String(err);
+      console.error(`[ask-izu] generation error (model=${model}):`, message.slice(0, 200));
+    }
     return response.status(502).json({ error: 'Ask Izu is unavailable right now.' });
   }
 }
