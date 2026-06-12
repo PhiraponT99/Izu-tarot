@@ -12,6 +12,7 @@
 
 import React, { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
+import AskIzuPanel from './ask-izu/AskIzuPanel';
 import type { TarotCardData, Language } from '../data/tarotData';
 
 interface RevealModalProps {
@@ -327,28 +328,36 @@ const RevealModal: React.FC<RevealModalProps> = ({
             {/* Full reading revealed message */}
             <AnimatePresence>
               {revealedCount >= 3 && (
-                <motion.div
-                  initial={{ opacity: 0, y: 10 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  transition={{ delay: 0.3 }}
-                  className="px-4 pb-4 text-center sm:px-8"
-                >
-                  <div
-                    className="h-px mb-4"
-                    style={{
-                      background:
-                        'linear-gradient(90deg, transparent, rgba(167,139,250,0.3), transparent)',
-                    }}
-                  />
-                  <p
-                    className={[
-                      'font-cormorant italic text-base leading-relaxed',
-                      izuMode ? 'text-purple-light/70' : 'text-slate-400',
-                    ].join(' ')}
+                <>
+                  <motion.div
+                    initial={{ opacity: 0, y: 10 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    transition={{ delay: 0.3 }}
+                    className="px-4 pb-4 text-center sm:px-8"
                   >
-                    {fullReadingText}
-                  </p>
-                </motion.div>
+                    <div
+                      className="h-px mb-4"
+                      style={{
+                        background:
+                          'linear-gradient(90deg, transparent, rgba(167,139,250,0.3), transparent)',
+                      }}
+                    />
+                    <p
+                      className={[
+                        'font-cormorant italic text-base leading-relaxed',
+                        izuMode ? 'text-purple-light/70' : 'text-slate-400',
+                      ].join(' ')}
+                    >
+                      {fullReadingText}
+                    </p>
+                  </motion.div>
+
+                  <AskIzuPanel
+                    cards={selectedCards}
+                    language={language}
+                    izuMode={izuMode}
+                  />
+                </>
               )}
             </AnimatePresence>
 
