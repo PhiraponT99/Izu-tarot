@@ -6,6 +6,8 @@ import { z } from 'zod';
 import { MAJOR_ARCANA } from '../shared/tarotData.js';
 import type { AskIzuResponse } from '../src/types/askIzu.js';
 
+// ── Request schema ─────────────────────────────────────────────────────────
+
 const messageSchema = z.object({
   role: z.enum(['user', 'assistant']),
   content: z.string().trim().min(1).max(800),
@@ -23,14 +25,18 @@ const requestSchema = z.object({
   question: z.string().trim().min(1).max(600),
   messages: z.array(messageSchema).max(6).optional(),
 }).refine(
-  ({ messages }) => (messages ?? []).filter((message) => message.role === 'user').length < 3,
+  ({ messages }) => (messages ?? []).filter((m) => m.role === 'user').length < 3,
   { message: 'Question limit reached.', path: ['messages'] },
 );
+
+// ── Model response schema ──────────────────────────────────────────────────
 
 const modelResponseSchema = z.object({
   answer: z.string().trim().min(1).max(1200),
   safety: z.enum(['standard', 'supportive-redirect']),
 });
+
+// ── Constants ──────────────────────────────────────────────────────────────
 
 const POSITION_LABELS = {
   en: ['Past', 'Present', 'Future'],
@@ -52,7 +58,9 @@ const SUPPORTIVE_RESPONSES = {
   },
 } as const;
 
-function parseMaxOutputTokens() {
+// ── Helpers ────────────────────────────────────────────────────────────────
+
+function parseMaxOutputTokens(): number {
   const configured = Number.parseInt(process.env.ASK_IZU_MAX_OUTPUT_TOKENS ?? '300', 10);
   return Number.isFinite(configured) ? Math.min(Math.max(configured, 100), 600) : 300;
 }
@@ -60,7 +68,7 @@ function parseMaxOutputTokens() {
 function buildDeveloperPrompt(
   parsed: z.infer<typeof requestSchema>,
   cards: typeof MAJOR_ARCANA,
-) {
+): string {
   const reading = cards.map((card, index) => {
     const reflection = parsed.izuMode
       ? card.izuReflection[parsed.language]
@@ -93,7 +101,6 @@ ${reading}`;
 
 function getBody(request: VercelRequest): unknown {
   if (typeof request.body !== 'string') return request.body;
-
   try {
     return JSON.parse(request.body) as unknown;
   } catch {
@@ -113,6 +120,8 @@ function sendSupportiveResponse(
   };
   return response.status(200).json(body);
 }
+
+// ── Handler ────────────────────────────────────────────────────────────────
 
 export default async function handler(request: VercelRequest, response: VercelResponse) {
   response.setHeader('Cache-Control', 'no-store');
@@ -137,36 +146,43 @@ export default async function handler(request: VercelRequest, response: VercelRe
   }
 
   const openai = new OpenAI({ apiKey: process.env.OPENAI_API_KEY });
+  const { language } = parsedRequest.data;
 
+  // ── Step 1: Moderate the user question only (V2.0: one moderation per request) ──
+
+  let moderationResult: Awaited<ReturnType<typeof openai.moderations.create>>['results'][0];
   try {
     const moderation = await openai.moderations.create({
       model: 'omni-moderation-latest',
       input: parsedRequest.data.question,
     });
-    const moderationResult = moderation.results[0];
+    moderationResult = moderation.results[0];
+  } catch (err) {
+    // Moderation provider error — log a safe diagnostic, do not expose details to client.
+    const message = err instanceof Error ? err.message : String(err);
+    console.error('[ask-izu] moderation error:', message.slice(0, 200));
+    return response.status(502).json({ error: 'Content check unavailable. Please try again.' });
+  }
 
-    if (
-      moderationResult.categories['self-harm']
-      || moderationResult.categories['self-harm/intent']
-      || moderationResult.categories['self-harm/instructions']
-    ) {
-      return sendSupportiveResponse(
-        response,
-        parsedRequest.data.language,
-        'crisis',
-      );
-    }
+  if (
+    moderationResult.categories['self-harm']
+    || moderationResult.categories['self-harm/intent']
+    || moderationResult.categories['self-harm/instructions']
+  ) {
+    return sendSupportiveResponse(response, language, 'crisis');
+  }
 
-    if (moderationResult.flagged) {
-      return sendSupportiveResponse(
-        response,
-        parsedRequest.data.language,
-        'general',
-      );
-    }
+  if (moderationResult.flagged) {
+    return sendSupportiveResponse(response, language, 'general');
+  }
 
+  // ── Step 2: Generate reading via Responses API ────────────────────────────
+
+  const model = process.env.OPENAI_MODEL || 'gpt-4.1-mini';
+
+  try {
     const modelResponse = await openai.responses.parse({
-      model: process.env.OPENAI_MODEL || 'gpt-5-mini',
+      model,
       max_output_tokens: parseMaxOutputTokens(),
       input: [
         {
@@ -184,31 +200,24 @@ export default async function handler(request: VercelRequest, response: VercelRe
       },
     });
 
-    const parsedModelResponse = modelResponse.output_parsed;
-    if (!parsedModelResponse) {
+    const parsed = modelResponse.output_parsed;
+    if (!parsed) {
+      console.error('[ask-izu] output_parsed was null after successful API call');
       return response.status(502).json({ error: 'Ask Izu returned no answer.' });
     }
 
-    const outputModeration = await openai.moderations.create({
-      model: 'omni-moderation-latest',
-      input: parsedModelResponse.answer,
-    });
-
-    if (outputModeration.results[0].flagged) {
-      return sendSupportiveResponse(
-        response,
-        parsedRequest.data.language,
-        'general',
-      );
-    }
+    // ── Step 3: Return response ───────────────────────────────────────────────
 
     const body: AskIzuResponse = {
-      answer: parsedModelResponse.answer.trim(),
-      safety: parsedModelResponse.safety,
+      answer: parsed.answer.trim(),
+      safety: parsed.safety,
       requestId: randomUUID(),
     };
     return response.status(200).json(body);
-  } catch {
+  } catch (err) {
+    // Generation error — log model name and a safe excerpt, do not leak prompt or API key.
+    const message = err instanceof Error ? err.message : String(err);
+    console.error(`[ask-izu] generation error (model=${model}):`, message.slice(0, 200));
     return response.status(502).json({ error: 'Ask Izu is unavailable right now.' });
   }
 }
