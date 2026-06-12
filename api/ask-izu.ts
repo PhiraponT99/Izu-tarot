@@ -131,7 +131,7 @@ export default async function handler(request: VercelRequest, response: VercelRe
     return response.status(503).json({ error: 'Ask Izu is not configured yet.' });
   }
 
-  const cards = parsedRequest.data.cardIds.map((id) => MAJOR_ARCANA[id]);
+  const cards = parsedRequest.data.cardIds.map((id: number) => MAJOR_ARCANA[id]);
   if (cards.some((card) => !card)) {
     return response.status(400).json({ error: 'Invalid tarot card selection.' });
   }
