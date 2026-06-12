@@ -4,7 +4,7 @@
  * Particles float upward with random sizes, positions, speeds, and colors.
  */
 
-import React, { useMemo } from 'react';
+import React from 'react';
 
 interface ParticleConfig {
   id: number;
@@ -26,22 +26,26 @@ const PARTICLE_COLORS = [
 
 const PARTICLE_COUNT = 25;
 
+const seededValue = (index: number, salt: number) => {
+  const value = Math.sin(index * 12.9898 + salt * 78.233) * 43758.5453;
+  return value - Math.floor(value);
+};
+
+const PARTICLES: ParticleConfig[] = Array.from({ length: PARTICLE_COUNT }, (_, i) => ({
+  id: i,
+  left: `${seededValue(i, 1) * 100}%`,
+  size: seededValue(i, 2) * 4 + 1,
+  duration: seededValue(i, 3) * 12 + 8,
+  delay: seededValue(i, 4) * 10,
+  color: PARTICLE_COLORS[Math.floor(seededValue(i, 5) * PARTICLE_COLORS.length)],
+  opacity: seededValue(i, 6) * 0.5 + 0.2,
+}));
+
 const Particles: React.FC = () => {
-  const particles = useMemo<ParticleConfig[]>(() => {
-    return Array.from({ length: PARTICLE_COUNT }, (_, i) => ({
-      id: i,
-      left: `${Math.random() * 100}%`,
-      size: Math.random() * 4 + 1,
-      duration: Math.random() * 12 + 8,
-      delay: Math.random() * 10,
-      color: PARTICLE_COLORS[Math.floor(Math.random() * PARTICLE_COLORS.length)],
-      opacity: Math.random() * 0.5 + 0.2,
-    }));
-  }, []);
 
   return (
     <div className="particles-container" aria-hidden="true">
-      {particles.map((p) => (
+      {PARTICLES.map((p) => (
         <div
           key={p.id}
           className="particle"

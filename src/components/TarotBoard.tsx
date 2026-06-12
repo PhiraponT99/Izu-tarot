@@ -135,7 +135,7 @@ const TarotBoard: React.FC<TarotBoardProps> = ({
       </AnimatePresence>
 
       {/* Spacer to prevent selected cards from overlapping instruction text */}
-      <div className="h-12 flex-shrink-0" aria-hidden="true" />
+      <div className="h-20 flex-shrink-0" aria-hidden="true" />
 
       {/* ── Fan container ──
           Height is the pixel budget for the pivot zone at the bottom.

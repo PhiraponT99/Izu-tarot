@@ -187,8 +187,13 @@ const App: React.FC = () => {
           <button
             id="sound-toggle-btn"
             onClick={toggleSound}
+            disabled={!canPlay}
             aria-label={
-              language === 'th'
+              !canPlay
+                ? language === 'th'
+                  ? 'ไม่มีไฟล์เสียงบรรยากาศ'
+                  : 'Ambient sound unavailable'
+                : language === 'th'
                 ? (isPlaying ? 'ปิดเสียงบรรยากาศ' : 'เปิดเสียงบรรยากาศ')
                 : (isPlaying ? 'Mute ambient sound' : 'Play ambient sound')
             }

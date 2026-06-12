@@ -201,12 +201,7 @@ const RevealModal: React.FC<RevealModalProps> = ({
 
   // Stagger card reveals with 800ms delay each
   useEffect(() => {
-    if (!isOpen) {
-      setRevealedCount(0);
-      return;
-    }
-
-    setRevealedCount(0);
+    if (!isOpen) return;
 
     const timers: ReturnType<typeof setTimeout>[] = [];
 
@@ -220,9 +215,14 @@ const RevealModal: React.FC<RevealModalProps> = ({
     return () => timers.forEach(clearTimeout);
   }, [isOpen, selectedCards]);
 
+  const handleClose = () => {
+    setRevealedCount(0);
+    onClose();
+  };
+
   // Close on backdrop click
   const handleBackdropClick = (e: React.MouseEvent<HTMLDivElement>) => {
-    if (e.target === e.currentTarget) onClose();
+    if (e.target === e.currentTarget) handleClose();
   };
 
   const modalTitle = izuMode
@@ -356,7 +356,7 @@ const RevealModal: React.FC<RevealModalProps> = ({
             <div className="flex justify-center pb-8">
               <button
                 id="modal-close-btn"
-                onClick={onClose}
+                onClick={handleClose}
                 className={[
                   'font-cinzel text-xs tracking-widest uppercase px-8 py-3 rounded-full',
                   'transition-all duration-300 focus:outline-none focus-visible:ring-2',
