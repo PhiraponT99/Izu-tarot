@@ -18,12 +18,13 @@
  */
 
 import React, { useState, useCallback } from 'react';
-import { motion, AnimatePresence } from 'framer-motion';
+import { motion } from 'framer-motion';
 import TarotBoard from './components/TarotBoard';
 import RevealModal from './components/RevealModal';
 import Particles from './components/Particles';
 import { useAmbientSound } from './hooks/useAmbientSound';
 import { MAJOR_ARCANA } from './data/tarotData';
+import type { Language } from './data/tarotData';
 
 // Maximum selectable cards
 const MAX_SELECTION = 3;
@@ -33,6 +34,7 @@ const App: React.FC = () => {
   const [selectedIds, setSelectedIds] = useState<number[]>([]);
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [izuMode, setIzuMode] = useState(false);
+  const [language, setLanguage] = useState<Language>('en');
 
   // Ambient sound — only plays on explicit user interaction (no autoplay).
   // TODO: Place your ambient audio file at /public/ambient.mp3 to enable sound.
@@ -114,7 +116,7 @@ const App: React.FC = () => {
             transition={{ delay: 0.3, duration: 0.6 }}
             className="font-cormorant italic text-xs text-purple-light/50 tracking-wider"
           >
-            A mystical reading experience
+            {language === 'th' ? 'ประสบการณ์การอ่านไพ่ทาโรต์อันน่าค้นหา' : 'A mystical reading experience'}
           </motion.p>
         </div>
 
@@ -125,12 +127,30 @@ const App: React.FC = () => {
           transition={{ duration: 0.8, ease: 'easeOut' }}
           className="flex items-center gap-3"
         >
+          {/* Language toggle */}
+          <button
+            id="lang-toggle-btn"
+            onClick={() => setLanguage((l) => (l === 'en' ? 'th' : 'en'))}
+            aria-label={language === 'en' ? 'Switch to Thai' : 'Switch to English'}
+            title={language === 'en' ? 'Switch to Thai' : 'Switch to English'}
+            className={[
+              'flex items-center gap-1.5 px-3 py-1.5 rounded-full text-xs font-inter border transition-all duration-300 focus:outline-none focus-visible:ring-2',
+              'bg-white/5 border-white/15 text-white/70 hover:text-gold hover:border-gold/40 focus-visible:ring-gold',
+            ].join(' ')}
+          >
+            <span className={language === 'en' ? 'text-gold font-bold' : 'text-white/40'}>EN</span>
+            <span className="text-white/20">|</span>
+            <span className={language === 'th' ? 'text-gold font-bold' : 'text-white/40'}>TH</span>
+          </button>
+
           {/* Izu Mode toggle */}
           <button
             id="izu-mode-btn"
             onClick={() => setIzuMode((v) => !v)}
             aria-pressed={izuMode}
-            title={izuMode ? 'Disable Izu Mode' : 'Enable Izu Mode'}
+            title={language === 'th' 
+              ? (izuMode ? 'ปิดโหมดอิซุ' : 'เปิดโหมดอิซุ')
+              : (izuMode ? 'Disable Izu Mode' : 'Enable Izu Mode')}
             className={[
               'flex items-center gap-2 px-3 py-1.5 rounded-full text-xs font-inter',
               'border transition-all duration-300 focus:outline-none focus-visible:ring-2',
@@ -140,7 +160,9 @@ const App: React.FC = () => {
             ].join(' ')}
           >
             <span className="text-base" aria-hidden="true">✦</span>
-            <span className="hidden sm:inline">Izu Mode</span>
+            <span className="hidden sm:inline">
+              {language === 'th' ? 'โหมดอิซุ' : 'Izu Mode'}
+            </span>
             {/* Toggle pill */}
             <span
               className={[
@@ -154,6 +176,7 @@ const App: React.FC = () => {
                   'absolute top-0.5 w-3 h-3 rounded-full bg-white transition-all duration-300',
                   izuMode ? 'left-[14px]' : 'left-0.5',
                 ].join(' ')}
+                aria-hidden="true"
               />
             </span>
           </button>
@@ -164,11 +187,19 @@ const App: React.FC = () => {
           <button
             id="sound-toggle-btn"
             onClick={toggleSound}
-            aria-label={isPlaying ? 'Mute ambient sound' : 'Play ambient sound'}
+            aria-label={
+              language === 'th'
+                ? (isPlaying ? 'ปิดเสียงบรรยากาศ' : 'เปิดเสียงบรรยากาศ')
+                : (isPlaying ? 'Mute ambient sound' : 'Play ambient sound')
+            }
             title={
               canPlay
-                ? isPlaying ? 'Mute ambient sound' : 'Play ambient sound'
-                : 'Place ambient.mp3 in /public to enable sound'
+                ? (language === 'th'
+                  ? (isPlaying ? 'ปิดเสียงบรรยากาศ' : 'เปิดเสียงบรรยากาศ')
+                  : (isPlaying ? 'Mute ambient sound' : 'Play ambient sound'))
+                : (language === 'th'
+                  ? 'ใส่ไฟล์ ambient.mp3 ในโฟลเดอร์ public เพื่อเปิดใช้งานเสียง'
+                  : 'Place ambient.mp3 in /public to enable sound')
             }
             className={[
               'flex items-center justify-center w-9 h-9 rounded-full',
@@ -191,12 +222,12 @@ const App: React.FC = () => {
       <main
         className="relative z-10 flex min-h-screen flex-col items-center justify-center"
         style={{
-          // paddingTop clears the absolute header (~72px).
-          // paddingBottom is set larger so flex justify-center treats the
-          // usable zone as header-to-footer, shifting the board downward
-          // to feel like cards resting on the centre of the page.
-          paddingTop: '72px',
-          paddingBottom: '112px',
+          // We adjust the paddings to shift the centered area down by 32px:
+          // paddingTop is increased by 32px (72px -> 104px),
+          // and paddingBottom is decreased by 32px (112px -> 80px).
+          // This keeps the total padding sum (184px) constant while lowering the spread.
+          paddingTop: '104px',
+          paddingBottom: '80px',
         }}
       >
         <TarotBoard
@@ -206,6 +237,7 @@ const App: React.FC = () => {
           onReveal={handleReveal}
           onReset={handleReset}
           izuMode={izuMode}
+          language={language}
         />
       </main>
 
@@ -222,6 +254,7 @@ const App: React.FC = () => {
         selectedCards={selectedCards}
         onClose={handleCloseModal}
         izuMode={izuMode}
+        language={language}
       />
     </div>
   );
