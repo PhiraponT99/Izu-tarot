@@ -226,23 +226,23 @@ const RevealModal: React.FC<RevealModalProps> = ({
   };
 
   const modalTitle = izuMode
-    ? language === 'th' ? '✦ คำสะท้อนของคุณ ✦' : '✦ Your Reflection ✦'
-    : language === 'th' ? '✦ คำทำนายของคุณ ✦' : '✦ Your Reading ✦';
+    ? language === 'th' ? '✦ ข้อความสะท้อนใจ ✦' : '✦ Your Reflection ✦'
+    : language === 'th' ? '✦ ข้อความจากไพ่ ✦' : '✦ Your Reading ✦';
 
   const modalSubtitle = izuMode
     ? language === 'th'
-      ? 'กระจกเงาอันอ่อนโยนเพื่อการเดินทางของจิตวิญญาณคุณ'
+      ? 'พื้นที่อ่อนโยนให้คุณได้มองกลับเข้ามาข้างใน'
       : "A gentle mirror for your soul's journey"
     : language === 'th'
-      ? 'ไพ่ทาโรต์ได้พูดแล้ว — อดีต ปัจจุบัน และอนาคต'
+      ? 'ลองมองอดีต ปัจจุบัน และสิ่งที่อาจค่อย ๆ คลี่คลายต่อไป'
       : 'The cards have spoken — past, present, and future';
 
   const fullReadingText = izuMode
     ? language === 'th'
-      ? 'คุณไม่จำเป็นต้องหาคำตอบของทุกอย่างในวันนี้หรอก แค่หายใจเข้าลึก ๆ และเชื่อมั่นในก้าวเล็ก ๆ ก้าวต่อไปก็พอ'
+      ? 'คุณไม่จำเป็นต้องหาคำตอบทั้งหมดในวันนี้ แค่หายใจลึก ๆ และไว้ใจก้าวเล็ก ๆ ถัดไปก็พอ'
       : "You don't need to figure it all out today. Just breathe, and trust the next small step."
     : language === 'th'
-      ? 'จักรวาลได้เผยสิ่งที่จะเกิดขึ้นบนเส้นทางของคุณแล้ว ก้าวเดินต่อไปด้วยความกล้าหาญและความชัดเจน'
+      ? 'เก็บเฉพาะข้อความที่ตรงกับใจไว้ แล้วค่อย ๆ ก้าวต่อไปในจังหวะของคุณ'
       : 'The universe has revealed what lies in your path. Walk forward with courage and clarity.';
 
   return (

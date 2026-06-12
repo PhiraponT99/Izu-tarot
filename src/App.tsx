@@ -125,7 +125,7 @@ const App: React.FC = () => {
             transition={{ delay: 0.3, duration: 0.6 }}
             className="hidden font-cormorant text-xs italic tracking-wider text-purple-light/50 min-[430px]:block"
           >
-            {language === 'th' ? 'ประสบการณ์การอ่านไพ่ทาโรต์อันน่าค้นหา' : 'A mystical reading experience'}
+            {language === 'th' ? 'พื้นที่เล็ก ๆ สำหรับฟังเสียงข้างใน' : 'A mystical reading experience'}
           </motion.p>
         </div>
 
@@ -204,7 +204,7 @@ const App: React.FC = () => {
             aria-label={
               !canPlay
                 ? language === 'th'
-                  ? 'ไม่มีไฟล์เสียงบรรยากาศ'
+                  ? 'ยังไม่มีเสียงบรรยากาศ'
                   : 'Ambient sound unavailable'
                 : language === 'th'
                 ? (isPlaying ? 'ปิดเสียงบรรยากาศ' : 'เปิดเสียงบรรยากาศ')
@@ -216,7 +216,7 @@ const App: React.FC = () => {
                   ? (isPlaying ? 'ปิดเสียงบรรยากาศ' : 'เปิดเสียงบรรยากาศ')
                   : (isPlaying ? 'Mute ambient sound' : 'Play ambient sound'))
                 : (language === 'th'
-                  ? 'ใส่ไฟล์ ambient.mp3 ในโฟลเดอร์ public เพื่อเปิดใช้งานเสียง'
+                  ? 'เพิ่มไฟล์ ambient.mp3 ในโฟลเดอร์ public เพื่อเปิดเสียงบรรยากาศ'
                   : 'Place ambient.mp3 in /public to enable sound')
             }
             className={[

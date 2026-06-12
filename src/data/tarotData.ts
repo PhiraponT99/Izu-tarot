@@ -28,15 +28,15 @@ export const MAJOR_ARCANA: TarotCardData[] = [
     name: "The Fool",
     keywords: {
       en: ["Beginnings", "Innocence", "Spontaneity"],
-      th: ["การเริ่มต้นใหม่", "ความไร้เดียงสา", "ความเป็นธรรมชาติ"]
+      th: ["การเริ่มต้น", "ใจที่เปิดกว้าง", "ความเป็นธรรมชาติ"]
     },
     izuReflection: {
       en: "Every step into the unknown is an act of trust in yourself.",
-      th: "ทุกก้าวเดินไปสู่สิ่งที่ไม่รู้ คือโอกาสที่คุณจะได้เชื่อมั่นในตัวเอง"
+      th: "ทุกก้าวสู่สิ่งที่ยังไม่รู้ อาจชวนให้คุณค่อย ๆ ไว้ใจตัวเองมากขึ้น"
     },
     description: {
       en: "A new journey begins. Embrace the unknown with an open heart.",
-      th: "การเดินทางครั้งใหม่กำลังเริ่มต้น เปิดใจรับสิ่งใหม่ ๆ ด้วยความพร้อมเรียนรู้"
+      th: "วันนี้อาจเหมาะกับการเริ่มต้นบางอย่าง ลองเปิดใจและค่อย ๆ เรียนรู้ระหว่างทาง"
     }
   },
   {
@@ -44,15 +44,15 @@ export const MAJOR_ARCANA: TarotCardData[] = [
     name: "The Magician",
     keywords: {
       en: ["Willpower", "Manifestation", "Skill"],
-      th: ["พลังเจตจำนง", "การสรรสร้าง", "ทักษะความสามารถ"]
+      th: ["ความตั้งใจ", "การสร้างสรรค์", "ศักยภาพ"]
     },
     izuReflection: {
       en: "You already hold all the tools you need within you.",
-      th: "คุณมีทรัพยากรและสิ่งสำคัญที่จำเป็นอยู่ภายในตัวเองเรียบร้อยแล้ว"
+      th: "สิ่งที่คุณต้องการอาจมีอยู่ในตัวคุณมากกว่าที่คิด ลองหยิบมันมาใช้อย่างมั่นใจ"
     },
     description: {
       en: "Your intentions have power. Focus your will and create.",
-      th: "พลังแห่งความตั้งใจของคุณนั้นมีอยู่จริง ลองจดจ่อและลงมือสร้างสรรค์สิ่งดี ๆ"
+      th: "ความตั้งใจของคุณมีพลัง ลองเลือกสิ่งสำคัญแล้วค่อย ๆ ลงมือทำให้เป็นรูปเป็นร่าง"
     }
   },
   {
@@ -60,15 +60,15 @@ export const MAJOR_ARCANA: TarotCardData[] = [
     name: "The High Priestess",
     keywords: {
       en: ["Intuition", "Mystery", "Inner knowing"],
-      th: ["สัญชาตญาณ", "ความลึกลับ", "ความรู้แจ้งภายใน"]
+      th: ["สัญชาตญาณ", "ความลึกลับ", "เสียงข้างใน"]
     },
     izuReflection: {
       en: "The answers you seek are already whispering inside you.",
-      th: "คำตอบที่คุณกำลังมองหา อาจกำลังส่งเสียงกระซิบเบา ๆ อยู่ในใจคุณแล้ว"
+      th: "คำตอบที่คุณตามหาอาจกำลังกระซิบอยู่ข้างใน ลองให้พื้นที่กับความเงียบสักครู่"
     },
     description: {
       en: "Trust your inner wisdom. Something hidden will be revealed.",
-      th: "ลองรับฟังเสียงเตือนและสัญชาตญาณข้างใน มีสิ่งสำคัญกำลังเผยให้คุณเห็น"
+      th: "ลองฟังสัญชาตญาณของตัวเอง บางคำตอบอาจค่อย ๆ ชัดขึ้นเมื่อคุณไม่เร่งรีบ"
     }
   },
   {
@@ -76,15 +76,15 @@ export const MAJOR_ARCANA: TarotCardData[] = [
     name: "The Empress",
     keywords: {
       en: ["Abundance", "Nurturing", "Nature"],
-      th: ["ความอุดมสมบูรณ์", "การฟูมฟัก", "ธรรมชาติ"]
+      th: ["ความอุดมสมบูรณ์", "การดูแล", "การเติบโต"]
     },
     izuReflection: {
       en: "You deserve to receive as generously as you give.",
-      th: "คุณสมควรได้รับความรักและความดูแลเอาใจใส่ เช่นเดียวกับที่คุณมอบให้ผู้อื่น"
+      th: "คุณคู่ควรกับความรักและการดูแล เช่นเดียวกับที่คุณมอบสิ่งเหล่านั้นให้คนอื่น"
     },
     description: {
       en: "Creativity and growth flourish. Abundance surrounds you.",
-      th: "ช่วงเวลาแห่งการเติบโตและการสร้างสรรค์ ความสมบูรณ์พร้อมอยู่รอบตัวคุณ"
+      th: "สิ่งที่คุณดูแลอาจกำลังเติบโต ลองเปิดรับความอ่อนโยนและความสร้างสรรค์รอบตัว"
     }
   },
   {
@@ -96,11 +96,11 @@ export const MAJOR_ARCANA: TarotCardData[] = [
     },
     izuReflection: {
       en: "Boundaries set with love are an act of self-respect.",
-      th: "การสร้างขอบเขตที่พอดีด้วยความรัก คือการให้เกียรติและเคารพตัวเอง"
+      th: "การวางขอบเขตอย่างอ่อนโยน คือวิธีหนึ่งในการเคารพและดูแลตัวเอง"
     },
     description: {
       en: "Establish order. Lead with confidence and compassion.",
-      th: "จัดระเบียบและวางรากฐานชีวิต นำพาด้วยความมั่นใจและเปี่ยมด้วยความเข้าใจ"
+      th: "วันนี้อาจเหมาะกับการจัดระเบียบสิ่งสำคัญ และนำทางด้วยความมั่นคงที่ไม่แข็งกระด้าง"
     }
   },
   {
@@ -108,15 +108,15 @@ export const MAJOR_ARCANA: TarotCardData[] = [
     name: "The Hierophant",
     keywords: {
       en: ["Tradition", "Guidance", "Wisdom"],
-      th: ["ขนบธรรมเนียม", "การชี้แนะ", "ปัญญาญาณ"]
+      th: ["ธรรมเนียม", "คำแนะนำ", "บทเรียน"]
     },
     izuReflection: {
       en: "Sometimes the path walked by many holds a wisdom meant for you.",
-      th: "ในบางครั้ง แนวทางที่สืบทอดกันมาก็อาจมีบทเรียนที่เหมาะกับคุณในเวลานี้"
+      th: "บางครั้งบทเรียนจากคนที่เคยผ่านมาก่อน อาจช่วยให้คุณเห็นทางของตัวเองชัดขึ้น"
     },
     description: {
       en: "Seek guidance from those who've walked this path before.",
-      th: "มองหาคำแนะนำหรือเรียนรู้จากผู้มีประสบการณ์ เพื่อช่วยขยายมุมมองของคุณ"
+      th: "ลองเปิดใจรับคำแนะนำจากคนที่ไว้ใจ แล้วเลือกเฉพาะสิ่งที่สอดคล้องกับคุณ"
     }
   },
   {
@@ -124,15 +124,15 @@ export const MAJOR_ARCANA: TarotCardData[] = [
     name: "The Lovers",
     keywords: {
       en: ["Union", "Choice", "Alignment"],
-      th: ["การผสมผสาน", "การเลือก", "ความสอดคล้อง"]
+      th: ["ความสัมพันธ์", "ทางเลือก", "ความสอดคล้อง"]
     },
     izuReflection: {
       en: "The most important relationship is the one you have with yourself.",
-      th: "ความสัมพันธ์ที่สำคัญที่สุด คือความเข้าใจและยอมรับในตัวตนของคุณเอง"
+      th: "ความสัมพันธ์กับตัวเองคือพื้นฐานสำคัญ ลองฟังทั้งความต้องการและขอบเขตของใจ"
     },
     description: {
       en: "A meaningful choice awaits. Choose what aligns with your truth.",
-      th: "มีทางเลือกสำคัญรออยู่ข้างหน้า ลองเลือกสิ่งที่สอดคล้องกับหัวใจและตัวตนของคุณ"
+      th: "หากกำลังลังเล ลองเลือกสิ่งที่ซื่อตรงกับคุณค่าและความรู้สึกข้างใน"
     }
   },
   {
@@ -140,15 +140,15 @@ export const MAJOR_ARCANA: TarotCardData[] = [
     name: "The Chariot",
     keywords: {
       en: ["Victory", "Determination", "Control"],
-      th: ["ชัยชนะ", "ความมุ่งมั่น", "การควบคุม"]
+      th: ["ความก้าวหน้า", "ความมุ่งมั่น", "การกำกับทิศทาง"]
     },
     izuReflection: {
       en: "Your focused heart can carry you through any storm.",
-      th: "พลังใจที่จดจ่อของคุณ จะช่วยพาให้คุณผ่านพ้นพายุและอุปสรรคไปได้"
+      th: "เมื่อใจและทิศทางไปด้วยกัน คุณอาจก้าวผ่านความท้าทายได้อย่างมั่นคงขึ้น"
     },
     description: {
       en: "Move forward with determination. Victory comes to the resolute.",
-      th: "ขับเคลื่อนไปข้างหน้าด้วยความมุ่งมั่น ชัยชนะและทางออกรอคอยผู้ไม่ยอมแพ้"
+      th: "ค่อย ๆ เดินหน้าอย่างมีเป้าหมาย คุณไม่จำเป็นต้องเร่ง แค่รักษาทิศทางของตัวเองไว้"
     }
   },
   {
@@ -160,11 +160,11 @@ export const MAJOR_ARCANA: TarotCardData[] = [
     },
     izuReflection: {
       en: "Gentleness is not weakness — it is the deepest form of strength.",
-      th: "ความอ่อนโยนไม่ได้แปลว่าอ่อนแอ แต่เป็นพลังที่นุ่มนวลและเข้มแข็งที่สุด"
+      th: "ความอ่อนโยนไม่ใช่ความอ่อนแอ แต่อาจเป็นพลังที่มั่นคงที่สุดของคุณ"
     },
     description: {
       en: "Inner strength and quiet courage will see you through.",
-      th: "ความเข้มแข็งภายในและความอดทนอย่างเข้าใจ จะช่วยประคับประคองคุณไปได้"
+      th: "ลองรับมือกับสิ่งตรงหน้าด้วยความนิ่งและเมตตา พลังของคุณไม่จำเป็นต้องเสียงดัง"
     }
   },
   {
@@ -172,15 +172,15 @@ export const MAJOR_ARCANA: TarotCardData[] = [
     name: "The Hermit",
     keywords: {
       en: ["Solitude", "Reflection", "Guidance"],
-      th: ["การปลีกวิเวก", "การทบทวนตัวเอง", "ดวงประทีปนำทาง"]
+      th: ["เวลาส่วนตัว", "การทบทวน", "แสงนำทาง"]
     },
     izuReflection: {
       en: "In stillness, you find the light that guides you home.",
-      th: "ภายใต้ความสงบนิ่ง คุณจะพบแสงสว่างที่ช่วยนำทางใจของคุณกลับบ้าน"
+      th: "ในความเงียบ คุณอาจพบแสงเล็ก ๆ ที่พาใจกลับมาใกล้ตัวเองอีกครั้ง"
     },
     description: {
       en: "A period of introspection will illuminate your path.",
-      th: "การใช้เวลาอยู่กับตัวเองเงียบ ๆ จะช่วยตอบคำถามที่ค้างคาใจให้ชัดเจนขึ้น"
+      th: "ลองเว้นพื้นที่ให้ตัวเองได้ทบทวน บางคำตอบอาจชัดขึ้นเมื่อใจสงบลง"
     }
   },
   {
@@ -188,15 +188,15 @@ export const MAJOR_ARCANA: TarotCardData[] = [
     name: "Wheel of Fortune",
     keywords: {
       en: ["Cycles", "Fate", "Change"],
-      th: ["วัฏจักร", "โชคชะตา", "ความเปลี่ยนแปลง"]
+      th: ["วัฏจักร", "จังหวะชีวิต", "ความเปลี่ยนแปลง"]
     },
     izuReflection: {
       en: "Even when the wheel turns hard, you are still at the center.",
-      th: "แม้ในวันที่ชีวิตหมุนเปลี่ยนอย่างรวดเร็ว คุณก็ยังมั่นคงอยู่ที่ศูนย์กลางของใจตัวเองได้"
+      th: "แม้หลายอย่างกำลังเปลี่ยน คุณยังกลับมายืนตรงกลางใจของตัวเองได้เสมอ"
     },
     description: {
       en: "Change is coming. Trust in the natural cycles of life.",
-      th: "ทุกสิ่งมีจังหวะเวลาของมัน ลองลื่นไหลไปกับกระแสแห่งความเปลี่ยนแปลงรอบตัว"
+      th: "ชีวิตมีจังหวะขึ้นลงของมัน ลองปรับตัวกับความเปลี่ยนแปลงโดยไม่กดดันตัวเอง"
     }
   },
   {
@@ -208,11 +208,11 @@ export const MAJOR_ARCANA: TarotCardData[] = [
     },
     izuReflection: {
       en: "Honesty with yourself is the foundation of all healing.",
-      th: "การยอมรับความจริงอย่างตรงไปตรงมากับตัวเอง คือจุดเริ่มต้นของการเยียวยาที่ดี"
+      th: "การซื่อตรงกับความรู้สึกของตัวเอง อาจเป็นจุดเริ่มต้นของการเยียวยา"
     },
     description: {
       en: "Cause and effect are in balance. Act with integrity.",
-      th: "สิ่งต่าง ๆ กำลังปรับสมดุล ทำสิ่งที่คุณเชื่อว่าถูกต้องและซื่อสัตย์ต่อใจ"
+      th: "ลองมองสถานการณ์อย่างรอบด้าน แล้วเลือกสิ่งที่ยุติธรรมทั้งกับตัวเองและผู้อื่น"
     }
   },
   {
@@ -224,11 +224,11 @@ export const MAJOR_ARCANA: TarotCardData[] = [
     },
     izuReflection: {
       en: "Letting go is not losing — it's making space for something truer.",
-      th: "การปล่อยวางไม่ใช่ความพ่ายแพ้ แต่เป็นการเปิดพื้นที่ให้สิ่งที่ดีกว่าได้เข้ามา"
+      th: "การปล่อยวางไม่ใช่ความพ่ายแพ้ แต่อาจเป็นการเปิดพื้นที่ให้สิ่งที่จริงใจกว่า"
     },
     description: {
       en: "Pause and gain a new perspective. Surrender leads to insight.",
-      th: "ลองหยุดนิ่งและมองจากมุมกลับ บางครั้งคำตอบอาจซ่อนอยู่ในมุมมองที่คุณคาดไม่ถึง"
+      th: "ลองพักและมองจากอีกมุม บางคำตอบอาจปรากฏเมื่อคุณยอมชะลอลง"
     }
   },
   {
@@ -240,11 +240,11 @@ export const MAJOR_ARCANA: TarotCardData[] = [
     },
     izuReflection: {
       en: "What ends makes room for who you are becoming.",
-      th: "สิ่งที่สิ้นสุดลงกำลังช่วยเคลียร์ทางให้ตัวตนใหม่ของคุณได้เติบโต"
+      th: "สิ่งที่กำลังจบลง อาจกำลังเปิดพื้นที่ให้ตัวตนอีกแบบของคุณได้เติบโต"
     },
     description: {
       en: "Transformation is underway. An ending brings beautiful renewal.",
-      th: "การยอมรับความเปลี่ยนแปลงและการจากลา จะนำพาการเริ่มต้นที่งดงามกลับมา"
+      th: "บางช่วงอาจกำลังเปลี่ยนผ่าน ลองค่อย ๆ บอกลาสิ่งเดิมและเปิดรับการเริ่มต้นใหม่"
     }
   },
   {
@@ -256,11 +256,11 @@ export const MAJOR_ARCANA: TarotCardData[] = [
     },
     izuReflection: {
       en: "Peace is found when you walk gently between your extremes.",
-      th: "ความสงบใจมักจะเกิดขึ้นเมื่อคุณเรียนรู้ที่จะเดินบนทางสายกลางอย่างพอเหมาะ"
+      th: "ความสงบอาจเกิดขึ้นเมื่อคุณค่อย ๆ หาจุดพอดีระหว่างสิ่งที่ต่างกัน"
     },
     description: {
       en: "Find balance and harmony. Patience blends everything beautifully.",
-      th: "ลองปรับสมดุลและผสานความขัดแย้ง ความอดทนจะค่อย ๆ นำพาทุกสิ่งลงตัว"
+      th: "ลองค่อย ๆ ปรับจังหวะให้พอดี ความกลมกลืนไม่จำเป็นต้องเกิดขึ้นในทันที"
     }
   },
   {
@@ -268,15 +268,15 @@ export const MAJOR_ARCANA: TarotCardData[] = [
     name: "The Devil",
     keywords: {
       en: ["Shadow", "Attachment", "Freedom"],
-      th: ["ด้านมืดในใจ", "ความผูกมัด", "เสรีภาพ"]
+      th: ["เงาในใจ", "ความยึดติด", "อิสรภาพ"]
     },
     izuReflection: {
       en: "Naming what binds you is the first breath of freedom.",
-      th: "การตระหนักรู้และยอมรับสิ่งทีพันธนาการคุณอยู่ คือก้าวแรกสู่การเป็นอิสระ"
+      th: "การมองเห็นสิ่งที่รั้งคุณไว้โดยไม่ตัดสินตัวเอง คือก้าวแรกของการคลายออก"
     },
     description: {
       en: "Examine what holds you back. Liberation begins with awareness.",
-      th: "สำรวจนิสัยหรือกรอบความคิดที่จำกัดตัวคุณไว้ การรับรู้นำพาไปสู่หนทางแก้ไข"
+      th: "ลองสังเกตสิ่งที่ทำให้คุณรู้สึกติดอยู่ การรับรู้อย่างอ่อนโยนอาจเปิดทางเลือกใหม่"
     }
   },
   {
@@ -284,15 +284,15 @@ export const MAJOR_ARCANA: TarotCardData[] = [
     name: "The Tower",
     keywords: {
       en: ["Upheaval", "Revelation", "Breakthrough"],
-      th: ["การเปลี่ยนแปลงกะทันหัน", "การค้นพบความจริง", "การทลายกำแพง"]
+      th: ["การสั่นคลอน", "ความจริงที่ปรากฏ", "การเปลี่ยนผ่าน"]
     },
     izuReflection: {
       en: "Sometimes things must fall apart so you can finally see what was real.",
-      th: "ในบางครั้ง โครงสร้างเก่า ๆ ก็ต้องทลายลงเพื่อให้คุณได้เห็นความจริงที่มั่นคงกว่า"
+      th: "เมื่อสิ่งเดิมสั่นคลอน คุณอาจได้เห็นว่าอะไรคือสิ่งสำคัญและจริงแท้สำหรับคุณ"
     },
     description: {
       en: "Sudden change clears what no longer serves. Truth emerges.",
-      th: "ความเปลี่ยนแปลงที่คาดไม่ถึงช่วยชะล้างสิ่งล้าสมัย เพื่อต้อนรับสัจธรรมที่แท้จริง"
+      th: "ความเปลี่ยนแปลงอาจทำให้ไม่สบายใจ ลองค่อย ๆ มองว่าสิ่งใดไม่เหมาะกับคุณแล้ว"
     }
   },
   {
@@ -304,11 +304,11 @@ export const MAJOR_ARCANA: TarotCardData[] = [
     },
     izuReflection: {
       en: "Even in your darkest hour, you are a light returning to itself.",
-      th: "แม้ในคืนที่มืดมิดที่สุด ตัวตนของคุณก็ยังคงเป็นดั่งดวงดาวที่ส่องประกายในตัวเอง"
+      th: "แม้ในคืนที่มืด คุณยังมีแสงเล็ก ๆ ในตัวเองที่ค่อย ๆ พากลับมาหาความหวัง"
     },
     description: {
       en: "Hope and healing shine upon you. Trust in the universe.",
-      th: "ขอให้มีความหวังและการเยียวยาใจ ค่ำคืนนี้กำลังจะผ่านพ้นไปสู่เช้าวันใหม่"
+      th: "วันนี้อาจเป็นจังหวะให้คุณพักใจ เติมความหวัง และเชื่อในการฟื้นตัวทีละน้อย"
     }
   },
   {
@@ -320,11 +320,11 @@ export const MAJOR_ARCANA: TarotCardData[] = [
     },
     izuReflection: {
       en: "Your fears are asking to be met with curiosity, not judgment.",
-      th: "ความกังวลในใจคุณอาจเพียงต้องการให้คุณเข้าไปรับฟังด้วยความเข้าใจ ไม่ใช่ตัดสิน"
+      th: "ความกังวลอาจกำลังขอให้คุณรับฟังด้วยความสงสัยใคร่รู้ แทนการตัดสินตัวเอง"
     },
     description: {
       en: "Navigate the shadows with trust. Illusions will fade with clarity.",
-      th: "ยอมรับความไม่แน่นอนด้วยความอ่อนโยน หมอกแห่งความกังวลจะจางลงเมื่อใจคุณสงบ"
+      th: "เมื่อทุกอย่างยังไม่ชัด ลองอยู่กับความไม่แน่นอนอย่างอ่อนโยนและค่อย ๆ สังเกต"
     }
   },
   {
@@ -332,15 +332,15 @@ export const MAJOR_ARCANA: TarotCardData[] = [
     name: "The Sun",
     keywords: {
       en: ["Joy", "Success", "Vitality"],
-      th: ["ความสุขสันต์", "ความสำเร็จ", "พลังชีวิต"]
+      th: ["ความเบิกบาน", "ความสำเร็จ", "พลังชีวิต"]
     },
     izuReflection: {
       en: "You are allowed to feel this good. Joy is not borrowed — it's yours.",
-      th: "คุณได้รับอนุญาตให้มีความสุขได้อย่างเต็มที่ ความเบิกบานนี้เป็นของคุณแล้ว"
+      th: "คุณอนุญาตให้ตัวเองมีความสุขได้ ความเบิกบานนี้ไม่จำเป็นต้องมีเงื่อนไข"
     },
     description: {
       en: "Radiant joy and success fill your path. Celebrate fully.",
-      th: "แสงแดดอันอบอุ่นและพลังบวกกำลังส่องสว่างบนทางเดินของคุณ มาร่วมเฉลิมฉลองชีวิตกัน"
+      th: "ลองเปิดรับความสุขที่อยู่ตรงหน้า และชื่นชมสิ่งเล็ก ๆ ที่เติมพลังให้คุณ"
     }
   },
   {
@@ -348,15 +348,15 @@ export const MAJOR_ARCANA: TarotCardData[] = [
     name: "Judgement",
     keywords: {
       en: ["Awakening", "Renewal", "Calling"],
-      th: ["การตื่นรู้", "การปรับปรุงใหม่", "เสียงเพรียกภายใน"]
+      th: ["การตื่นรู้", "การเริ่มใหม่", "เสียงเรียกข้างใน"]
     },
     izuReflection: {
       en: "Your past does not define you — your willingness to grow does.",
-      th: "อดีตไม่ได้ชี้วัดคุณค่าของคุณ แต่เป็นความพร้อมที่จะเรียนรู้และเติบโตในปัจจุบันต่างหาก"
+      th: "อดีตไม่ได้กำหนดคุณ คุณยังเลือกเรียนรู้และเติบโตจากจุดที่ยืนอยู่ตอนนี้ได้"
     },
     description: {
       en: "A calling awakens within. Rise and embrace your true self.",
-      th: "เสียงเพรียกแห่งความเปลี่ยนแปลงดังขึ้นภายใน ถึงเวลาปลดแอกและยอมรับความจริง"
+      th: "บางสิ่งข้างในอาจกำลังชวนให้คุณมองชีวิตใหม่ และเลือกสิ่งที่ตรงกับตัวเองมากขึ้น"
     }
   },
   {
@@ -364,15 +364,15 @@ export const MAJOR_ARCANA: TarotCardData[] = [
     name: "The World",
     keywords: {
       en: ["Completion", "Integration", "Wholeness"],
-      th: ["ความเสร็จสมบูรณ์", "การหลอมรวม", "ความครบถ้วนสมบูรณ์"]
+      th: ["ความสำเร็จครบถ้วน", "การหลอมรวม", "ความสมบูรณ์ในตัวเอง"]
     },
     izuReflection: {
       en: "You have arrived, exactly as you are, exactly where you need to be.",
-      th: "คุณได้มาถึงจุดที่เป็นตัวคุณอย่างสมบูรณ์แบบ ในพื้นที่และเวลาที่เหมาะสมที่สุดแล้ว"
+      th: "ลองรับรู้ว่าคุณเดินมาไกลแค่ไหน และยอมรับตัวเองในจุดที่ยืนอยู่วันนี้"
     },
     description: {
       en: "A cycle completes in wholeness. You have everything you need.",
-      th: "วัฏจักรเดิมลุล่วงไปด้วยดีด้วยความเข้าใจและความภาคภูมิใจในสิ่งที่คุณเป็น"
+      th: "บางวงจรอาจกำลังสมบูรณ์ ลองชื่นชมสิ่งที่เรียนรู้ก่อนก้าวต่อไป"
     }
   }
 ];

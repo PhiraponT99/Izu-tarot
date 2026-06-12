@@ -66,10 +66,10 @@ const STATUS: Record<Language, Record<number, string>> = {
     3: 'Your three cards are chosen.',
   },
   th: {
-    0: 'เลือกไพ่ 3 ใบที่รู้สึกเชื่อมโยงกับคุณ…',
-    1: 'เลือกแล้วหนึ่งใบ ยังคงเหลืออีกสองใบ…',
-    2: 'ใกล้ครบแล้ว — เลือกไพ่ใบสุดท้ายของคุณ…',
-    3: 'คุณเลือกไพ่ครบทั้งสามใบแล้ว',
+    0: 'ค่อย ๆ เลือกไพ่ 3 ใบที่ดึงดูดความรู้สึกของคุณ…',
+    1: 'ได้แล้วหนึ่งใบ ลองฟังใจแล้วเลือกอีกสองใบ…',
+    2: 'เหลืออีกหนึ่งใบ เลือกใบที่เรียกหาคุณ…',
+    3: 'ไพ่ทั้งสามใบพร้อมแล้ว',
   }
 };
 
@@ -93,10 +93,10 @@ const TarotBoard: React.FC<TarotBoardProps> = ({
   // Localized taglines
   const tagline = izuMode
     ? language === 'th'
-      ? 'พื้นที่อันเงียบสงบสำหรับหยุดพักและฟังเสียงตัวคุณเอง'
+      ? 'พื้นที่เงียบ ๆ ให้คุณได้พักและกลับมาฟังเสียงข้างใน'
       : 'A quiet space to pause and listen to yourself.'
     : language === 'th'
-      ? 'ไพ่ทาโรต์กำลังรอคอยคุณอยู่ สามใบนี้จะบอกความจริงในใจคุณ'
+      ? 'ให้ไพ่ทั้งสามใบชวนคุณมองเรื่องราวในใจจากมุมใหม่'
       : 'The cards await. Three will speak your truth.';
 
   return (
@@ -223,8 +223,8 @@ const TarotBoard: React.FC<TarotBoardProps> = ({
               />
               <span className="relative z-10">
                 {izuMode
-                  ? language === 'th' ? '✦ เปิดคำสะท้อนของฉัน ✦' : '✦ Receive Your Reflection ✦'
-                  : language === 'th' ? '✦ เปิดคำทำนายของฉัน ✦' : '✦ Reveal My Reading ✦'}
+                  ? language === 'th' ? '✦ รับข้อความสะท้อนใจ ✦' : '✦ Receive Your Reflection ✦'
+                  : language === 'th' ? '✦ เปิดข้อความจากไพ่ ✦' : '✦ Reveal My Reading ✦'}
               </span>
             </button>
 
@@ -234,7 +234,7 @@ const TarotBoard: React.FC<TarotBoardProps> = ({
               onClick={onReset}
               className="font-inter text-xs text-white/30 hover:text-white/60 tracking-widest uppercase transition-colors duration-300 focus:outline-none focus-visible:ring-1 focus-visible:ring-white/30 rounded"
             >
-              {language === 'th' ? '↺ เริ่มต้นใหม่' : '↺ Start Over'}
+              {language === 'th' ? '↺ เลือกไพ่ใหม่' : '↺ Start Over'}
             </button>
           </motion.div>
         )}

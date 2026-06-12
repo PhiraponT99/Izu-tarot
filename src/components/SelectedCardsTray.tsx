@@ -19,7 +19,7 @@ const SelectedCardsTray: React.FC<SelectedCardsTrayProps> = ({
 }) => (
   <div
     className="flex items-center justify-center gap-3 sm:gap-6"
-    aria-label={language === 'th' ? 'ไพ่ที่เลือก' : 'Selected cards'}
+    aria-label={language === 'th' ? 'ไพ่ที่คุณเลือก' : 'Selected cards'}
   >
     {Array.from({ length: SLOT_COUNT }, (_, index) => {
       const card = selectedCards[index];
@@ -43,7 +43,7 @@ const SelectedCardsTray: React.FC<SelectedCardsTrayProps> = ({
                 onClick={() => onDeselect(card.id)}
                 aria-label={
                   language === 'th'
-                    ? `ยกเลิกการเลือกไพ่ใบที่ ${index + 1}`
+                    ? `นำไพ่ใบที่ ${index + 1} ออกจากชุด`
                     : `Deselect card ${index + 1}`
                 }
                 className="relative h-[88px] w-[54px] cursor-pointer overflow-visible rounded-lg focus:outline-none focus-visible:ring-2"

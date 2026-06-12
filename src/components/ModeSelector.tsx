@@ -16,7 +16,7 @@ const LABELS: Record<Language, Record<ReadingMode, string>> = {
   },
   th: {
     daily: 'ไพ่ประจำวัน',
-    'three-card': 'ไพ่สามใบ',
+    'three-card': 'อ่านไพ่สามใบ',
   },
 };
 
@@ -24,7 +24,7 @@ const ModeSelector: React.FC<ModeSelectorProps> = ({ mode, onChange, language })
   <div
     className="flex items-center rounded-full border border-white/10 bg-navy/60 p-1 shadow-lg backdrop-blur-sm"
     role="group"
-    aria-label={language === 'th' ? 'เลือกรูปแบบการอ่านไพ่' : 'Choose reading mode'}
+    aria-label={language === 'th' ? 'เลือกรูปแบบการเปิดไพ่' : 'Choose reading mode'}
   >
     {(['daily', 'three-card'] as ReadingMode[]).map((option) => {
       const isActive = mode === option;
