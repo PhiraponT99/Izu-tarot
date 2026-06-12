@@ -18,13 +18,16 @@
  */
 
 import React, { useState, useCallback } from 'react';
-import { motion } from 'framer-motion';
+import { AnimatePresence, motion } from 'framer-motion';
 import TarotBoard from './components/TarotBoard';
+import DailyTarotMode from './components/DailyTarotMode';
+import ModeSelector from './components/ModeSelector';
 import RevealModal from './components/RevealModal';
 import Particles from './components/Particles';
 import { useAmbientSound } from './hooks/useAmbientSound';
 import { MAJOR_ARCANA } from './data/tarotData';
 import type { Language } from './data/tarotData';
+import type { ReadingMode } from './components/ModeSelector';
 
 // Maximum selectable cards
 const MAX_SELECTION = 3;
@@ -35,6 +38,7 @@ const App: React.FC = () => {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [izuMode, setIzuMode] = useState(false);
   const [language, setLanguage] = useState<Language>('en');
+  const [readingMode, setReadingMode] = useState<ReadingMode>('daily');
 
   // Ambient sound — only plays on explicit user interaction (no autoplay).
   // TODO: Place your ambient audio file at /public/ambient.mp3 to enable sound.
@@ -55,6 +59,11 @@ const App: React.FC = () => {
   const handleReveal = useCallback(() => setIsModalOpen(true), []);
 
   const handleCloseModal = useCallback(() => setIsModalOpen(false), []);
+
+  const handleModeChange = useCallback((mode: ReadingMode) => {
+    setReadingMode(mode);
+    setIsModalOpen(false);
+  }, []);
 
   /** Reset all selections to begin a new reading. */
   const handleReset = useCallback(() => {
@@ -118,6 +127,10 @@ const App: React.FC = () => {
           >
             {language === 'th' ? 'ประสบการณ์การอ่านไพ่ทาโรต์อันน่าค้นหา' : 'A mystical reading experience'}
           </motion.p>
+        </div>
+
+        <div className="absolute left-1/2 top-[72px] -translate-x-1/2 md:top-5">
+          <ModeSelector mode={readingMode} onChange={handleModeChange} language={language} />
         </div>
 
         {/* Controls */}
@@ -225,30 +238,41 @@ const App: React.FC = () => {
 
       {/* ── Main — fills viewport, centres the board both axes ── */}
       <main
-        className="relative z-10 flex min-h-screen flex-col items-center justify-center"
-        style={{
-          // We adjust the paddings to shift the centered area down by 32px:
-          // paddingTop is increased by 32px (72px -> 104px),
-          // and paddingBottom is decreased by 32px (112px -> 80px).
-          // This keeps the total padding sum (184px) constant while lowering the spread.
-          paddingTop: '104px',
-          paddingBottom: '80px',
-        }}
+        className="relative z-10 flex min-h-screen flex-col items-center justify-center px-2 pb-20 pt-[136px] md:pt-[104px]"
       >
-        <TarotBoard
-          cards={MAJOR_ARCANA}
-          selectedIds={selectedIds}
-          onCardClick={handleCardClick}
-          onReveal={handleReveal}
-          onReset={handleReset}
-          izuMode={izuMode}
-          language={language}
-        />
+        <AnimatePresence mode="wait">
+          {readingMode === 'daily' ? (
+            <DailyTarotMode
+              key="daily"
+              cards={MAJOR_ARCANA}
+              izuMode={izuMode}
+              language={language}
+            />
+          ) : (
+            <motion.div
+              key="three-card"
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0 }}
+              className="w-full"
+            >
+              <TarotBoard
+                cards={MAJOR_ARCANA}
+                selectedIds={selectedIds}
+                onCardClick={handleCardClick}
+                onReveal={handleReveal}
+                onReset={handleReset}
+                izuMode={izuMode}
+                language={language}
+              />
+            </motion.div>
+          )}
+        </AnimatePresence>
       </main>
 
       {/* ── Footer — absolute at bottom, purely decorative ── */}
       <footer className="absolute bottom-0 left-0 right-0 z-10 text-center py-3 pointer-events-none">
-        <p className="font-inter text-xs text-white/18 tracking-wider">
+        <p className="font-inter text-[10px] text-white/15 tracking-[0.16em]">
           IZU TAROT · MAJOR ARCANA · {new Date().getFullYear()}
         </p>
       </footer>

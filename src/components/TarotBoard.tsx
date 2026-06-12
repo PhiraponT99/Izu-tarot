@@ -21,6 +21,7 @@
 import React, { useMemo } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import TarotCard from './TarotCard';
+import SelectedCardsTray from './SelectedCardsTray';
 import type { TarotCardData, Language } from '../data/tarotData';
 
 interface TarotBoardProps {
@@ -85,6 +86,9 @@ const TarotBoard: React.FC<TarotBoardProps> = ({
 }) => {
   const fanPositions = useMemo(() => computeFan(cards.length), [cards.length]);
   const selectionFull = selectedIds.length >= 3;
+  const selectedCards = selectedIds
+    .map((id) => cards.find((card) => card.id === id))
+    .filter((card): card is TarotCardData => Boolean(card));
 
   // Localized taglines
   const tagline = izuMode
@@ -135,7 +139,7 @@ const TarotBoard: React.FC<TarotBoardProps> = ({
       </AnimatePresence>
 
       {/* Spacer to prevent selected cards from overlapping instruction text */}
-      <div className="h-20 flex-shrink-0" aria-hidden="true" />
+      <div className="h-12 flex-shrink-0" aria-hidden="true" />
 
       {/* ── Fan container ──
           Height is the pixel budget for the pivot zone at the bottom.
@@ -166,11 +170,19 @@ const TarotBoard: React.FC<TarotBoardProps> = ({
               selectionOrder={selOrder >= 0 ? selOrder + 1 : null}
               isDisabled={selectionFull && !selectedIds.includes(card.id)}
               onClick={onCardClick}
-              izuMode={izuMode}
               zIndex={i}
             />
           );
         })}
+      </div>
+
+      <div className="-mt-16">
+        <SelectedCardsTray
+          selectedCards={selectedCards}
+          onDeselect={onCardClick}
+          izuMode={izuMode}
+          language={language}
+        />
       </div>
 
       {/* ── Action area (reveal + reset) ── */}
