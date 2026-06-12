@@ -1,5 +1,5 @@
 import React from 'react';
-import type { Language } from '../data/tarotData';
+import type { Language } from '../../shared/tarotData';
 
 export type ReadingMode = 'daily' | 'three-card';
 

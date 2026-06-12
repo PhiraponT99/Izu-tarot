@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { motion } from 'framer-motion';
-import type { Language, TarotCardData } from '../data/tarotData';
+import type { Language, TarotCardData } from '../../shared/tarotData';
 
 interface DailyTarotModeProps {
   cards: TarotCardData[];

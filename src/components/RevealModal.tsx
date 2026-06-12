@@ -13,7 +13,7 @@
 import React, { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import AskIzuPanel from './ask-izu/AskIzuPanel';
-import type { TarotCardData, Language } from '../data/tarotData';
+import type { TarotCardData, Language } from '../../shared/tarotData';
 
 interface RevealModalProps {
   isOpen: boolean;

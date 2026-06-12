@@ -1,5 +1,5 @@
 /**
- * tarotData.ts
+ * Shared, runtime-safe tarot data used by the frontend and Vercel API.
  * Defines the 22 Major Arcana cards with their names, bilingual keywords, and interpretations.
  */
 

@@ -25,8 +25,8 @@ import ModeSelector from './components/ModeSelector';
 import RevealModal from './components/RevealModal';
 import Particles from './components/Particles';
 import { useAmbientSound } from './hooks/useAmbientSound';
-import { MAJOR_ARCANA } from './data/tarotData';
-import type { Language } from './data/tarotData';
+import { MAJOR_ARCANA } from '../shared/tarotData';
+import type { Language } from '../shared/tarotData';
 import type { ReadingMode } from './components/ModeSelector';
 
 // Maximum selectable cards

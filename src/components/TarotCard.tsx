@@ -10,7 +10,7 @@
 
 import React from 'react';
 import { motion } from 'framer-motion';
-import type { TarotCardData } from '../data/tarotData';
+import type { TarotCardData } from '../../shared/tarotData';
 
 const CARD_W = 68;
 const CARD_H = 112;

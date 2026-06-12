@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { motion } from 'framer-motion';
-import type { Language, TarotCardData } from '../../data/tarotData';
+import type { Language, TarotCardData } from '../../../shared/tarotData';
 import { useAskIzu } from '../../hooks/useAskIzu';
 
 interface AskIzuPanelProps {

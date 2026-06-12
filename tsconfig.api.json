@@ -16,5 +16,5 @@
     "erasableSyntaxOnly": true,
     "noFallthroughCasesInSwitch": true
   },
-  "include": ["api/**/*.ts", "src/data/tarotData.ts", "src/types/askIzu.ts"]
+  "include": ["api/**/*.ts", "shared/**/*.ts", "src/types/askIzu.ts"]
 }

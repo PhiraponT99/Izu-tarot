@@ -1,5 +1,5 @@
 import { useEffect, useRef, useState } from 'react';
-import type { Language, TarotCardData } from '../data/tarotData';
+import type { Language, TarotCardData } from '../../shared/tarotData';
 import { askIzu } from '../services/askIzuApi';
 import type { AskIzuMessage } from '../types/askIzu';
 

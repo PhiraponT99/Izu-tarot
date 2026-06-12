@@ -3,8 +3,8 @@ import OpenAI from 'openai';
 import { zodTextFormat } from 'openai/helpers/zod';
 import type { VercelRequest, VercelResponse } from '@vercel/node';
 import { z } from 'zod';
-import { MAJOR_ARCANA } from '../src/data/tarotData';
-import type { AskIzuResponse } from '../src/types/askIzu';
+import { MAJOR_ARCANA } from '../shared/tarotData.js';
+import type { AskIzuResponse } from '../src/types/askIzu.js';
 
 const messageSchema = z.object({
   role: z.enum(['user', 'assistant']),

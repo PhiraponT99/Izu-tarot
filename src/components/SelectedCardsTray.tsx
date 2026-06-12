@@ -1,6 +1,6 @@
 import React from 'react';
 import { AnimatePresence, motion } from 'framer-motion';
-import type { Language, TarotCardData } from '../data/tarotData';
+import type { Language, TarotCardData } from '../../shared/tarotData';
 
 interface SelectedCardsTrayProps {
   selectedCards: TarotCardData[];

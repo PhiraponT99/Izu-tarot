@@ -1,4 +1,4 @@
-import type { Language } from '../data/tarotData';
+import type { Language } from '../../shared/tarotData.js';
 
 export type AskIzuSafety = 'standard' | 'supportive-redirect';
 

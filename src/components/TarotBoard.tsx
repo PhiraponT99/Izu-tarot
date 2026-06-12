@@ -22,7 +22,7 @@ import React, { useMemo } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import TarotCard from './TarotCard';
 import SelectedCardsTray from './SelectedCardsTray';
-import type { TarotCardData, Language } from '../data/tarotData';
+import type { TarotCardData, Language } from '../../shared/tarotData';
 
 interface TarotBoardProps {
   cards: TarotCardData[];
