@@ -29,102 +29,102 @@ const REFLECTION_GROUPS: readonly ReflectionGroup[] = [
     name: 'Shadow Care',
     cardIds: new Set([15, 18, 16, 13]),
     messages: {
-      en: `Something in this reading may be asking for gentleness, not judgement.
-If a feeling or pattern feels heavy, you do not have to fight it all at once.
-Just noticing it with honesty is already a quiet kind of healing.
-Stay close to yourself while you untangle what has been holding you.`,
-      th: `ไพ่ชุดนี้เหมือนกำลังบอกว่า บางอย่างต้องการความอ่อนโยนมากกว่าการตัดสิน
-ถ้าความรู้สึกหรือรูปแบบบางอย่างมันหนัก ไม่จำเป็นต้องสู้กับมันทั้งหมดในทีเดียว
-แค่เริ่มมองเห็นมันอย่างซื่อสัตย์ ก็เป็นการเยียวยาแบบเงียบ ๆ แล้ว
-ค่อย ๆ อยู่ข้างตัวเอง ระหว่างแกะสิ่งที่เคยรั้งเราไว้`,
+      en: `Some things may not need an answer right away.
+They may simply be asking to be seen with more gentleness.
+If it still feels heavy, untangle it slowly.
+For today, not judging yourself is already enough.`,
+      th: `บางเรื่องอาจไม่ได้ต้องการคำตอบทันที
+มันอาจแค่อยากให้เรามองมันอย่างอ่อนโยนขึ้น
+ถ้ายังหนักอยู่ ค่อย ๆ แกะมันทีละนิดก็ได้
+วันนี้แค่ไม่ตัดสินตัวเอง ก็พอแล้วนะ`,
     },
   },
   {
     name: 'Transition & Release',
     cardIds: new Set([13, 16, 10, 12, 20]),
     messages: {
-      en: `This reading feels like a soft threshold.
-Something may be changing, ending, or asking to be released with care.
-You do not need to understand the whole transformation today.
-Let one honest breath, one small step, be enough for now.`,
-      th: `ไพ่ชุดนี้ให้ความรู้สึกเหมือนเรายืนอยู่ตรงขอบของการเปลี่ยนผ่าน
-บางอย่างอาจกำลังเปลี่ยน จบลง หรือขอให้เราค่อย ๆ ปล่อยมันด้วยความอ่อนโยน
-ไม่จำเป็นต้องเข้าใจการเปลี่ยนแปลงทั้งหมดในวันนี้
-แค่หายใจอย่างจริงใจหนึ่งครั้ง แล้วค่อยก้าวเล็ก ๆ ก็พอ`,
+      en: `Something may be quietly changing shape.
+If something needs to be released, it does not have to happen all at once.
+Breathe, soften, and take the next small step.
+Let yourself move through this gently.`,
+      th: `เหมือนมีบางอย่างกำลังค่อย ๆ เปลี่ยนรูปไป
+ถ้าต้องปล่อยอะไรสักอย่าง ก็ไม่ต้องรีบปล่อยมันทั้งหมดในทีเดียว
+ค่อย ๆ วาง ค่อย ๆ หายใจ
+ให้ตัวเองผ่านช่วงนี้อย่างอ่อนโยนก็พอ`,
     },
   },
   {
     name: 'Inner Listening',
     cardIds: new Set([2, 9, 18, 12]),
     messages: {
-      en: `These cards invite you to slow down and listen inwardly.
-There may be a quiet answer beneath the noise, but it may not arrive by force.
-Give yourself permission to pause before deciding.
-Some truths become clearer when the heart feels safe.`,
-      th: `ไพ่ชุดนี้ชวนให้เราช้าลง แล้วฟังเสียงข้างในมากขึ้น
-อาจมีคำตอบเงียบ ๆ อยู่ใต้ความวุ่นวาย แต่มันอาจไม่มาเมื่อเราฝืนเร่ง
-ให้เวลาตัวเองได้หยุดก่อนตัดสินใจ
-บางความจริงจะชัดขึ้น เมื่อหัวใจรู้สึกปลอดภัยพอ`,
+      en: `These cards may be asking you to slow down.
+Some answers do not become clear when they are rushed.
+Give your heart a little quiet before choosing.
+Truth can arrive softly too.`,
+      th: `ไพ่ชุดนี้เหมือนชวนให้เราช้าลง
+บางคำตอบอาจยังไม่อยากถูกเร่งให้ชัด
+ลองให้ใจได้เงียบพอก่อนค่อยเลือกก็ได้
+บางทีความจริงก็มาเบา ๆ แบบนั้นแหละ`,
     },
   },
   {
     name: 'Healing & Hope',
     cardIds: new Set([14, 17, 19, 21]),
     messages: {
-      en: `This reading carries a small restoring light.
-Something in you may be learning how to trust warmth again.
-Let healing be gradual, not perfect.
-Even a tiny sign of hope is still real.`,
-      th: `ไพ่ชุดนี้มีแสงเล็ก ๆ ของการเยียวยาอยู่ในนั้น
-บางส่วนในตัวเราอาจกำลังค่อย ๆ เรียนรู้ที่จะไว้วางใจความอบอุ่นอีกครั้ง
-ให้การรักษาเป็นเรื่องค่อยเป็นค่อยไป ไม่ต้องสมบูรณ์แบบ
-แม้ความหวังเล็กมาก มันก็ยังเป็นความหวังจริง ๆ`,
+      en: `There is a small light in this reading.
+It may not be loud, but it is still real.
+Let warmth return slowly.
+You do not have to heal perfectly for anyone.`,
+      th: `ไพ่ชุดนี้มีแสงเล็ก ๆ อยู่ในนั้น
+อาจไม่ใช่ความหวังที่ดังมาก แต่ยังเป็นความหวังจริง ๆ
+ค่อย ๆ ให้ใจได้กลับมาอุ่นขึ้นทีละนิด
+ไม่ต้องรีบหายดีเพื่อใครเลย`,
     },
   },
   {
     name: 'Choice & Alignment',
     cardIds: new Set([6, 11, 7, 1]),
     messages: {
-      en: `These cards bring attention to what feels honest inside you.
-The next step may not need to be loud or dramatic.
-Choose what feels steady, kind, and aligned with who you are becoming.
-A gentle choice can still be a powerful one.`,
-      th: `ไพ่ชุดนี้พาเรากลับมามองว่า อะไรคือสิ่งที่จริงกับใจเรา
-ก้าวถัดไปไม่จำเป็นต้องดังหรือยิ่งใหญ่
-ลองเลือกสิ่งที่มั่นคง อ่อนโยน และไม่พาเราออกห่างจากตัวเอง
-การเลือกอย่างเบา ๆ ก็มีพลังได้เหมือนกัน`,
+      en: `The answer may not be about the perfect path.
+It may be about the path that keeps you close to yourself.
+Choose from honesty, not pressure.
+A small sincere step can still be powerful.`,
+      th: `บางทีคำตอบอาจไม่ได้อยู่ที่ทางไหนดีที่สุด
+แต่อยู่ที่ทางไหนทำให้เราไม่หลุดจากตัวเอง
+ลองเลือกจากความจริงข้างใน ไม่ใช่จากแรงกดดัน
+ก้าวเล็ก ๆ ที่ซื่อสัตย์ ก็มีพลังมากพอแล้ว`,
     },
   },
   {
     name: 'Grounding & Support',
     cardIds: new Set([4, 5, 8, 3]),
     messages: {
-      en: `This reading asks you to care for your foundation.
-A little structure, rest, or support may help your heart feel safer.
-You do not have to hold everything alone.
-Start with one small thing that brings you back to yourself.`,
-      th: `ไพ่ชุดนี้ชวนให้เรากลับมาดูแลฐานของตัวเอง
-โครงสร้างเล็ก ๆ การพัก หรือการขอแรงสนับสนุน อาจช่วยให้ใจรู้สึกปลอดภัยขึ้น
-เราไม่จำเป็นต้องแบกทุกอย่างไว้คนเดียว
-เริ่มจากสิ่งเล็ก ๆ ที่พาเรากลับมาอยู่กับตัวเองก็พอ`,
+      en: `You do not have to fix everything at once.
+Start by giving your heart one small place to rest.
+A boundary, a pause, or someone safe may help.
+You were not meant to carry everything alone.`,
+      th: `ช่วงนี้อาจไม่ต้องแก้ทุกอย่างพร้อมกันก็ได้
+ลองกลับมาจัดพื้นที่เล็ก ๆ ให้ใจได้พักก่อน
+ขอบเขต การพัก หรือคนที่ไว้ใจ อาจช่วยประคองเราได้
+เราไม่จำเป็นต้องแบกทุกอย่างคนเดียว`,
     },
   },
 ];
 
 const GENERIC_MESSAGES: Record<Language, string> = {
   en: `These three cards feel like a small mirror for this moment.
-You do not need to solve everything right away.
-Notice what wants care, what wants space, and what feels quietly true.
-Let this reading stay with you gently.`,
-  th: `ไพ่สามใบนี้เหมือนกระจกเล็ก ๆ ของช่วงเวลานี้
-เราไม่จำเป็นต้องแก้ทุกอย่างให้ได้ทันที
-ลองสังเกตว่าอะไรต้องการการดูแล อะไรต้องการพื้นที่ และอะไรที่รู้สึกจริงอย่างเงียบ ๆ
-ให้ reading นี้อยู่กับเราอย่างอ่อนโยนก็พอ`,
+You do not have to understand everything right away.
+Notice what wants care, what wants space, and what feels true.
+Let the reading stay with you gently.`,
+  th: `ไพ่สามใบนี้เหมือนกระจกเล็ก ๆ ของตอนนี้
+ไม่ต้องรีบแปลทุกอย่างให้ได้ทันที
+ลองดูว่าอะไรอยากให้เราดูแล อะไรอยากได้พื้นที่
+แล้วค่อย ๆ อยู่กับคำตอบนั้นก็พอ`,
 };
 
 const REFLECTION_TITLES: Record<Language, string> = {
-  en: 'Izu Reflection',
-  th: 'ข้อความจากอีซึ',
+  en: 'Izu whispers...',
+  th: 'อีซึกระซิบว่า...',
 };
 
 export function getIzuThreeCardReflection(

@@ -17,19 +17,26 @@ const ReflectionContent: React.FC<ReflectionContentProps> = ({ reflection, title
     >
       {reflection.title}
     </h3>
-    <p className="whitespace-pre-line font-inter text-sm font-normal leading-6 text-slate-100 sm:text-base sm:leading-7">
+    <p className="whitespace-pre-line font-inter text-sm font-normal leading-[1.7] text-slate-100 sm:text-[15px] md:text-base">
       {reflection.message}
     </p>
-    {ENABLE_TAROT_TEST_MODE && (
-      <p className="mt-3 border-t border-purple-light/15 pt-2 font-inter text-[9px] uppercase tracking-wider text-purple-light/60 sm:text-[10px]">
-        Matched reflection group: {reflection.group}
-      </p>
-    )}
   </>
 );
 
+const ReflectionDebugLabel: React.FC<IzuReflectionBubbleProps> = ({ reflection }) => (
+  <p className="font-inter  tracking-wider  text-white opacity-55 md:text-[11px]">
+    Matched reflection group: {reflection.group}
+  </p>
+);
+
 const IzuReflectionBubble: React.FC<IzuReflectionBubbleProps> = ({ reflection }) => (
-  <div className="mx-auto w-full max-w-[720px]">
+  <div className="mx-auto w-full max-w-[720px] ">
+    {ENABLE_TAROT_TEST_MODE && (
+      <div className="mb-2 flex justify-center px-4 text-center">
+        <ReflectionDebugLabel reflection={reflection} />
+      </div>
+    )}
+
     {/* On phones, keep the full mascot visible and give the longer copy its own readable panel. */}
     <section aria-labelledby="izu-reflection-title-mobile" className="sm:hidden">
       <img
@@ -55,7 +62,7 @@ const IzuReflectionBubble: React.FC<IzuReflectionBubbleProps> = ({ reflection })
         alt="Izu message bubble"
         className="h-auto w-full"
       />
-      <div className="absolute bottom-[22%] left-[11%] right-[22%] top-[15%] flex flex-col justify-center px-4 text-left md:px-7">
+      <div className="absolute left-[19%] top-[31%] w-[60%] max-w-[520px] text-center">
         <ReflectionContent
           reflection={reflection}
           titleId="izu-reflection-title-desktop"
