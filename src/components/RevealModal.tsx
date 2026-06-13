@@ -14,6 +14,8 @@ import React, { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import AskIzuPanel from './ask-izu/AskIzuPanel';
 import CardArtwork from './CardArtwork';
+import { getIzuThreeCardReflection } from '../utils/izuThreeCardReflection';
+import { ENABLE_TAROT_TEST_MODE } from '../config/featureFlags';
 
 /**
  * Feature flag: Ask Izu is disabled in production while OpenAI billing is inactive.
@@ -179,13 +181,7 @@ const RevealModal: React.FC<RevealModalProps> = ({
       ? 'ลองมองอดีต ปัจจุบัน และสิ่งที่อาจค่อย ๆ คลี่คลายต่อไป'
       : 'The cards have spoken — past, present, and future';
 
-  const fullReadingText = izuMode
-    ? language === 'th'
-      ? 'คุณไม่จำเป็นต้องหาคำตอบทั้งหมดในวันนี้ แค่หายใจลึก ๆ และไว้ใจก้าวเล็ก ๆ ถัดไปก็พอ'
-      : "You don't need to figure it all out today. Just breathe, and trust the next small step."
-    : language === 'th'
-      ? 'เก็บเฉพาะข้อความที่ตรงกับใจไว้ แล้วค่อย ๆ ก้าวต่อไปในจังหวะของคุณ'
-      : 'The universe has revealed what lies in your path. Walk forward with courage and clarity.';
+  const threeCardReflection = getIzuThreeCardReflection(selectedCards, language);
 
   return (
     <AnimatePresence>
@@ -274,7 +270,7 @@ const RevealModal: React.FC<RevealModalProps> = ({
                     initial={{ opacity: 0, y: 10 }}
                     animate={{ opacity: 1, y: 0 }}
                     transition={{ delay: 0.3 }}
-                    className="px-4 pb-4 text-center sm:px-8"
+                    className="px-4 pb-4 sm:px-8"
                   >
                     <div
                       className="h-px mb-4"
@@ -283,14 +279,25 @@ const RevealModal: React.FC<RevealModalProps> = ({
                           'linear-gradient(90deg, transparent, rgba(167,139,250,0.3), transparent)',
                       }}
                     />
-                    <p
-                      className={[
-                        'font-cormorant italic text-base leading-relaxed',
-                        izuMode ? 'text-purple-light/70' : 'text-slate-400',
-                      ].join(' ')}
+                    <section
+                      aria-labelledby="izu-three-card-reflection-title"
+                      className="mx-auto max-w-2xl rounded-xl border border-purple-light/20 bg-purple-mystic/10 px-4 py-4 text-left shadow-[inset_0_1px_0_rgba(251,191,36,0.08)] sm:px-5"
                     >
-                      {fullReadingText}
-                    </p>
+                      <h3
+                        id="izu-three-card-reflection-title"
+                        className="mb-2 font-cinzel text-xs uppercase tracking-widest text-gold/75"
+                      >
+                        {threeCardReflection.title}
+                      </h3>
+                      <p className="whitespace-pre-line font-cormorant text-sm leading-6 text-purple-light/80 sm:text-base">
+                        {threeCardReflection.message}
+                      </p>
+                      {ENABLE_TAROT_TEST_MODE && (
+                        <p className="mt-3 border-t border-purple-light/10 pt-2 font-inter text-[10px] uppercase tracking-wider text-purple-light/40">
+                          Matched reflection group: {threeCardReflection.group}
+                        </p>
+                      )}
+                    </section>
                   </motion.div>
 
                   {ASK_IZU_ENABLED && (

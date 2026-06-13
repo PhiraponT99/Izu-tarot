@@ -24,7 +24,9 @@ import DailyTarotMode from './components/DailyTarotMode';
 import ModeSelector from './components/ModeSelector';
 import RevealModal from './components/RevealModal';
 import Particles from './components/Particles';
+import TestReadingControls from './components/TestReadingControls';
 import { useAmbientSound } from './hooks/useAmbientSound';
+import { ENABLE_TAROT_TEST_MODE } from './config/featureFlags';
 import { MAJOR_ARCANA } from '../shared/tarotData';
 import type { Language } from '../shared/tarotData';
 import type { ReadingMode } from './components/ModeSelector';
@@ -57,6 +59,11 @@ const App: React.FC = () => {
   }, []);
 
   const handleReveal = useCallback(() => setIsModalOpen(true), []);
+
+  const handleUseTestCards = useCallback((ids: [number, number, number]) => {
+    setSelectedIds(ids);
+    setIsModalOpen(false);
+  }, []);
 
   const handleCloseModal = useCallback(() => setIsModalOpen(false), []);
 
@@ -256,6 +263,12 @@ const App: React.FC = () => {
               exit={{ opacity: 0 }}
               className="w-full"
             >
+              {ENABLE_TAROT_TEST_MODE && (
+                <TestReadingControls
+                  cards={MAJOR_ARCANA}
+                  onUseSelectedCards={handleUseTestCards}
+                />
+              )}
               <TarotBoard
                 cards={MAJOR_ARCANA}
                 selectedIds={selectedIds}
