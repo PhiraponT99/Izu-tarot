@@ -13,6 +13,7 @@
 import React, { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import AskIzuPanel from './ask-izu/AskIzuPanel';
+import CardArtwork from './CardArtwork';
 
 /**
  * Feature flag: Ask Izu is disabled in production while OpenAI billing is inactive.
@@ -90,45 +91,7 @@ const RevealedCard: React.FC<{
                   : '0 0 20px rgba(124,58,237,0.4), 0 8px 32px rgba(0,0,0,0.5)',
             }}
           >
-            {/* Roman numeral */}
-            <div className="absolute top-3 left-0 right-0 text-center">
-              <span className="font-cinzel text-gold/60 text-xs">
-                {toRoman(card.id)}
-              </span>
-            </div>
-
-            {/* Card name */}
-            <div className="absolute inset-0 flex flex-col items-center justify-center gap-2 px-2">
-              {/* Mystic symbol */}
-              <motion.div
-                initial={{ opacity: 0, scale: 0 }}
-                animate={{ opacity: 1, scale: 1 }}
-                transition={{ delay: 0.3, type: 'spring' }}
-                className="text-3xl select-none"
-                style={{ textShadow: '0 0 20px rgba(251,191,36,0.8)' }}
-              >
-                {getCardSymbol(card.id)}
-              </motion.div>
-
-              <motion.p
-                initial={{ opacity: 0, y: 8 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ delay: 0.4 }}
-                className="font-cinzel text-center text-white/90 leading-tight"
-                style={{ fontSize: '0.65rem', letterSpacing: '0.05em' }}
-              >
-                {card.name}
-              </motion.p>
-            </div>
-
-            {/* Bottom decorative line */}
-            <div
-              className="absolute bottom-3 left-4 right-4 h-px"
-              style={{
-                background:
-                  'linear-gradient(90deg, transparent, rgba(251,191,36,0.4), transparent)',
-              }}
-            />
+            <CardArtwork card={card} />
           </div>
 
           {/* Keywords */}
@@ -167,34 +130,6 @@ const RevealedCard: React.FC<{
     </AnimatePresence>
   );
 };
-
-/** Convert number to Roman numeral (0 → ∞ for The Fool) */
-function toRoman(n: number): string {
-  if (n === 0) return '∞';
-  const vals = [10, 9, 5, 4, 1];
-  const syms = ['X', 'IX', 'V', 'IV', 'I'];
-  let result = '';
-  let num = n;
-  for (let i = 0; i < vals.length; i++) {
-    while (num >= vals[i]) {
-      result += syms[i];
-      num -= vals[i];
-    }
-  }
-  return result;
-}
-
-/** Get a thematic symbol for each card */
-function getCardSymbol(id: number): string {
-  const symbols = [
-    '🌟', '⚡', '🌙', '🌿', '👑',
-    '🔑', '💫', '🏆', '🦁', '🔮',
-    '☸️', '⚖️', '🌀', '💀', '🦋',
-    '😈', '🗼', '⭐', '🌕', '☀️',
-    '📯', '🌍',
-  ];
-  return symbols[id] ?? '✦';
-}
 
 const RevealModal: React.FC<RevealModalProps> = ({
   isOpen,

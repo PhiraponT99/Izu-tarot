@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { motion } from 'framer-motion';
 import type { Language, TarotCardData } from '../../shared/tarotData';
+import CardArtwork from './CardArtwork';
 
 interface DailyTarotModeProps {
   cards: TarotCardData[];
@@ -104,11 +105,7 @@ const DailyTarotMode: React.FC<DailyTarotModeProps> = ({ cards, language, izuMod
                 : '0 0 30px rgba(251,191,36,0.35), 0 16px 45px rgba(0,0,0,0.45)',
             }}
           >
-            <span className="text-4xl text-gold" aria-hidden="true">✦</span>
-            <p className="font-cinzel text-sm leading-snug text-white/90">
-              {selectedCard?.name ?? ''}
-            </p>
-            <div className="h-px w-16 bg-gradient-to-r from-transparent via-gold/50 to-transparent" />
+            {selectedCard && <CardArtwork card={selectedCard} />}
           </div>
         </motion.div>
       </div>
