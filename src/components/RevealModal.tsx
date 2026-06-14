@@ -17,6 +17,7 @@ import CardArtwork from './CardArtwork';
 import IzuReflectionBubble from './IzuReflectionBubble';
 import { createReadingStoryImage } from '../utils/createReadingStoryImage';
 import { getIzuThreeCardReflection } from '../utils/izuThreeCardReflection';
+import { shareStoryImage } from '../utils/shareStoryImage';
 
 /**
  * Feature flag: Ask Izu is disabled in production while OpenAI billing is inactive.
@@ -187,17 +188,6 @@ const RevealModal: React.FC<RevealModalProps> = ({
 
   const threeCardReflection = getIzuThreeCardReflection(selectedCards, language);
 
-  const downloadStory = (blob: Blob) => {
-    const url = URL.createObjectURL(blob);
-    const link = document.createElement('a');
-    link.href = url;
-    link.download = `izu-tarot-reading-${new Date().toISOString().slice(0, 10)}.png`;
-    document.body.appendChild(link);
-    link.click();
-    link.remove();
-    window.setTimeout(() => URL.revokeObjectURL(url), 1000);
-  };
-
   const handleShareStory = async () => {
     setIsCreatingStory(true);
     setShareError(null);
@@ -208,25 +198,7 @@ const RevealModal: React.FC<RevealModalProps> = ({
         reflection: threeCardReflection,
         language,
       });
-      const file = new File([blob], 'izu-tarot-reading.png', { type: 'image/png' });
-      const shareData: ShareData = {
-        files: [file],
-        title: 'Izu Tarot',
-        text: language === 'th'
-          ? 'ข้อความสะท้อนใจจากไพ่สามใบของฉัน'
-          : 'My gentle three-card reflection from Izu Tarot',
-      };
-
-      if (navigator.share && navigator.canShare?.({ files: [file] })) {
-        try {
-          await navigator.share(shareData);
-          return;
-        } catch (error) {
-          if (error instanceof DOMException && error.name === 'AbortError') return;
-        }
-      }
-
-      downloadStory(blob);
+      await shareStoryImage(blob, language);
     } catch (error) {
       console.error('Unable to create story image', error);
       setShareError(
@@ -351,43 +323,47 @@ const RevealModal: React.FC<RevealModalProps> = ({
 
             {/* Story share and close actions */}
             <div className="sticky bottom-0 z-20 flex flex-col items-center gap-3 bg-gradient-to-t from-slate-950 via-slate-950/95 to-transparent px-4 pb-5 pt-8 sm:pb-8">
-              {revealedCount >= 3 && (
+              <div className="flex w-full flex-col items-center gap-3 sm:w-auto sm:flex-row">
+                {revealedCount >= 3 && (
+                  <button
+                    id="share-story-btn"
+                    type="button"
+                    onClick={handleShareStory}
+                    disabled={isCreatingStory}
+                    className={[
+                      'w-full max-w-xs rounded-full bg-gradient-to-r from-gold-dark to-gold px-8 py-3 sm:w-auto',
+                      'font-cinzel text-xs uppercase tracking-widest text-navy shadow-[0_0_24px_rgba(251,191,36,0.24)]',
+                      'transition-all duration-300 hover:brightness-110 focus:outline-none focus-visible:ring-2 focus-visible:ring-gold-light',
+                      'disabled:cursor-wait disabled:opacity-60',
+                    ].join(' ')}
+                  >
+                    {isCreatingStory
+                      ? (language === 'th' ? 'กำลังเตรียม...' : 'Preparing...')
+                      : (language === 'th' ? 'แชร์สตอรี่' : 'Share Story')}
+                  </button>
+                )}
+
                 <button
-                  id="share-story-btn"
-                  onClick={handleShareStory}
-                  disabled={isCreatingStory}
+                  id="modal-close-btn"
+                  type="button"
+                  onClick={handleClose}
                   className={[
-                    'rounded-full bg-gradient-to-r from-gold-dark to-gold px-8 py-3',
-                    'font-cinzel text-xs uppercase tracking-widest text-navy shadow-[0_0_24px_rgba(251,191,36,0.24)]',
-                    'transition-all duration-300 hover:brightness-110 focus:outline-none focus-visible:ring-2 focus-visible:ring-gold-light',
-                    'disabled:cursor-wait disabled:opacity-60',
+                    'w-full max-w-xs rounded-full px-8 py-3 font-cinzel text-xs uppercase tracking-widest sm:w-auto',
+                    'transition-all duration-300 focus:outline-none focus-visible:ring-2',
+                    izuMode
+                      ? 'border border-purple-light/30 text-purple-light/60 hover:text-purple-light hover:border-purple-light/60 hover:bg-purple-mystic/10 focus-visible:ring-purple-light'
+                      : 'border border-gold/30 text-gold/60 hover:text-gold hover:border-gold/60 hover:bg-gold/5 focus-visible:ring-gold',
                   ].join(' ')}
                 >
-                  {isCreatingStory
-                    ? (language === 'th' ? 'กำลังสร้างรูป...' : 'Creating Story...')
-                    : (language === 'th' ? 'แชร์ลงสตอรี่' : 'Share Story')}
+                  {language === 'th' ? 'ปิด' : 'Close'}
                 </button>
-              )}
+              </div>
 
               {shareError && (
                 <p role="alert" className="text-center font-inter text-xs text-rose-300">
                   {shareError}
                 </p>
               )}
-
-              <button
-                id="modal-close-btn"
-                onClick={handleClose}
-                className={[
-                  'font-cinzel text-xs tracking-widest uppercase px-8 py-3 rounded-full',
-                  'transition-all duration-300 focus:outline-none focus-visible:ring-2',
-                  izuMode
-                    ? 'border border-purple-light/30 text-purple-light/60 hover:text-purple-light hover:border-purple-light/60 hover:bg-purple-mystic/10 focus-visible:ring-purple-light'
-                    : 'border border-gold/30 text-gold/60 hover:text-gold hover:border-gold/60 hover:bg-gold/5 focus-visible:ring-gold',
-                ].join(' ')}
-              >
-                {language === 'th' ? 'ปิด' : 'Close'}
-              </button>
             </div>
           </motion.div>
         </motion.div>
