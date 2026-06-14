@@ -15,6 +15,7 @@ import { motion, AnimatePresence } from 'framer-motion';
 import AskIzuPanel from './ask-izu/AskIzuPanel';
 import CardArtwork from './CardArtwork';
 import IzuReflectionBubble from './IzuReflectionBubble';
+import { createReadingStoryImage } from '../utils/createReadingStoryImage';
 import { getIzuThreeCardReflection } from '../utils/izuThreeCardReflection';
 
 /**
@@ -142,6 +143,8 @@ const RevealModal: React.FC<RevealModalProps> = ({
 }) => {
   // Track how many cards have been revealed (0 → 3)
   const [revealedCount, setRevealedCount] = useState(0);
+  const [isCreatingStory, setIsCreatingStory] = useState(false);
+  const [shareError, setShareError] = useState<string | null>(null);
 
   // Stagger card reveals with 800ms delay each
   useEffect(() => {
@@ -161,6 +164,7 @@ const RevealModal: React.FC<RevealModalProps> = ({
 
   const handleClose = () => {
     setRevealedCount(0);
+    setShareError(null);
     onClose();
   };
 
@@ -182,6 +186,58 @@ const RevealModal: React.FC<RevealModalProps> = ({
       : 'The cards have spoken — past, present, and future';
 
   const threeCardReflection = getIzuThreeCardReflection(selectedCards, language);
+
+  const downloadStory = (blob: Blob) => {
+    const url = URL.createObjectURL(blob);
+    const link = document.createElement('a');
+    link.href = url;
+    link.download = `izu-tarot-reading-${new Date().toISOString().slice(0, 10)}.png`;
+    document.body.appendChild(link);
+    link.click();
+    link.remove();
+    window.setTimeout(() => URL.revokeObjectURL(url), 1000);
+  };
+
+  const handleShareStory = async () => {
+    setIsCreatingStory(true);
+    setShareError(null);
+
+    try {
+      const blob = await createReadingStoryImage({
+        cards: selectedCards,
+        reflection: threeCardReflection,
+        language,
+      });
+      const file = new File([blob], 'izu-tarot-reading.png', { type: 'image/png' });
+      const shareData: ShareData = {
+        files: [file],
+        title: 'Izu Tarot',
+        text: language === 'th'
+          ? 'ข้อความสะท้อนใจจากไพ่สามใบของฉัน'
+          : 'My gentle three-card reflection from Izu Tarot',
+      };
+
+      if (navigator.share && navigator.canShare?.({ files: [file] })) {
+        try {
+          await navigator.share(shareData);
+          return;
+        } catch (error) {
+          if (error instanceof DOMException && error.name === 'AbortError') return;
+        }
+      }
+
+      downloadStory(blob);
+    } catch (error) {
+      console.error('Unable to create story image', error);
+      setShareError(
+        language === 'th'
+          ? 'ไม่สามารถสร้างรูปได้ในขณะนี้ กรุณาลองอีกครั้ง'
+          : 'Could not create the story image. Please try again.',
+      );
+    } finally {
+      setIsCreatingStory(false);
+    }
+  };
 
   return (
     <AnimatePresence>
@@ -293,8 +349,32 @@ const RevealModal: React.FC<RevealModalProps> = ({
               )}
             </AnimatePresence>
 
-            {/* Close button */}
-            <div className="sticky bottom-0 z-20 flex justify-center bg-gradient-to-t from-slate-950 via-slate-950/95 to-transparent px-4 pb-5 pt-8 sm:pb-8">
+            {/* Story share and close actions */}
+            <div className="sticky bottom-0 z-20 flex flex-col items-center gap-3 bg-gradient-to-t from-slate-950 via-slate-950/95 to-transparent px-4 pb-5 pt-8 sm:pb-8">
+              {revealedCount >= 3 && (
+                <button
+                  id="share-story-btn"
+                  onClick={handleShareStory}
+                  disabled={isCreatingStory}
+                  className={[
+                    'rounded-full bg-gradient-to-r from-gold-dark to-gold px-8 py-3',
+                    'font-cinzel text-xs uppercase tracking-widest text-navy shadow-[0_0_24px_rgba(251,191,36,0.24)]',
+                    'transition-all duration-300 hover:brightness-110 focus:outline-none focus-visible:ring-2 focus-visible:ring-gold-light',
+                    'disabled:cursor-wait disabled:opacity-60',
+                  ].join(' ')}
+                >
+                  {isCreatingStory
+                    ? (language === 'th' ? 'กำลังสร้างรูป...' : 'Creating Story...')
+                    : (language === 'th' ? 'แชร์ลงสตอรี่' : 'Share Story')}
+                </button>
+              )}
+
+              {shareError && (
+                <p role="alert" className="text-center font-inter text-xs text-rose-300">
+                  {shareError}
+                </p>
+              )}
+
               <button
                 id="modal-close-btn"
                 onClick={handleClose}
