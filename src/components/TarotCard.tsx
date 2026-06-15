@@ -13,7 +13,7 @@ import { motion } from 'framer-motion';
 import type { TarotCardData } from '../../shared/tarotData';
 
 const CARD_W = 68;
-const CARD_H = 112;
+const CARD_H = 102;
 
 interface TarotCardProps {
   card: TarotCardData;
@@ -27,53 +27,6 @@ interface TarotCardProps {
   onClick: (id: number) => void;
   zIndex: number;
 }
-
-/** SVG Mandala ornament for the card back */
-const MandalaSVG: React.FC = () => (
-  <svg
-    viewBox="0 0 80 80"
-    width="52"
-    height="52"
-    aria-hidden="true"
-    style={{
-      position: 'absolute',
-      top: '50%',
-      left: '50%',
-      transform: 'translate(-50%, -50%)',
-      opacity: 0.55,
-      pointerEvents: 'none',
-    }}
-  >
-    <circle cx="40" cy="40" r="36" fill="none" stroke="rgba(251,191,36,0.3)" strokeWidth="0.6" />
-    <circle cx="40" cy="40" r="27" fill="none" stroke="rgba(167,139,250,0.3)" strokeWidth="0.5" />
-    <circle cx="40" cy="40" r="17" fill="none" stroke="rgba(251,191,36,0.2)" strokeWidth="0.5" />
-    {Array.from({ length: 8 }, (_, i) => {
-      const a = (i * 45 * Math.PI) / 180;
-      return (
-        <line
-          key={i}
-          x1={40 + 36 * Math.cos(a)} y1={40 + 36 * Math.sin(a)}
-          x2={40 + 36 * Math.cos(a + Math.PI)} y2={40 + 36 * Math.sin(a + Math.PI)}
-          stroke="rgba(251,191,36,0.12)" strokeWidth="0.4"
-        />
-      );
-    })}
-    {Array.from({ length: 6 }, (_, i) => {
-      const a = (i * 60 * Math.PI) / 180;
-      return (
-        <circle
-          key={i}
-          cx={40 + 12 * Math.cos(a)}
-          cy={40 + 12 * Math.sin(a)}
-          r="5" fill="none"
-          stroke="rgba(167,139,250,0.28)"
-          strokeWidth="0.5"
-        />
-      );
-    })}
-    <circle cx="40" cy="40" r="2.5" fill="rgba(251,191,36,0.45)" />
-  </svg>
-);
 
 const TarotCard: React.FC<TarotCardProps> = ({
   card,
@@ -109,7 +62,7 @@ const TarotCard: React.FC<TarotCardProps> = ({
       <motion.div
         style={{ width: '100%', height: '100%', position: 'relative' }}
         animate={{
-          opacity: isSelected ? 0.2 : isDisabled ? 0.4 : 1,
+          opacity: isSelected ? 0.2 : 1,
           scale: isSelected ? 0.96 : 1,
         }}
         transition={{ type: 'spring', stiffness: 250, damping: 22 }}
@@ -130,59 +83,18 @@ const TarotCard: React.FC<TarotCardProps> = ({
           aria-label={`Tarot card ${card.id + 1}${isSelected ? `, selected placeholder for card ${selectionOrder}` : ''}`}
           aria-pressed={isSelected}
           className={[
-            'relative w-full h-full rounded-lg overflow-visible',
-            'focus:outline-none',
+            'relative h-full w-full overflow-hidden rounded-[10px] border border-gold/70 bg-gradient-to-br from-indigo-deep via-purple-mystic to-navy p-0',
+            'box-border shadow-[0_4px_14px_rgba(0,0,0,0.45),0_0_10px_rgba(251,191,36,0.22)]',
+            'transition-shadow duration-200 hover:shadow-[0_6px_18px_rgba(0,0,0,0.5),0_0_18px_rgba(251,191,36,0.5)] focus:outline-none',
             isDisabled || isSelected ? 'cursor-default' : 'cursor-pointer',
           ].join(' ')}
-          style={{
-            background: 'linear-gradient(145deg, #2D2A6E 0%, #1A1744 50%, #0E1229 100%)',
-            border: '1px solid rgba(124,58,237,0.3)',
-            boxShadow: '0 4px 14px rgba(0,0,0,0.45)',
-            borderRadius: 8,
-          }}
         >
-          {/* Inner border frame with diagonal pattern */}
-          <div
-            style={{
-              position: 'absolute',
-              inset: 4,
-              borderRadius: 5,
-              border: '1px solid rgba(251,191,36,0.13)',
-              background:
-                'repeating-linear-gradient(45deg, transparent, transparent 6px, rgba(167,139,250,0.03) 6px, rgba(167,139,250,0.03) 7px)',
-              pointerEvents: 'none',
-            }}
+          <img
+            src="/cards/v2/CardBack-CelestialMoon.webp"
+            alt=""
+            aria-hidden="true"
+            className="absolute inset-0 block h-full w-full object-contain pointer-events-none"
           />
-
-          {/* Mandala */}
-          <MandalaSVG />
-
-          {/* Corner ornaments */}
-          {[
-            { top: 3, left: 3, bt: true, bl: true },
-            { top: 3, right: 3, bt: true, br: true },
-            { bottom: 3, left: 3, bb: true, bl: true },
-            { bottom: 3, right: 3, bb: true, br: true },
-          ].map((c, ci) => (
-            <div
-              key={ci}
-              style={{
-                position: 'absolute',
-                width: 9,
-                height: 9,
-                top: c.top,
-                left: (c as { left?: number }).left,
-                right: (c as { right?: number }).right,
-                bottom: c.bottom,
-                borderTop: c.bt ? '1px solid rgba(251,191,36,0.24)' : 'none',
-                borderBottom: c.bb ? '1px solid rgba(251,191,36,0.24)' : 'none',
-                borderLeft: c.bl ? '1px solid rgba(251,191,36,0.24)' : 'none',
-                borderRight: c.br ? '1px solid rgba(251,191,36,0.24)' : 'none',
-                pointerEvents: 'none',
-              }}
-            />
-          ))}
-
         </button>
       </motion.div>
     </div>

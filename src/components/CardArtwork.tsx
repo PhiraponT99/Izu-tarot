@@ -14,7 +14,7 @@ const CardArtwork: React.FC<CardArtworkProps> = ({ card }) => {
     <img
       src={card.image}
       alt={`${card.name} tarot card`}
-      className="absolute inset-0 h-full w-full object-cover"
+      className="absolute inset-0 block h-full w-full object-contain"
       onError={() => setHasError(true)}
     />
   );

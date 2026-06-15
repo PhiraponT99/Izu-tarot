@@ -27,7 +27,7 @@ export const MAJOR_ARCANA: TarotCardData[] = [
   {
     id: 0,
     name: "The Fool",
-    image: "/cards/major/00-0-the-fool.webp",
+    image: "/cards/v2/00-The-Fool.webp",
     keywords: {
       en: ["Beginnings", "Innocence", "Spontaneity"],
       th: ["การเริ่มต้น", "ใจที่เปิดกว้าง", "ความเป็นธรรมชาติ"]
@@ -44,7 +44,7 @@ export const MAJOR_ARCANA: TarotCardData[] = [
   {
     id: 1,
     name: "The Magician",
-    image: "/cards/major/01-i-the-magician.webp",
+    image: "/cards/v2/01-The-Magician.webp",
     keywords: {
       en: ["Willpower", "Manifestation", "Skill"],
       th: ["ความตั้งใจ", "การสร้างสรรค์", "ศักยภาพ"]
@@ -61,7 +61,7 @@ export const MAJOR_ARCANA: TarotCardData[] = [
   {
     id: 2,
     name: "The High Priestess",
-    image: "/cards/major/02-ii-the-high-priestess.webp",
+    image: "/cards/v2/02-The-High-Priestess.webp",
     keywords: {
       en: ["Intuition", "Mystery", "Inner knowing"],
       th: ["สัญชาตญาณ", "ความลึกลับ", "เสียงข้างใน"]
@@ -78,7 +78,7 @@ export const MAJOR_ARCANA: TarotCardData[] = [
   {
     id: 3,
     name: "The Empress",
-    image: "/cards/major/03-iii-the-empress.webp",
+    image: "/cards/v2/03-The-Empress.webp",
     keywords: {
       en: ["Abundance", "Nurturing", "Nature"],
       th: ["ความอุดมสมบูรณ์", "การดูแล", "การเติบโต"]
@@ -95,7 +95,7 @@ export const MAJOR_ARCANA: TarotCardData[] = [
   {
     id: 4,
     name: "The Emperor",
-    image: "/cards/major/04-iv-the-emperor.webp",
+    image: "/cards/v2/04-The-Emperor.webp",
     keywords: {
       en: ["Authority", "Structure", "Stability"],
       th: ["ความเป็นผู้นำ", "โครงสร้าง", "ความมั่นคง"]
@@ -112,7 +112,7 @@ export const MAJOR_ARCANA: TarotCardData[] = [
   {
     id: 5,
     name: "The Hierophant",
-    image: "/cards/major/05-v-the-hierophant.webp",
+    image: "/cards/v2/05-The-Hierophant.webp",
     keywords: {
       en: ["Tradition", "Guidance", "Wisdom"],
       th: ["ธรรมเนียม", "คำแนะนำ", "บทเรียน"]
@@ -129,7 +129,7 @@ export const MAJOR_ARCANA: TarotCardData[] = [
   {
     id: 6,
     name: "The Lovers",
-    image: "/cards/major/06-vi-the-lovers.webp",
+    image: "/cards/v2/06-The-Lovers.webp",
     keywords: {
       en: ["Union", "Choice", "Alignment"],
       th: ["ความสัมพันธ์", "ทางเลือก", "ความสอดคล้อง"]
@@ -146,7 +146,7 @@ export const MAJOR_ARCANA: TarotCardData[] = [
   {
     id: 7,
     name: "The Chariot",
-    image: "/cards/major/07-vii-the-chariot.webp",
+    image: "/cards/v2/07-The-Chariot.webp",
     keywords: {
       en: ["Victory", "Determination", "Control"],
       th: ["ความก้าวหน้า", "ความมุ่งมั่น", "การกำกับทิศทาง"]
@@ -163,7 +163,7 @@ export const MAJOR_ARCANA: TarotCardData[] = [
   {
     id: 8,
     name: "Strength",
-    image: "/cards/major/08-viii-strength.webp",
+    image: "/cards/v2/08-Strength.webp",
     keywords: {
       en: ["Courage", "Patience", "Compassion"],
       th: ["ความกล้าหาญ", "ความอดทน", "ความเมตตา"]
@@ -180,7 +180,7 @@ export const MAJOR_ARCANA: TarotCardData[] = [
   {
     id: 9,
     name: "The Hermit",
-    image: "/cards/major/09-ix-the-hermit.webp",
+    image: "/cards/v2/09-The-Hermit.webp",
     keywords: {
       en: ["Solitude", "Reflection", "Guidance"],
       th: ["เวลาส่วนตัว", "การทบทวน", "แสงนำทาง"]
@@ -197,7 +197,7 @@ export const MAJOR_ARCANA: TarotCardData[] = [
   {
     id: 10,
     name: "Wheel of Fortune",
-    image: "/cards/major/10-x-wheel-of-fortune.webp",
+    image: "/cards/v2/10-Wheel-of-Fortune.webp",
     keywords: {
       en: ["Cycles", "Fate", "Change"],
       th: ["วัฏจักร", "จังหวะชีวิต", "ความเปลี่ยนแปลง"]
@@ -214,7 +214,7 @@ export const MAJOR_ARCANA: TarotCardData[] = [
   {
     id: 11,
     name: "Justice",
-    image: "/cards/major/11-xi-justice.webp",
+    image: "/cards/v2/11-Justice.webp",
     keywords: {
       en: ["Truth", "Fairness", "Law"],
       th: ["ความจริง", "ความยุติธรรม", "ความสมดุล"]
@@ -231,7 +231,7 @@ export const MAJOR_ARCANA: TarotCardData[] = [
   {
     id: 12,
     name: "The Hanged One",
-    image: "/cards/major/12-xii-the-hanged-man.webp",
+    image: "/cards/v2/12-The-Hanged-Man.webp",
     keywords: {
       en: ["Surrender", "Pause", "New Perspective"],
       th: ["การปล่อยวาง", "การหยุดพัก", "มุมมองใหม่"]
@@ -248,7 +248,7 @@ export const MAJOR_ARCANA: TarotCardData[] = [
   {
     id: 13,
     name: "Death",
-    image: "/cards/major/13-xiii-death.webp",
+    image: "/cards/v2/13-Death.webp",
     keywords: {
       en: ["Transformation", "Endings", "Renewal"],
       th: ["การเปลี่ยนผ่าน", "การสิ้นสุด", "การเกิดใหม่"]
@@ -265,7 +265,7 @@ export const MAJOR_ARCANA: TarotCardData[] = [
   {
     id: 14,
     name: "Temperance",
-    image: "/cards/major/14-xiv-temperance.webp",
+    image: "/cards/v2/14-Temperance.webp",
     keywords: {
       en: ["Balance", "Moderation", "Harmony"],
       th: ["ความพอดี", "ความพอประมาณ", "ความกลมเกลียว"]
@@ -282,7 +282,7 @@ export const MAJOR_ARCANA: TarotCardData[] = [
   {
     id: 15,
     name: "The Devil",
-    image: "/cards/major/15-xv-the-devil.webp",
+    image: "/cards/v2/15-The-Devil.webp",
     keywords: {
       en: ["Shadow", "Attachment", "Freedom"],
       th: ["เงาในใจ", "ความยึดติด", "อิสรภาพ"]
@@ -299,7 +299,7 @@ export const MAJOR_ARCANA: TarotCardData[] = [
   {
     id: 16,
     name: "The Tower",
-    image: "/cards/major/16-xvi-the-tower.webp",
+    image: "/cards/v2/16-The-Tower.webp",
     keywords: {
       en: ["Upheaval", "Revelation", "Breakthrough"],
       th: ["การสั่นคลอน", "ความจริงที่ปรากฏ", "การเปลี่ยนผ่าน"]
@@ -316,7 +316,7 @@ export const MAJOR_ARCANA: TarotCardData[] = [
   {
     id: 17,
     name: "The Star",
-    image: "/cards/major/17-xvii-the-star.webp",
+    image: "/cards/v2/17-The-Star.webp",
     keywords: {
       en: ["Hope", "Healing", "Serenity"],
       th: ["ความหวัง", "การเยียวยา", "ความสงบสุข"]
@@ -333,7 +333,7 @@ export const MAJOR_ARCANA: TarotCardData[] = [
   {
     id: 18,
     name: "The Moon",
-    image: "/cards/major/18-xviii-the-moon.webp",
+    image: "/cards/v2/18-The-Moon.webp",
     keywords: {
       en: ["Illusion", "Fear", "Subconscious"],
       th: ["ภาพลวงตา", "ความกังวล", "จิตใต้สำนึก"]
@@ -350,7 +350,7 @@ export const MAJOR_ARCANA: TarotCardData[] = [
   {
     id: 19,
     name: "The Sun",
-    image: "/cards/major/19-xix-the-sun.webp",
+    image: "/cards/v2/19-The-Sun.webp",
     keywords: {
       en: ["Joy", "Success", "Vitality"],
       th: ["ความเบิกบาน", "ความสำเร็จ", "พลังชีวิต"]
@@ -367,7 +367,7 @@ export const MAJOR_ARCANA: TarotCardData[] = [
   {
     id: 20,
     name: "Judgement",
-    image: "/cards/major/20-xx-judgement.webp",
+    image: "/cards/v2/20-Judgement.webp",
     keywords: {
       en: ["Awakening", "Renewal", "Calling"],
       th: ["การตื่นรู้", "การเริ่มใหม่", "เสียงเรียกข้างใน"]
@@ -384,7 +384,7 @@ export const MAJOR_ARCANA: TarotCardData[] = [
   {
     id: 21,
     name: "The World",
-    image: "/cards/major/21-xxi-the-world.webp",
+    image: "/cards/v2/21-The-World.webp",
     keywords: {
       en: ["Completion", "Integration", "Wholeness"],
       th: ["ความสำเร็จครบถ้วน", "การหลอมรวม", "ความสมบูรณ์ในตัวเอง"]

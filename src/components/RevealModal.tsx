@@ -16,8 +16,8 @@ import AskIzuPanel from './ask-izu/AskIzuPanel';
 import CardArtwork from './CardArtwork';
 import IzuReflectionBubble from './IzuReflectionBubble';
 import { createReadingStoryImage } from '../utils/createReadingStoryImage';
+import { downloadStoryImage } from '../utils/downloadStoryImage';
 import { getIzuThreeCardReflection } from '../utils/izuThreeCardReflection';
-import { shareStoryImage } from '../utils/shareStoryImage';
 
 /**
  * Feature flag: Ask Izu is disabled in production while OpenAI billing is inactive.
@@ -54,21 +54,24 @@ const RevealedCard: React.FC<{
   language: Language;
 }> = ({ card, position, isVisible, izuMode, language }) => {
   return (
-    <AnimatePresence>
-      {isVisible && (
-        <motion.div
-          initial={{ opacity: 0, rotateY: -90, scale: 0.8 }}
-          animate={{ opacity: 1, rotateY: 0, scale: 1 }}
-          transition={{
-            duration: 0.7,
-            ease: [0.4, 0, 0.2, 1],
-            rotateY: { duration: 0.6 },
-          }}
-          className="flex flex-col items-center gap-3"
-          style={{ perspective: 1000 }}
-        >
-          {/* Position label */}
-          <span
+    <motion.div
+      initial={false}
+      animate={{
+        opacity: isVisible ? 1 : 0,
+        rotateY: isVisible ? 0 : -90,
+        scale: isVisible ? 1 : 0.8,
+      }}
+      transition={{
+        duration: 0.7,
+        ease: [0.4, 0, 0.2, 1],
+        rotateY: { duration: 0.6 },
+      }}
+      aria-hidden={!isVisible}
+      className="flex w-full max-w-[160px] flex-col items-center gap-3"
+      style={{ perspective: 1000, pointerEvents: isVisible ? 'auto' : 'none' }}
+    >
+      {/* Position label */}
+      <span
             className={[
               'font-cinzel text-xs tracking-widest uppercase px-3 py-1 rounded-full',
               `bg-gradient-to-r ${POSITION_COLORS[position]}`,
@@ -76,33 +79,26 @@ const RevealedCard: React.FC<{
             ].join(' ')}
           >
             {POSITION_LABELS[language][position]}
-          </span>
+      </span>
 
-          {/* Card face */}
-          <div
-            className="relative rounded-xl overflow-hidden"
-            style={{
-              width: 120,
-              height: 200,
-              background:
-                'linear-gradient(160deg, #1E1B4B 0%, #312E81 40%, #1E1B4B 100%)',
-              border: position === 2
-                ? '2px solid rgba(251,191,36,0.7)'
-                : '2px solid rgba(167,139,250,0.5)',
-              boxShadow:
-                position === 2
-                  ? '0 0 25px rgba(251,191,36,0.4), 0 8px 32px rgba(0,0,0,0.5)'
-                  : '0 0 20px rgba(124,58,237,0.4), 0 8px 32px rgba(0,0,0,0.5)',
-            }}
-          >
-            <CardArtwork card={card} />
-          </div>
+      {/* Card face */}
+      <div
+        className={[
+          'relative aspect-[2/3] w-[clamp(108px,18vw,144px)] overflow-hidden rounded-[10px] border',
+          'box-border bg-gradient-to-br from-indigo-deep via-purple-mystic to-navy',
+          position === 2
+            ? 'border-gold/80 shadow-[0_0_25px_rgba(251,191,36,0.45),0_8px_32px_rgba(0,0,0,0.5)]'
+            : 'border-purple-light/60 shadow-[0_0_20px_rgba(124,58,237,0.45),0_8px_32px_rgba(0,0,0,0.5)]',
+        ].join(' ')}
+      >
+        <CardArtwork card={card} />
+      </div>
 
-          {/* Keywords */}
-          <motion.div
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            transition={{ delay: 0.5 }}
+      {/* Keywords */}
+      <motion.div
+            initial={false}
+            animate={{ opacity: isVisible ? 1 : 0 }}
+            transition={{ delay: isVisible ? 0.5 : 0 }}
             className="flex flex-wrap justify-center gap-1"
           >
             {card.keywords[language].map((kw) => (
@@ -113,13 +109,13 @@ const RevealedCard: React.FC<{
                 {kw}
               </span>
             ))}
-          </motion.div>
+      </motion.div>
 
-          {/* Reading text */}
-          <motion.p
-            initial={{ opacity: 0, y: 6 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.6 }}
+      {/* Reading text */}
+      <motion.p
+            initial={false}
+            animate={{ opacity: isVisible ? 1 : 0, y: isVisible ? 0 : 6 }}
+            transition={{ delay: isVisible ? 0.6 : 0 }}
             className={[
               'text-center max-w-[140px] leading-relaxed',
               izuMode
@@ -128,10 +124,8 @@ const RevealedCard: React.FC<{
             ].join(' ')}
           >
             {izuMode ? card.izuReflection[language] : card.description[language]}
-          </motion.p>
-        </motion.div>
-      )}
-    </AnimatePresence>
+      </motion.p>
+    </motion.div>
   );
 };
 
@@ -145,7 +139,8 @@ const RevealModal: React.FC<RevealModalProps> = ({
   // Track how many cards have been revealed (0 → 3)
   const [revealedCount, setRevealedCount] = useState(0);
   const [isCreatingStory, setIsCreatingStory] = useState(false);
-  const [shareError, setShareError] = useState<string | null>(null);
+  const [storyError, setStoryError] = useState<string | null>(null);
+  const [isStorySaved, setIsStorySaved] = useState(false);
 
   // Stagger card reveals with 800ms delay each
   useEffect(() => {
@@ -165,7 +160,8 @@ const RevealModal: React.FC<RevealModalProps> = ({
 
   const handleClose = () => {
     setRevealedCount(0);
-    setShareError(null);
+    setStoryError(null);
+    setIsStorySaved(false);
     onClose();
   };
 
@@ -188,9 +184,10 @@ const RevealModal: React.FC<RevealModalProps> = ({
 
   const threeCardReflection = getIzuThreeCardReflection(selectedCards, language);
 
-  const handleShareStory = async () => {
+  const handleSaveStoryImage = async () => {
     setIsCreatingStory(true);
-    setShareError(null);
+    setStoryError(null);
+    setIsStorySaved(false);
 
     try {
       const blob = await createReadingStoryImage({
@@ -198,10 +195,11 @@ const RevealModal: React.FC<RevealModalProps> = ({
         reflection: threeCardReflection,
         language,
       });
-      await shareStoryImage(blob, language);
+      downloadStoryImage(blob);
+      setIsStorySaved(true);
     } catch (error) {
       console.error('Unable to create story image', error);
-      setShareError(
+      setStoryError(
         language === 'th'
           ? 'ไม่สามารถสร้างรูปได้ในขณะนี้ กรุณาลองอีกครั้ง'
           : 'Could not create the story image. Please try again.',
@@ -321,14 +319,14 @@ const RevealModal: React.FC<RevealModalProps> = ({
               )}
             </AnimatePresence>
 
-            {/* Story share and close actions */}
+            {/* Story download and close actions */}
             <div className="sticky bottom-0 z-20 flex flex-col items-center gap-3 bg-gradient-to-t from-slate-950 via-slate-950/95 to-transparent px-4 pb-5 pt-8 sm:pb-8">
               <div className="flex w-full flex-col items-center gap-3 sm:w-auto sm:flex-row">
                 {revealedCount >= 3 && (
                   <button
-                    id="share-story-btn"
+                    id="save-story-image-btn"
                     type="button"
-                    onClick={handleShareStory}
+                    onClick={handleSaveStoryImage}
                     disabled={isCreatingStory}
                     className={[
                       'w-full max-w-xs rounded-full bg-gradient-to-r from-gold-dark to-gold px-8 py-3 sm:w-auto',
@@ -339,7 +337,7 @@ const RevealModal: React.FC<RevealModalProps> = ({
                   >
                     {isCreatingStory
                       ? (language === 'th' ? 'กำลังเตรียม...' : 'Preparing...')
-                      : (language === 'th' ? 'แชร์สตอรี่' : 'Share Story')}
+                      : (language === 'th' ? 'บันทึกภาพสำหรับสตอรี่' : 'Save Story Image')}
                   </button>
                 )}
 
@@ -359,11 +357,35 @@ const RevealModal: React.FC<RevealModalProps> = ({
                 </button>
               </div>
 
-              {shareError && (
+              {storyError && (
                 <p role="alert" className="text-center font-inter text-xs text-rose-300">
-                  {shareError}
+                  {storyError}
                 </p>
               )}
+
+              <AnimatePresence>
+                {isStorySaved && (
+                  <motion.div
+                    initial={{ opacity: 0, y: 6 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    exit={{ opacity: 0, y: 4 }}
+                    role="status"
+                    aria-live="polite"
+                    className="max-w-sm rounded-xl border border-gold/20 bg-slate-950/90 px-4 py-3 text-center font-inter text-xs leading-relaxed text-slate-200 shadow-[0_0_20px_rgba(251,191,36,0.08)]"
+                  >
+                    <p className="font-medium text-gold-light">
+                      {language === 'th'
+                        ? '✨ บันทึกภาพเรียบร้อยแล้ว'
+                        : '✨ Story image saved successfully.'}
+                    </p>
+                    <p className="mt-2 whitespace-pre-line text-slate-300/90">
+                      {language === 'th'
+                        ? 'เปิด Instagram → Story → Recent\nเพื่อแชร์ผลการอ่านของคุณได้เลย'
+                        : 'Open Instagram → Story → Recent\nto share your reflection.'}
+                    </p>
+                  </motion.div>
+                )}
+              </AnimatePresence>
             </div>
           </motion.div>
         </motion.div>

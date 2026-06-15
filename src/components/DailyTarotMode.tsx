@@ -68,7 +68,10 @@ const DailyTarotMode: React.FC<DailyTarotModeProps> = ({ cards, language, izuMod
         </p>
       </div>
 
-      <div className="relative h-[240px] w-[144px]" style={{ perspective: 1000 }}>
+      <div
+        className="relative aspect-[2/3] w-[clamp(160px,36vw,192px)]"
+        style={{ perspective: 1000 }}
+      >
         <motion.div
           className="relative h-full w-full"
           animate={{ rotateY: isRevealed ? 180 : 0, y: isRevealed ? -4 : 0 }}
@@ -76,33 +79,29 @@ const DailyTarotMode: React.FC<DailyTarotModeProps> = ({ cards, language, izuMod
           style={{ transformStyle: 'preserve-3d' }}
         >
           <div
-            className="absolute inset-0 overflow-hidden rounded-xl"
+            className="absolute inset-0 box-border overflow-hidden rounded-[10px] border border-gold/75 bg-gradient-to-br from-indigo-deep via-purple-mystic to-navy shadow-[0_0_28px_rgba(251,191,36,0.38),0_16px_45px_rgba(0,0,0,0.45)]"
             style={{
               backfaceVisibility: 'hidden',
-              background: 'linear-gradient(145deg, #2D2A6E 0%, #1A1744 50%, #0E1229 100%)',
-              border: '1.5px solid rgba(251,191,36,0.55)',
-              boxShadow: '0 0 28px rgba(124,58,237,0.32), 0 16px 45px rgba(0,0,0,0.45)',
             }}
           >
-            <div className="absolute inset-2 rounded-lg border border-gold/20" />
-            <div className="absolute left-1/2 top-1/2 h-20 w-20 -translate-x-1/2 -translate-y-1/2 rounded-full border border-gold/30">
-              <div className="absolute inset-3 rounded-full border border-purple-light/35" />
-              <div className="absolute inset-7 rounded-full bg-gold/35 shadow-[0_0_18px_rgba(251,191,36,0.45)]" />
-            </div>
+            <img
+              src="/cards/v2/CardBack-CelestialMoon.webp"
+              alt=""
+              aria-hidden="true"
+              className="block h-full w-full object-contain"
+            />
           </div>
 
           <div
-            className="absolute inset-0 flex flex-col items-center justify-center gap-4 overflow-hidden rounded-xl px-4"
+            className={[
+              'absolute inset-0 box-border overflow-hidden rounded-[10px] border bg-gradient-to-br from-indigo-deep via-purple-mystic to-navy',
+              izuMode
+                ? 'border-purple-light/80 shadow-[0_0_30px_rgba(167,139,250,0.48),0_16px_45px_rgba(0,0,0,0.45)]'
+                : 'border-gold/80 shadow-[0_0_30px_rgba(251,191,36,0.42),0_16px_45px_rgba(0,0,0,0.45)]',
+            ].join(' ')}
             style={{
               backfaceVisibility: 'hidden',
               transform: 'rotateY(180deg)',
-              background: 'linear-gradient(160deg, #1E1B4B 0%, #312E81 45%, #111827 100%)',
-              border: izuMode
-                ? '2px solid rgba(167,139,250,0.75)'
-                : '2px solid rgba(251,191,36,0.7)',
-              boxShadow: izuMode
-                ? '0 0 30px rgba(167,139,250,0.4), 0 16px 45px rgba(0,0,0,0.45)'
-                : '0 0 30px rgba(251,191,36,0.35), 0 16px 45px rgba(0,0,0,0.45)',
             }}
           >
             {selectedCard && <CardArtwork card={selectedCard} />}

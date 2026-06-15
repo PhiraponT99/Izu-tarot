@@ -18,7 +18,7 @@ const SelectedCardsTray: React.FC<SelectedCardsTrayProps> = ({
   language,
 }) => (
   <div
-    className="flex items-center justify-center gap-3 sm:gap-6"
+    className="flex w-full items-center justify-center gap-3 px-3 sm:gap-6 sm:px-0"
     aria-label={language === 'th' ? 'ไพ่ที่คุณเลือก' : 'Selected cards'}
   >
     {Array.from({ length: SLOT_COUNT }, (_, index) => {
@@ -27,54 +27,53 @@ const SelectedCardsTray: React.FC<SelectedCardsTrayProps> = ({
       return (
         <div
           key={index}
-          className="relative flex h-[92px] w-[58px] items-center justify-center rounded-lg border border-dashed border-purple-light/20 bg-white/[0.025]"
+          className={[
+            'relative aspect-[2/3] w-[clamp(58px,18vw,76px)] flex-none',
+            card
+              ? 'bg-transparent'
+              : 'rounded-lg border border-dashed border-purple-light/20 bg-white/[0.025]',
+          ].join(' ')}
         >
           <AnimatePresence mode="wait">
             {card ? (
-              <motion.button
+              <motion.div
                 key={card.id}
-                type="button"
                 initial={{ opacity: 0, y: -20, scale: 0.85 }}
                 animate={{ opacity: 1, y: 0, scale: 1 }}
                 exit={{ opacity: 0, y: -10, scale: 0.85 }}
                 whileHover={{ y: -4, scale: 1.04 }}
                 whileTap={{ scale: 0.97 }}
                 transition={{ type: 'spring', stiffness: 280, damping: 22 }}
-                onClick={() => onDeselect(card.id)}
-                aria-label={
-                  language === 'th'
-                    ? `นำไพ่ใบที่ ${index + 1} ออกจากชุด`
-                    : `Deselect card ${index + 1}`
-                }
-                className="relative h-[88px] w-[54px] cursor-pointer overflow-visible rounded-lg focus:outline-none focus-visible:ring-2"
-                style={{
-                  background: 'linear-gradient(145deg, #2D2A6E 0%, #1A1744 50%, #0E1229 100%)',
-                  border: izuMode
-                    ? '1.5px solid rgba(167,139,250,0.9)'
-                    : '1.5px solid rgba(251,191,36,0.9)',
-                  boxShadow: izuMode
-                    ? '0 0 18px rgba(167,139,250,0.55), 0 0 36px rgba(124,58,237,0.25)'
-                    : '0 0 18px rgba(251,191,36,0.55), 0 0 36px rgba(251,191,36,0.2)',
-                }}
+                className="absolute inset-0 overflow-visible"
               >
-                <span className="absolute inset-1 rounded border border-gold/15" aria-hidden="true" />
-                <span
-                  className="absolute left-1/2 top-1/2 h-8 w-8 -translate-x-1/2 -translate-y-1/2 rounded-full border border-gold/25"
-                  aria-hidden="true"
-                >
-                  <span className="absolute inset-2 rounded-full border border-purple-light/30" />
-                </span>
-                <span
+                <button
+                  type="button"
+                  onClick={() => onDeselect(card.id)}
+                  aria-label={
+                    language === 'th'
+                      ? `นำไพ่ใบที่ ${index + 1} ออกจากชุด`
+                      : `Deselect card ${index + 1}`
+                  }
                   className={[
-                    'absolute inset-0 rounded-lg opacity-50 pointer-events-none',
-                    izuMode ? 'shimmer-purple' : 'shimmer-gold',
+                    'absolute inset-0 block h-full w-full cursor-pointer overflow-hidden rounded-[10px] border p-0',
+                    'box-border bg-gradient-to-br from-indigo-deep via-purple-mystic to-navy',
+                    'transition-shadow duration-200 focus:outline-none focus-visible:ring-2',
+                    izuMode
+                      ? 'border-purple-light/80 shadow-[0_0_18px_rgba(167,139,250,0.55),0_0_32px_rgba(124,58,237,0.28)] hover:shadow-[0_0_24px_rgba(167,139,250,0.72),0_0_40px_rgba(124,58,237,0.35)]'
+                      : 'border-gold/90 shadow-[0_0_18px_rgba(251,191,36,0.55),0_0_32px_rgba(251,191,36,0.24)] hover:shadow-[0_0_24px_rgba(251,191,36,0.75),0_0_40px_rgba(251,191,36,0.32)]',
                   ].join(' ')}
-                  aria-hidden="true"
-                />
+                >
+                  <img
+                    src="/cards/v2/CardBack-CelestialMoon.webp"
+                    alt=""
+                    aria-hidden="true"
+                    className="absolute inset-0 block h-full w-full object-contain pointer-events-none"
+                  />
+                </button>
                 <motion.span
                   initial={{ scale: 0 }}
                   animate={{ scale: 1 }}
-                  className="absolute -right-2 -top-2 z-10 flex h-5 w-5 items-center justify-center rounded-full font-cinzel text-[10px] font-bold"
+                  className="pointer-events-none absolute -right-2 -top-2 z-30 flex h-5 w-5 items-center justify-center rounded-full font-cinzel text-[10px] font-bold"
                   style={{
                     background: izuMode
                       ? 'radial-gradient(circle, #A78BFA 0%, #7C3AED 100%)'
@@ -87,7 +86,7 @@ const SelectedCardsTray: React.FC<SelectedCardsTrayProps> = ({
                 >
                   {index + 1}
                 </motion.span>
-              </motion.button>
+              </motion.div>
             ) : (
               <motion.span
                 key="empty"
