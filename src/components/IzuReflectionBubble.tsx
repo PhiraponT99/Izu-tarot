@@ -28,7 +28,7 @@ const IzuReflectionBubble: React.FC<IzuReflectionBubbleProps> = ({ reflection })
       />
 
       {/* Message body text overlay centered inside Ms2 bubble */}
-      <div className="absolute left-1/2 top-[48%] w-[72%] -translate-x-1/2 -translate-y-1/2 text-center">
+      <div className="absolute left-1/2 top-[38%] w-[72%] -translate-x-1/2 -translate-y-1/2 text-center sm:top-[48%]">
         <p className="whitespace-pre-line font-body text-[11px] font-normal leading-[1.45] text-white min-[390px]:text-[12px] min-[390px]:leading-[1.55] sm:text-[14px] sm:leading-[1.7] md:text-[16px] md:leading-[1.7]">
           {reflection.message}
         </p>
