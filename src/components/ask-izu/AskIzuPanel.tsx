@@ -77,7 +77,7 @@ const AskIzuPanel: React.FC<AskIzuPanelProps> = ({ cards, language, izuMode }) =
       </div>
 
       {messages.length > 0 && (
-        <div className="mt-4 max-h-64 space-y-3 overflow-y-auto pr-1" aria-live="polite">
+        <div className="mt-4 space-y-3 pr-1" aria-live="polite">
           {messages.map((message, index) => (
             <div
               key={`${message.role}-${index}`}

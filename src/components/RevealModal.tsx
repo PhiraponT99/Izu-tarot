@@ -213,7 +213,7 @@ const RevealModal: React.FC<RevealModalProps> = ({
           animate={{ opacity: 1 }}
           exit={{ opacity: 0 }}
           transition={{ duration: 0.4 }}
-          className="modal-backdrop fixed inset-0 z-50 flex items-center justify-center p-2 sm:p-4"
+          className="modal-backdrop absolute inset-x-0 top-0 z-50 flex min-h-screen items-start justify-center p-2 sm:p-4"
           style={{ backgroundColor: 'rgba(8, 14, 26, 0.85)' }}
           onClick={handleBackdropClick}
           role="dialog"
@@ -226,7 +226,7 @@ const RevealModal: React.FC<RevealModalProps> = ({
             animate={{ opacity: 1, scale: 1, y: 0 }}
             exit={{ opacity: 0, scale: 0.85, y: 30 }}
             transition={{ type: 'spring', stiffness: 200, damping: 25 }}
-            className="hide-scrollbar relative max-h-[calc(100dvh-1rem)] w-full max-w-3xl overflow-y-auto rounded-lg sm:max-h-[90vh]"
+            className="relative w-full max-w-3xl rounded-lg"
             style={{
               background: 'var(--izu-panel)',
               border: `2px solid ${izuMode ? 'var(--izu-purple-soft)' : 'var(--izu-gold)'}`,
@@ -315,7 +315,7 @@ const RevealModal: React.FC<RevealModalProps> = ({
             </AnimatePresence>
 
             {/* Story download and close actions */}
-            <div className="sticky bottom-0 z-20 flex flex-col items-center gap-3 bg-gradient-to-t from-slate-950 via-slate-950/95 to-transparent px-4 pb-5 pt-8 sm:pb-8">
+            <div className="relative z-20 flex flex-col items-center gap-3 bg-gradient-to-t from-slate-950 via-slate-950/95 to-transparent px-4 pb-5 pt-8 sm:pb-8">
               <div className="flex w-full flex-col items-center gap-3 sm:w-auto sm:flex-row">
                 {revealedCount >= 3 && (
                   <button

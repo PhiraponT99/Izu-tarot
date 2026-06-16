@@ -132,7 +132,7 @@ const App: React.FC = () => {
     <div
       className={[
         // Fill full viewport; position context for the absolute header/footer
-        'relative w-full min-h-screen overflow-hidden',
+        'relative min-h-screen w-full overflow-x-hidden',
         izuMode ? 'izu-mode-active' : '',
       ].join(' ')}
       style={{

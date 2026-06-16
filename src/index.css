@@ -222,28 +222,27 @@
 }
 
 /* ── Scrollbar Styling ── */
-::-webkit-scrollbar {
-  width: 6px;
-}
-::-webkit-scrollbar-track {
-  background: #0F172A;
-}
-::-webkit-scrollbar-thumb {
-  background: #312E81;
-  border-radius: 3px;
-}
-::-webkit-scrollbar-thumb:hover {
-  background: #7C3AED;
-}
-
 @layer utilities {
-  .hide-scrollbar {
-    scrollbar-width: none;
-    -ms-overflow-style: none;
+  .izu-scrollbar {
+    scrollbar-width: thin;
+    scrollbar-color: rgba(124, 58, 237, 0.45) transparent;
   }
 
-  .hide-scrollbar::-webkit-scrollbar {
-    display: none;
+  .izu-scrollbar::-webkit-scrollbar {
+    width: 4px;
+  }
+
+  .izu-scrollbar::-webkit-scrollbar-track {
+    background: transparent;
+  }
+
+  .izu-scrollbar::-webkit-scrollbar-thumb {
+    background: rgba(124, 58, 237, 0.45);
+    border-radius: 999px;
+  }
+
+  .izu-scrollbar::-webkit-scrollbar-thumb:hover {
+    background: rgba(251, 191, 36, 0.55);
   }
 }
 
