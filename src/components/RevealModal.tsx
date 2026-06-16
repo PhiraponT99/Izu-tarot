@@ -226,7 +226,7 @@ const RevealModal: React.FC<RevealModalProps> = ({
             animate={{ opacity: 1, scale: 1, y: 0 }}
             exit={{ opacity: 0, scale: 0.85, y: 30 }}
             transition={{ type: 'spring', stiffness: 200, damping: 25 }}
-            className="relative max-h-[calc(100dvh-1rem)] w-full max-w-3xl overflow-y-auto rounded-lg sm:max-h-[90vh]"
+            className="hide-scrollbar relative max-h-[calc(100dvh-1rem)] w-full max-w-3xl overflow-y-auto rounded-lg sm:max-h-[90vh]"
             style={{
               background: 'var(--izu-panel)',
               border: `2px solid ${izuMode ? 'var(--izu-purple-soft)' : 'var(--izu-gold)'}`,
