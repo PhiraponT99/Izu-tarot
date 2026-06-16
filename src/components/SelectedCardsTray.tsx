@@ -3,8 +3,8 @@ import { AnimatePresence, motion } from 'framer-motion';
 import type { Language, TarotCardData } from '../../shared/tarotData';
 
 interface SelectedCardsTrayProps {
-  selectedCards: TarotCardData[];
-  onDeselect: (id: number) => void;
+  selectedCards: Array<TarotCardData | null>;
+  onDeselect: (slotIndex: number) => void;
   izuMode: boolean;
   language: Language;
 }
@@ -31,7 +31,7 @@ const SelectedCardsTray: React.FC<SelectedCardsTrayProps> = ({
             'relative aspect-[2/3] w-[clamp(58px,18vw,76px)] flex-none',
             card
               ? 'bg-transparent'
-              : 'rounded-md border border-dashed border-izu-muted/25 bg-white/[0.025]',
+              : 'flex items-center justify-center rounded-md border border-dashed border-izu-muted/25 bg-white/[0.025]',
           ].join(' ')}
         >
           <AnimatePresence mode="wait">
@@ -48,7 +48,7 @@ const SelectedCardsTray: React.FC<SelectedCardsTrayProps> = ({
               >
                 <button
                   type="button"
-                  onClick={() => onDeselect(card.id)}
+                  onClick={() => onDeselect(index)}
                   aria-label={
                     language === 'th'
                       ? `นำไพ่ใบที่ ${index + 1} ออกจากชุด`

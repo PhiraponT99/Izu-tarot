@@ -33,10 +33,24 @@ import type { ReadingMode } from './components/ModeSelector';
 
 // Maximum selectable cards
 const MAX_SELECTION = 3;
+type SelectedIdSlots = [number | null, number | null, number | null];
+const EMPTY_SELECTION: SelectedIdSlots = [null, null, null];
+
+function shuffleCards(cards: typeof MAJOR_ARCANA): typeof MAJOR_ARCANA {
+  const shuffled = [...cards];
+
+  for (let i = shuffled.length - 1; i > 0; i -= 1) {
+    const j = Math.floor(Math.random() * (i + 1));
+    [shuffled[i], shuffled[j]] = [shuffled[j], shuffled[i]];
+  }
+
+  return shuffled;
+}
 
 const App: React.FC = () => {
   // --- State ---
-  const [selectedIds, setSelectedIds] = useState<number[]>([]);
+  const [selectedIds, setSelectedIds] = useState<SelectedIdSlots>(EMPTY_SELECTION);
+  const [deckOrder, setDeckOrder] = useState<typeof MAJOR_ARCANA>(() => shuffleCards(MAJOR_ARCANA));
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [izuMode, setIzuMode] = useState(false);
   const [language, setLanguage] = useState<Language>('en');
@@ -52,13 +66,38 @@ const App: React.FC = () => {
   /** Toggle card selection. Max 3; tap again to deselect. */
   const handleCardClick = useCallback((id: number) => {
     setSelectedIds((prev) => {
-      if (prev.includes(id)) return prev.filter((cid) => cid !== id);
-      if (prev.length >= MAX_SELECTION) return prev;
-      return [...prev, id];
+      const existingIndex = prev.findIndex((cid) => cid === id);
+      if (existingIndex >= 0) {
+        const next: SelectedIdSlots = [...prev];
+        next[existingIndex] = null;
+        return next;
+      }
+
+      const firstEmptyIndex = prev.findIndex((cid) => cid === null);
+      if (firstEmptyIndex === -1) return prev;
+
+      const next: SelectedIdSlots = [...prev];
+      next[firstEmptyIndex] = id;
+      return next;
     });
   }, []);
 
-  const handleReveal = useCallback(() => setIsModalOpen(true), []);
+  const handleDeselectSlot = useCallback((slotIndex: number) => {
+    setSelectedIds((prev) => {
+      if (slotIndex < 0 || slotIndex >= MAX_SELECTION || prev[slotIndex] === null) {
+        return prev;
+      }
+
+      const next: SelectedIdSlots = [...prev];
+      next[slotIndex] = null;
+      return next;
+    });
+    setIsModalOpen(false);
+  }, []);
+
+  const handleReveal = useCallback(() => {
+    setIsModalOpen((prev) => (selectedIds.every((id) => id !== null) ? true : prev));
+  }, [selectedIds]);
 
   const handleUseTestCards = useCallback((ids: [number, number, number]) => {
     setSelectedIds(ids);
@@ -74,14 +113,19 @@ const App: React.FC = () => {
 
   /** Reset all selections to begin a new reading. */
   const handleReset = useCallback(() => {
-    setSelectedIds([]);
+    setSelectedIds(EMPTY_SELECTION);
+    setDeckOrder(shuffleCards(MAJOR_ARCANA));
     setIsModalOpen(false);
   }, []);
 
-  // Derive ordered selected card data
-  const selectedCards = selectedIds
-    .map((id) => MAJOR_ARCANA.find((c) => c.id === id))
-    .filter(Boolean) as typeof MAJOR_ARCANA;
+  // Derive fixed-slot card data. Reveal receives a compact reading only when complete.
+  const selectedCards = selectedIds.map((id) =>
+    id === null ? null : MAJOR_ARCANA.find((c) => c.id === id) ?? null,
+  );
+  const readingCards = selectedCards.filter((card): card is (typeof MAJOR_ARCANA)[number] =>
+    card !== null,
+  );
+  const isReadingComplete = selectedCards.every((card) => card !== null);
 
   // --- Render ---
   return (
@@ -169,7 +213,7 @@ const App: React.FC = () => {
             onClick={() => setIzuMode((v) => !v)}
             aria-pressed={izuMode}
             title={language === 'th' 
-              ? (izuMode ? 'ปิดโหมดอิซุ' : 'เปิดโหมดอิซุ')
+              ? (izuMode ? 'ปิดโหมดอีซึ' : 'เปิดโหมดอีซึ')
               : (izuMode ? 'Disable Izu Mode' : 'Enable Izu Mode')}
             className={[
               'flex items-center gap-1.5 px-2 py-1.5 rounded-md text-[11px] font-pixel sm:gap-2 sm:px-3',
@@ -181,7 +225,7 @@ const App: React.FC = () => {
           >
             <span className="text-base" aria-hidden="true">✦</span>
             <span className="hidden sm:inline">
-              {language === 'th' ? 'โหมดอิซุ' : 'Izu Mode'}
+              {language === 'th' ? 'โหมดอีซึ' : 'Izu Mode'}
             </span>
             {/* Toggle pill */}
             <span
@@ -270,9 +314,10 @@ const App: React.FC = () => {
                 />
               )}
               <TarotBoard
-                cards={MAJOR_ARCANA}
+                cards={deckOrder}
                 selectedIds={selectedIds}
                 onCardClick={handleCardClick}
+                onDeselectSlot={handleDeselectSlot}
                 onReveal={handleReveal}
                 onReset={handleReset}
                 izuMode={izuMode}
@@ -293,7 +338,7 @@ const App: React.FC = () => {
       {/* ── Reveal Modal ── */}
       <RevealModal
         isOpen={isModalOpen}
-        selectedCards={selectedCards}
+        selectedCards={isReadingComplete ? readingCards : []}
         onClose={handleCloseModal}
         izuMode={izuMode}
         language={language}

@@ -61,7 +61,7 @@ export function useAskIzu({ cards, language, izuMode }: UseAskIzuOptions) {
           requestError instanceof Error
             ? requestError.message
             : language === 'th'
-              ? 'ตอนนี้อิซุยังตอบไม่ได้ ลองอีกครั้งในสักครู่'
+              ? 'ตอนนี้อีซึยังตอบไม่ได้ ลองอีกครั้งในสักครู่'
               : 'Izu could not respond right now. Please try again shortly.',
         );
       }

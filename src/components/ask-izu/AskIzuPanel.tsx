@@ -20,10 +20,10 @@ const COPY = {
     complete: 'You have asked three questions for this reading.',
   },
   th: {
-    title: 'ถามอิซุ',
-    intro: 'ชวนอิซุช่วยสะท้อนคำถามจากไพ่ทั้งสามใบ',
+    title: 'ถามอีซึ',
+    intro: 'ชวนอีซึช่วยสะท้อนคำถามจากไพ่ทั้งสามใบ',
     placeholder: 'ตอนนี้คุณอยากค่อย ๆ มองเรื่องอะไร?',
-    send: 'ถามอิซุ',
+    send: 'ถามอีซึ',
     sending: 'กำลังรับฟัง…',
     remaining: (count: number) => 'เหลืออีก ' + count + ' คำถาม',
     complete: 'คุณถามครบสามคำถามสำหรับการอ่านครั้งนี้แล้ว',

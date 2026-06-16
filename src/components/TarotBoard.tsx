@@ -26,8 +26,9 @@ import type { TarotCardData, Language } from '../../shared/tarotData';
 
 interface TarotBoardProps {
   cards: TarotCardData[];
-  selectedIds: number[];
+  selectedIds: Array<number | null>;
   onCardClick: (id: number) => void;
+  onDeselectSlot: (slotIndex: number) => void;
   onReveal: () => void;
   onReset: () => void;
   izuMode: boolean;
@@ -79,16 +80,18 @@ const TarotBoard: React.FC<TarotBoardProps> = ({
   cards,
   selectedIds,
   onCardClick,
+  onDeselectSlot,
   onReveal,
   onReset,
   izuMode,
   language,
 }) => {
   const fanPositions = useMemo(() => computeFan(cards.length), [cards.length]);
-  const selectionFull = selectedIds.length >= 3;
-  const selectedCards = selectedIds
-    .map((id) => cards.find((card) => card.id === id))
-    .filter((card): card is TarotCardData => Boolean(card));
+  const selectedCards = selectedIds.map((id) =>
+    id === null ? null : cards.find((card) => card.id === id) ?? null,
+  );
+  const selectedCount = selectedCards.filter((card): card is TarotCardData => Boolean(card)).length;
+  const selectionFull = selectedCards.every((card) => card !== null);
 
   // Localized taglines
   const tagline = izuMode
@@ -124,7 +127,7 @@ const TarotBoard: React.FC<TarotBoardProps> = ({
       {/* ── Selection status line ── */}
       <AnimatePresence mode="wait">
         <motion.p
-          key={selectedIds.length}
+          key={selectedCount}
           initial={{ opacity: 0, y: -6 }}
           animate={{ opacity: 1, y: 0 }}
           exit={{ opacity: 0, y: 6 }}
@@ -134,7 +137,7 @@ const TarotBoard: React.FC<TarotBoardProps> = ({
             izuMode ? 'text-izu-purple-soft text-glow-purple' : 'text-izu-muted/80',
           ].join(' ')}
         >
-          {STATUS[language][selectedIds.length] ?? ''}
+          {STATUS[language][selectedCount] ?? ''}
         </motion.p>
       </AnimatePresence>
 
@@ -159,7 +162,7 @@ const TarotBoard: React.FC<TarotBoardProps> = ({
       >
         {cards.map((card, i) => {
           const { rotate, translateY } = fanPositions[i];
-          const selOrder = selectedIds.indexOf(card.id);
+          const selOrder = selectedIds.findIndex((id) => id === card.id);
           return (
             <TarotCard
               key={card.id}
@@ -179,7 +182,7 @@ const TarotBoard: React.FC<TarotBoardProps> = ({
       <div className="-mt-6 sm:-mt-16">
         <SelectedCardsTray
           selectedCards={selectedCards}
-          onDeselect={onCardClick}
+          onDeselect={onDeselectSlot}
           izuMode={izuMode}
           language={language}
         />
