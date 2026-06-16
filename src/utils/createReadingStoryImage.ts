@@ -183,12 +183,13 @@ export async function createReadingStoryImage({
   }
 
   await document.fonts?.ready;
-  const [cardImages, bubbleImage] = await Promise.all([
+  const [cardImages, bubbleImage, izuImage] = await Promise.all([
     Promise.all(cards.map((card) => {
       if (!card.image) throw new Error(`Card image is missing for ${card.name}.`);
       return loadImage(card.image);
     })),
-    loadImage('/ui/izu-message-bubble.png'),
+    loadImage('/ui/Ms1.png'),
+    loadImage('/ui/izu.png'),
   ]);
 
   const canvas = document.createElement('canvas');
@@ -276,22 +277,29 @@ export async function createReadingStoryImage({
   const bubbleY = 930;
   const bubbleWidth = 900;
   const bubbleHeight = bubbleWidth * (bubbleImage.naturalHeight / bubbleImage.naturalWidth);
+  
+  // Draw bubble background
   context.save();
-  context.shadowColor = 'rgba(124, 58, 237, 0.38)';
-  context.shadowBlur = 32;
+  context.shadowColor = 'rgba(124, 58, 237, 0.22)';
+  context.shadowBlur = 20;
   context.drawImage(bubbleImage, bubbleX, bubbleY, bubbleWidth, bubbleHeight);
   context.restore();
 
-  const reflectionX = bubbleX + 132;
-  const reflectionY = bubbleY + 165;
-  const reflectionWidth = bubbleWidth * 0.59;
-  const reflectionCenterX = reflectionX + reflectionWidth / 2;
+  // Draw Izu character layer - matches desktop: right 2%, bottom -6%, width 26%
+  const izuWidth = bubbleWidth * 0.26;
+  const izuHeight = izuWidth * (izuImage.naturalHeight / izuImage.naturalWidth);
+  const izuX = bubbleX + bubbleWidth * 1.02 - izuWidth;
+  const izuDrawY = bubbleY + bubbleHeight * 1.06 - izuHeight;
+  context.save();
+  context.shadowColor = 'rgba(0, 0, 0, 0.45)';
+  context.shadowBlur = 12;
+  context.shadowOffsetY = 4;
+  context.drawImage(izuImage, izuX, izuDrawY, izuWidth, izuHeight);
+  context.restore();
 
-  context.fillStyle = '#FBBF24';
-  context.font = language === 'th'
-    ? '600 28px "IBM Plex Sans Thai", "Noto Sans Thai", sans-serif'
-    : '700 29px "Pixelify Sans", monospace';
-  context.fillText(reflection.title, reflectionCenterX, reflectionY);
+  // Draw reflection message text centered relative to bubble center line (left: 50%, top: 34%, width: 70%)
+  const reflectionWidth = bubbleWidth * 0.70;
+  const reflectionCenterX = bubbleX + bubbleWidth / 2; // centered strictly on center line
 
   context.fillStyle = '#F1F5F9';
   const fittedReflection = getFittedWrappedText(
@@ -304,11 +312,14 @@ export async function createReadingStoryImage({
   context.font = language === 'th'
     ? `400 ${fittedReflection.fontSize}px "IBM Plex Sans Thai", "Noto Sans Thai", sans-serif`
     : `400 ${fittedReflection.fontSize}px Inter, Arial, sans-serif`;
+
+  const startY = bubbleY + bubbleHeight * 0.34 + fittedReflection.lineHeight / 2;
+
   fittedReflection.lines.forEach((line, index) => {
     context.fillText(
       line,
       reflectionCenterX,
-      reflectionY + 72 + index * fittedReflection.lineHeight,
+      startY + index * fittedReflection.lineHeight,
     );
   });
 

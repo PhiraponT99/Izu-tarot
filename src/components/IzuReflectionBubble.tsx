@@ -5,24 +5,6 @@ interface IzuReflectionBubbleProps {
   reflection: IzuThreeCardReflection;
 }
 
-interface ReflectionContentProps extends IzuReflectionBubbleProps {
-  titleId: string;
-}
-
-const ReflectionContent: React.FC<ReflectionContentProps> = ({ reflection, titleId }) => (
-  <>
-    <h3
-      id={titleId}
-      className="mb-1 font-pixel text-[10px] uppercase tracking-widest text-izu-gold sm:mb-2 sm:text-sm"
-    >
-      {reflection.title}
-    </h3>
-    <p className="whitespace-pre-line font-body text-[13px] font-normal leading-6 text-slate-100 sm:text-sm sm:leading-7 md:text-base md:leading-8">
-      {reflection.message}
-    </p>
-  </>
-);
-
 const ReflectionDebugLabel: React.FC<IzuReflectionBubbleProps> = ({ reflection }) => (
   <p className="font-pixel tracking-wider text-white opacity-55 md:text-[10px]">
     Matched reflection group: {reflection.group}
@@ -30,30 +12,36 @@ const ReflectionDebugLabel: React.FC<IzuReflectionBubbleProps> = ({ reflection }
 );
 
 const IzuReflectionBubble: React.FC<IzuReflectionBubbleProps> = ({ reflection }) => (
-  <div className="mx-auto w-full max-w-[720px]">
+  <div className="mx-auto w-full px-2 sm:px-4">
     {ENABLE_TAROT_TEST_MODE && (
       <div className="mb-2 flex justify-center px-4 text-center">
         <ReflectionDebugLabel reflection={reflection} />
       </div>
     )}
 
-    {/* Keep the reflection inside the artwork on every viewport. */}
-    <section
-      aria-labelledby="izu-reflection-title"
-      className="relative"
-    >
+    {/* Main wrapper keeping the composition centered */}
+    <div className="relative mx-auto w-full max-w-[760px]">
+      {/* Separated bubble asset with CSS drop shadow */}
       <img
-        src="/ui/izu-message-bubble.png"
-        alt="Izu message bubble"
-        className="h-auto w-full"
+        src="/ui/Ms1.png"
+        alt="Message bubble background"
+        className="h-auto w-full drop-shadow-[0_0_20px_rgba(124,58,237,0.22)]"
       />
-      <div className="absolute left-[8%] top-[10%] flex h-[66%] w-[72%] flex-col items-center justify-center overflow-hidden text-center sm:left-[19%] sm:top-[31%] sm:block sm:h-auto sm:w-[60%] sm:max-w-[520px]">
-        <ReflectionContent
-          reflection={reflection}
-          titleId="izu-reflection-title"
-        />
+
+      {/* Message body text overlay strictly centered relative to the bubble center line */}
+      <div className="absolute left-1/2 top-[30%] w-[76%] max-w-[420px] -translate-x-1/2 text-center sm:top-[34%] sm:w-[70%] sm:max-w-[560px]">
+        <p className="whitespace-pre-line font-body text-[11px] font-normal leading-[1.5] text-white min-[390px]:text-[12px] min-[390px]:leading-[1.6] sm:text-[14px] sm:leading-[1.7] md:text-[16px] md:leading-[1.7]">
+          {reflection.message}
+        </p>
       </div>
-    </section>
+
+      {/* Separated Izu character layer */}
+      <img
+        src="/ui/izu.png"
+        alt="Izu character"
+        className="absolute right-[-4%] bottom-[-10%] w-[24%] sm:right-[2%] sm:bottom-[-19%] sm:w-[26%] max-w-[200px] drop-shadow-[0_4px_12px_rgba(0,0,0,0.5)] transition-all duration-300"
+      />
+    </div>
   </div>
 );
 

@@ -291,7 +291,7 @@ const RevealModal: React.FC<RevealModalProps> = ({
                     initial={{ opacity: 0, y: 10 }}
                     animate={{ opacity: 1, y: 0 }}
                     transition={{ delay: 0.3 }}
-                    className="px-4 pb-4 sm:px-8"
+                    className="px-4 pb-10 sm:px-8"
                   >
                     <div
                       className="h-px mb-4"
@@ -315,7 +315,7 @@ const RevealModal: React.FC<RevealModalProps> = ({
             </AnimatePresence>
 
             {/* Story download and close actions */}
-            <div className="relative z-20 flex flex-col items-center gap-3 bg-gradient-to-t from-slate-950 via-slate-950/95 to-transparent px-4 pb-5 pt-8 sm:pb-8">
+            <div className="relative z-20 flex flex-col items-center gap-3 bg-gradient-to-t from-slate-950 via-slate-950/95 to-transparent px-4 pb-12 pt-8 sm:pb-20">
               <div className="flex w-full flex-col items-center gap-3 sm:w-auto sm:flex-row">
                 {revealedCount >= 3 && (
                   <button
