@@ -57,13 +57,13 @@ const DailyTarotMode: React.FC<DailyTarotModeProps> = ({ cards, language, izuMod
         <h2
           id="daily-card-heading"
           className={[
-            'font-cinzel text-lg tracking-widest',
-            izuMode ? 'text-purple-glow text-glow-purple' : 'text-gold text-glow-gold',
+            'font-pixel text-lg tracking-widest',
+            izuMode ? 'text-izu-purple-soft text-glow-purple' : 'text-izu-gold text-glow-gold',
           ].join(' ')}
         >
           {language === 'th' ? 'ไพ่ประจำวัน' : 'Daily Card'}
         </h2>
-        <p className="mt-2 font-cormorant text-lg italic text-purple-light/70">
+        <p className="mt-2 font-body text-base text-izu-muted/70">
           {selectedCard ? COPY[language].stored : COPY[language].instruction}
         </p>
       </div>
@@ -79,7 +79,7 @@ const DailyTarotMode: React.FC<DailyTarotModeProps> = ({ cards, language, izuMod
           style={{ transformStyle: 'preserve-3d' }}
         >
           <div
-            className="absolute inset-0 box-border overflow-hidden rounded-[10px] border border-gold/75 bg-gradient-to-br from-indigo-deep via-purple-mystic to-navy shadow-[0_0_28px_rgba(251,191,36,0.38),0_16px_45px_rgba(0,0,0,0.45)]"
+            className="absolute inset-0 box-border overflow-hidden rounded-md border border-izu-gold/75 bg-gradient-to-br from-indigo-deep via-purple-mystic to-navy shadow-[0_0_28px_rgba(251,191,36,0.38),0_16px_45px_rgba(0,0,0,0.45)]"
             style={{
               backfaceVisibility: 'hidden',
             }}
@@ -94,10 +94,10 @@ const DailyTarotMode: React.FC<DailyTarotModeProps> = ({ cards, language, izuMod
 
           <div
             className={[
-              'absolute inset-0 box-border overflow-hidden rounded-[10px] border bg-gradient-to-br from-indigo-deep via-purple-mystic to-navy',
+              'absolute inset-0 box-border overflow-hidden rounded-md border bg-gradient-to-br from-indigo-deep via-purple-mystic to-navy',
               izuMode
-                ? 'border-purple-light/80 shadow-[0_0_30px_rgba(167,139,250,0.48),0_16px_45px_rgba(0,0,0,0.45)]'
-                : 'border-gold/80 shadow-[0_0_30px_rgba(251,191,36,0.42),0_16px_45px_rgba(0,0,0,0.45)]',
+                ? 'border-izu-purple-soft/80 shadow-[0_0_30px_rgba(167,139,250,0.48),0_16px_45px_rgba(0,0,0,0.45)]'
+                : 'border-izu-gold/80 shadow-[0_0_30px_rgba(251,191,36,0.42),0_16px_45px_rgba(0,0,0,0.45)]',
             ].join(' ')}
             style={{
               backfaceVisibility: 'hidden',
@@ -116,29 +116,24 @@ const DailyTarotMode: React.FC<DailyTarotModeProps> = ({ cards, language, izuMod
           transition={{ delay: 0.5, duration: 0.5 }}
           className="w-full max-w-md space-y-3"
         >
-          <p className="font-inter text-xs uppercase tracking-widest text-white/35">
+          <p className="font-pixel text-[11px] uppercase tracking-widest text-white/35">
             {COPY[language].keyword}
           </p>
           <div className="flex flex-wrap justify-center gap-2">
             {selectedCard.keywords[language].map((keyword) => (
               <span
                 key={keyword}
-                className="rounded-full border border-purple-light/20 bg-purple-mystic/20 px-3 py-1 font-inter text-xs text-purple-light"
+                className="rounded-md border border-izu-purple-soft/20 bg-izu-purple/20 px-3 py-1 font-pixel text-xs text-izu-purple-soft"
               >
                 {keyword}
               </span>
             ))}
           </div>
-          <p className="font-inter text-xs uppercase tracking-widest text-white/35">
+          <p className="font-pixel text-[11px] uppercase tracking-widest text-white/35">
             {COPY[language].meaning}
           </p>
           <p
-            className={[
-              'leading-relaxed',
-              izuMode
-                ? 'font-cormorant text-base italic text-purple-glow/90'
-                : 'font-inter text-sm text-slate-300/85',
-            ].join(' ')}
+            className="leading-relaxed font-body text-sm text-izu-text/90"
           >
             {meaning}
           </p>
@@ -147,13 +142,13 @@ const DailyTarotMode: React.FC<DailyTarotModeProps> = ({ cards, language, izuMod
         <motion.button
           type="button"
           onClick={handleDraw}
-          whileHover={{ y: -2, scale: 1.02 }}
-          whileTap={{ scale: 0.98 }}
+          whileHover={{ y: -1, scale: 1.01 }}
+          whileTap={{ scale: 0.99 }}
           className={[
-            'w-full max-w-xs rounded-full px-5 py-3 font-cinzel text-xs uppercase tracking-widest transition-colors focus:outline-none focus-visible:ring-2 sm:px-8',
+            'w-full max-w-xs rounded-md px-5 py-3 font-pixel text-xs uppercase tracking-widest transition-colors focus:outline-none focus-visible:ring-2 sm:px-8',
             izuMode
-              ? 'border border-purple-light/40 bg-purple-mystic/20 text-purple-glow focus-visible:ring-purple-light'
-              : 'border border-gold/50 bg-gold/10 text-gold focus-visible:ring-gold',
+              ? 'pixel-btn-purple focus-visible:ring-izu-purple-soft'
+              : 'pixel-btn-gold focus-visible:ring-izu-gold-soft',
           ].join(' ')}
         >
           {COPY[language].draw}

@@ -127,7 +127,7 @@ function getFittedWrappedText(
 
   while (fontSize > minimumFontSize) {
     context.font = language === 'th'
-      ? `400 ${fontSize}px Inter, "Noto Sans Thai", Arial, sans-serif`
+      ? `400 ${fontSize}px "IBM Plex Sans Thai", "Noto Sans Thai", sans-serif`
       : `400 ${fontSize}px Inter, Arial, sans-serif`;
     const lines = getWrappedLines(context, text, maxWidth);
     if (lines.length <= maxLines) {
@@ -141,7 +141,7 @@ function getFittedWrappedText(
   }
 
   context.font = language === 'th'
-    ? `400 ${minimumFontSize}px Inter, "Noto Sans Thai", Arial, sans-serif`
+    ? `400 ${minimumFontSize}px "IBM Plex Sans Thai", "Noto Sans Thai", sans-serif`
     : `400 ${minimumFontSize}px Inter, Arial, sans-serif`;
   return {
     lines: getWrappedLines(context, text, maxWidth).slice(0, maxLines),
@@ -217,14 +217,14 @@ export async function createReadingStoryImage({
   context.shadowColor = 'rgba(251, 191, 36, 0.35)';
   context.shadowBlur = 22;
   context.fillStyle = '#FDE68A';
-  context.font = '700 66px "Cinzel Decorative", Georgia, serif';
+  context.font = '700 66px "Pixelify Sans", "Press Start 2P", monospace';
   context.fillText('IZU TAROT', 540, 145);
   context.shadowBlur = 0;
 
   context.fillStyle = 'rgba(226, 232, 240, 0.78)';
   context.font = language === 'th'
-    ? '400 31px Inter, "Noto Sans Thai", Arial, sans-serif'
-    : 'italic 34px "Cormorant Garamond", Georgia, serif';
+    ? '400 31px "IBM Plex Sans Thai", "Noto Sans Thai", sans-serif'
+    : '34px "Pixelify Sans", monospace';
   context.fillText(STORY_COPY[language].subtitle, 540, 215);
 
   const cardWidth = 230;
@@ -237,8 +237,8 @@ export async function createReadingStoryImage({
     const x = cardsStartX + index * (cardWidth + cardGap);
     context.fillStyle = index === 2 ? '#FBBF24' : '#C4B5FD';
     context.font = language === 'th'
-      ? '500 28px Inter, "Noto Sans Thai", Arial, sans-serif'
-      : '600 25px Inter, Arial, sans-serif';
+      ? '500 28px "IBM Plex Sans Thai", "Noto Sans Thai", sans-serif'
+      : '600 25px "Pixelify Sans", monospace';
     context.fillText(POSITION_LABELS[language][index], x + cardWidth / 2, 304);
 
     context.save();
@@ -260,7 +260,7 @@ export async function createReadingStoryImage({
     context.restore();
 
     context.fillStyle = '#F8FAFC';
-    context.font = '500 27px Inter, Arial, sans-serif';
+    context.font = '500 27px "Pixelify Sans", monospace';
     drawCenteredWrappedText(
       context,
       card.name,
@@ -289,8 +289,8 @@ export async function createReadingStoryImage({
 
   context.fillStyle = '#FBBF24';
   context.font = language === 'th'
-    ? '600 28px Inter, "Noto Sans Thai", Arial, sans-serif'
-    : '700 29px "Cinzel Decorative", Georgia, serif';
+    ? '600 28px "IBM Plex Sans Thai", "Noto Sans Thai", sans-serif'
+    : '700 29px "Pixelify Sans", monospace';
   context.fillText(reflection.title, reflectionCenterX, reflectionY);
 
   context.fillStyle = '#F1F5F9';
@@ -302,7 +302,7 @@ export async function createReadingStoryImage({
     language,
   );
   context.font = language === 'th'
-    ? `400 ${fittedReflection.fontSize}px Inter, "Noto Sans Thai", Arial, sans-serif`
+    ? `400 ${fittedReflection.fontSize}px "IBM Plex Sans Thai", "Noto Sans Thai", sans-serif`
     : `400 ${fittedReflection.fontSize}px Inter, Arial, sans-serif`;
   fittedReflection.lines.forEach((line, index) => {
     context.fillText(

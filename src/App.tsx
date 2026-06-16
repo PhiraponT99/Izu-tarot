@@ -92,7 +92,7 @@ const App: React.FC = () => {
         izuMode ? 'izu-mode-active' : '',
       ].join(' ')}
       style={{
-        background: 'radial-gradient(ellipse at 50% 45%, #1E1B4B 0%, #0F172A 55%, #080E1A 100%)',
+        background: 'radial-gradient(ellipse at 50% 45%, var(--izu-panel-soft) 0%, var(--izu-bg) 55%, #040610 100%)',
       }}
     >
       {/* ── Fixed background layers (below all content) ── */}
@@ -120,8 +120,8 @@ const App: React.FC = () => {
             animate={{ opacity: 1, x: 0 }}
             transition={{ duration: 0.8, ease: 'easeOut' }}
             className={[
-              'font-cinzel text-lg tracking-widest sm:text-2xl',
-              izuMode ? 'text-purple-glow text-glow-purple' : 'text-gold text-glow-gold',
+              'font-pixel text-lg tracking-widest sm:text-2xl',
+              izuMode ? 'text-izu-purple-soft text-glow-purple' : 'text-izu-gold text-glow-gold',
             ].join(' ')}
           >
             IZU TAROT
@@ -130,7 +130,7 @@ const App: React.FC = () => {
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             transition={{ delay: 0.3, duration: 0.6 }}
-            className="hidden font-cormorant text-xs italic tracking-wider text-purple-light/50 min-[430px]:block"
+            className="hidden font-body text-xs tracking-wider text-izu-purple-soft/50 min-[430px]:block"
           >
             {language === 'th' ? 'พื้นที่เล็ก ๆ สำหรับฟังเสียงข้างใน' : 'A mystical reading experience'}
           </motion.p>
@@ -154,13 +154,13 @@ const App: React.FC = () => {
             aria-label={language === 'en' ? 'Switch to Thai' : 'Switch to English'}
             title={language === 'en' ? 'Switch to Thai' : 'Switch to English'}
             className={[
-              'flex items-center gap-1 px-2 py-1.5 rounded-full text-xs font-inter border transition-all duration-300 focus:outline-none focus-visible:ring-2 sm:gap-1.5 sm:px-3',
-              'bg-white/5 border-white/15 text-white/70 hover:text-gold hover:border-gold/40 focus-visible:ring-gold',
+              'flex items-center gap-1 px-2 py-1.5 rounded-md text-[10px] font-pixel border transition-all duration-300 focus:outline-none focus-visible:ring-2 sm:gap-1.5 sm:px-3',
+              'bg-izu-panel-soft/50 border-white/10 text-white/70 hover:text-izu-gold hover:border-izu-gold/40 focus-visible:ring-izu-gold',
             ].join(' ')}
           >
-            <span className={language === 'en' ? 'text-gold font-bold' : 'text-white/40'}>EN</span>
+            <span className={language === 'en' ? 'text-izu-gold font-bold' : 'text-white/40'}>EN</span>
             <span className="text-white/20">|</span>
-            <span className={language === 'th' ? 'text-gold font-bold' : 'text-white/40'}>TH</span>
+            <span className={language === 'th' ? 'text-izu-gold font-bold' : 'text-white/40'}>TH</span>
           </button>
 
           {/* Izu Mode toggle */}
@@ -172,11 +172,11 @@ const App: React.FC = () => {
               ? (izuMode ? 'ปิดโหมดอิซุ' : 'เปิดโหมดอิซุ')
               : (izuMode ? 'Disable Izu Mode' : 'Enable Izu Mode')}
             className={[
-              'flex items-center gap-1.5 px-2 py-1.5 rounded-full text-xs font-inter sm:gap-2 sm:px-3',
+              'flex items-center gap-1.5 px-2 py-1.5 rounded-md text-[11px] font-pixel sm:gap-2 sm:px-3',
               'border transition-all duration-300 focus:outline-none focus-visible:ring-2',
               izuMode
-                ? 'bg-purple-mystic/20 border-purple-light/50 text-purple-light focus-visible:ring-purple-light'
-                : 'bg-white/5 border-white/15 text-white/50 hover:text-purple-light hover:border-purple-light/30 focus-visible:ring-purple-light',
+                ? 'bg-izu-purple/20 border-izu-purple-soft/50 text-izu-purple-soft focus-visible:ring-izu-purple-soft'
+                : 'bg-izu-panel-soft/50 border-white/10 text-white/50 hover:text-izu-purple-soft hover:border-izu-purple-soft/30 focus-visible:ring-izu-purple-soft',
             ].join(' ')}
           >
             <span className="text-base" aria-hidden="true">✦</span>
@@ -186,14 +186,14 @@ const App: React.FC = () => {
             {/* Toggle pill */}
             <span
               className={[
-                'inline-flex w-7 h-4 rounded-full transition-all duration-300 relative flex-shrink-0',
-                izuMode ? 'bg-purple-mystic' : 'bg-white/15',
+                'inline-flex w-7 h-4 rounded-[4px] transition-all duration-300 relative flex-shrink-0',
+                izuMode ? 'bg-izu-purple' : 'bg-white/15',
               ].join(' ')}
               aria-hidden="true"
             >
               <span
                 className={[
-                  'absolute top-0.5 w-3 h-3 rounded-full bg-white transition-all duration-300',
+                  'absolute top-0.5 w-3 h-3 rounded-[2px] bg-white transition-all duration-300',
                   izuMode ? 'left-[14px]' : 'left-0.5',
                 ].join(' ')}
                 aria-hidden="true"
@@ -227,12 +227,12 @@ const App: React.FC = () => {
                   : 'Place ambient.mp3 in /public to enable sound')
             }
             className={[
-              'flex h-8 w-8 items-center justify-center rounded-full sm:h-9 sm:w-9',
+              'flex h-8 w-8 items-center justify-center rounded-md sm:h-9 sm:w-9',
               'border transition-all duration-300 focus:outline-none focus-visible:ring-2',
               isPlaying
-                ? 'bg-gold/10 border-gold/40 text-gold focus-visible:ring-gold'
+                ? 'bg-izu-gold/10 border-izu-gold/40 text-izu-gold focus-visible:ring-izu-gold'
                 : canPlay
-                ? 'bg-white/5 border-white/15 text-white/40 hover:text-gold/60 hover:border-gold/20 focus-visible:ring-gold'
+                ? 'bg-izu-panel-soft/50 border-white/10 text-white/40 hover:text-izu-gold/60 hover:border-izu-gold/20 focus-visible:ring-izu-gold'
                 : 'bg-white/3 border-white/8 text-white/20 cursor-default focus-visible:ring-white/20',
             ].join(' ')}
           >
@@ -285,7 +285,7 @@ const App: React.FC = () => {
 
       {/* ── Footer — absolute at bottom, purely decorative ── */}
       <footer className="absolute bottom-0 left-0 right-0 z-10 text-center py-3 pointer-events-none">
-        <p className="font-inter text-[10px] text-white/15 tracking-[0.16em]">
+        <p className="font-pixel text-[9px] text-white/15 tracking-[0.12em]">
           IZU TAROT · MAJOR ARCANA · {new Date().getFullYear()}
         </p>
       </footer>

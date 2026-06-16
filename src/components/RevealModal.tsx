@@ -73,9 +73,9 @@ const RevealedCard: React.FC<{
       {/* Position label */}
       <span
             className={[
-              'font-cinzel text-xs tracking-widest uppercase px-3 py-1 rounded-full',
+              'font-pixel text-xs tracking-widest uppercase px-3 py-1 rounded-md',
               `bg-gradient-to-r ${POSITION_COLORS[position]}`,
-              position === 2 ? 'text-navy' : 'text-white',
+              position === 2 ? 'text-navy font-bold' : 'text-white font-bold',
             ].join(' ')}
           >
             {POSITION_LABELS[language][position]}
@@ -84,11 +84,11 @@ const RevealedCard: React.FC<{
       {/* Card face */}
       <div
         className={[
-          'relative aspect-[2/3] w-[clamp(108px,18vw,144px)] overflow-hidden rounded-[10px] border',
+          'relative aspect-[2/3] w-[clamp(108px,18vw,144px)] overflow-hidden rounded-md border',
           'box-border bg-gradient-to-br from-indigo-deep via-purple-mystic to-navy',
           position === 2
-            ? 'border-gold/80 shadow-[0_0_25px_rgba(251,191,36,0.45),0_8px_32px_rgba(0,0,0,0.5)]'
-            : 'border-purple-light/60 shadow-[0_0_20px_rgba(124,58,237,0.45),0_8px_32px_rgba(0,0,0,0.5)]',
+            ? 'border-izu-gold/80 shadow-[0_0_25px_rgba(251,191,36,0.45),0_8px_32px_rgba(0,0,0,0.5)]'
+            : 'border-izu-purple-soft/60 shadow-[0_0_20px_rgba(124,58,237,0.45),0_8px_32px_rgba(0,0,0,0.5)]',
         ].join(' ')}
       >
         <CardArtwork card={card} />
@@ -104,7 +104,7 @@ const RevealedCard: React.FC<{
             {card.keywords[language].map((kw) => (
               <span
                 key={kw}
-                className="text-xs font-inter px-2 py-0.5 rounded-full bg-purple-mystic/20 text-purple-light border border-purple-light/20"
+                className="text-[10px] font-pixel px-2 py-0.5 rounded-md bg-izu-purple/20 text-izu-purple-soft border border-izu-purple-soft/20"
               >
                 {kw}
               </span>
@@ -116,12 +116,7 @@ const RevealedCard: React.FC<{
             initial={false}
             animate={{ opacity: isVisible ? 1 : 0, y: isVisible ? 0 : 6 }}
             transition={{ delay: isVisible ? 0.6 : 0 }}
-            className={[
-              'text-center max-w-[140px] leading-relaxed',
-              izuMode
-                ? 'font-cormorant italic text-sm text-purple-glow/90'
-                : 'font-inter text-xs text-slate-300/80',
-            ].join(' ')}
+            className="text-center max-w-[140px] leading-relaxed font-body text-xs text-izu-text/90"
           >
             {izuMode ? card.izuReflection[language] : card.description[language]}
       </motion.p>
@@ -231,13 +226,13 @@ const RevealModal: React.FC<RevealModalProps> = ({
             animate={{ opacity: 1, scale: 1, y: 0 }}
             exit={{ opacity: 0, scale: 0.85, y: 30 }}
             transition={{ type: 'spring', stiffness: 200, damping: 25 }}
-            className="relative max-h-[calc(100dvh-1rem)] w-full max-w-3xl overflow-y-auto rounded-2xl sm:max-h-[90vh]"
+            className="relative max-h-[calc(100dvh-1rem)] w-full max-w-3xl overflow-y-auto rounded-lg sm:max-h-[90vh]"
             style={{
-              background:
-                'linear-gradient(145deg, rgba(30,27,75,0.95) 0%, rgba(15,23,42,0.98) 100%)',
-              border: '1px solid rgba(167,139,250,0.25)',
-              boxShadow:
-                '0 0 60px rgba(124,58,237,0.3), 0 25px 80px rgba(0,0,0,0.7)',
+              background: 'var(--izu-panel)',
+              border: `2px solid ${izuMode ? 'var(--izu-purple-soft)' : 'var(--izu-gold)'}`,
+              boxShadow: izuMode
+                ? 'inset 0 0 15px rgba(124,58,237,0.2), 0 0 50px rgba(124,58,237,0.35), 0 25px 80px rgba(0,0,0,0.7)'
+                : 'inset 0 0 15px rgba(251,191,36,0.15), 0 0 50px rgba(251,191,36,0.3), 0 25px 80px rgba(0,0,0,0.7)',
             }}
             onClick={(e) => e.stopPropagation()}
           >
@@ -257,8 +252,8 @@ const RevealModal: React.FC<RevealModalProps> = ({
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ delay: 0.1 }}
                 className={[
-                  'font-cinzel text-xl md:text-2xl mb-1',
-                  izuMode ? 'text-purple-glow text-glow-purple' : 'text-gold text-glow-gold',
+                  'font-pixel text-xl md:text-2xl mb-1',
+                  izuMode ? 'text-izu-purple-soft text-glow-purple' : 'text-izu-gold text-glow-gold',
                 ].join(' ')}
               >
                 {modalTitle}
@@ -268,7 +263,7 @@ const RevealModal: React.FC<RevealModalProps> = ({
                 initial={{ opacity: 0 }}
                 animate={{ opacity: 1 }}
                 transition={{ delay: 0.2 }}
-                className="font-cormorant italic text-purple-light/60 text-sm"
+                className="font-body text-xs text-izu-muted/70"
               >
                 {modalSubtitle}
               </motion.p>
@@ -329,10 +324,11 @@ const RevealModal: React.FC<RevealModalProps> = ({
                     onClick={handleSaveStoryImage}
                     disabled={isCreatingStory}
                     className={[
-                      'w-full max-w-xs rounded-full bg-gradient-to-r from-gold-dark to-gold px-8 py-3 sm:w-auto',
-                      'font-cinzel text-xs uppercase tracking-widest text-navy shadow-[0_0_24px_rgba(251,191,36,0.24)]',
-                      'transition-all duration-300 hover:brightness-110 focus:outline-none focus-visible:ring-2 focus-visible:ring-gold-light',
+                      'w-full max-w-xs rounded-md px-8 py-3 sm:w-auto',
+                      'font-pixel text-xs uppercase tracking-widest',
+                      'focus:outline-none focus-visible:ring-2',
                       'disabled:cursor-wait disabled:opacity-60',
+                      'pixel-btn-gold focus-visible:ring-izu-gold-soft',
                     ].join(' ')}
                   >
                     {isCreatingStory
@@ -346,11 +342,11 @@ const RevealModal: React.FC<RevealModalProps> = ({
                   type="button"
                   onClick={handleClose}
                   className={[
-                    'w-full max-w-xs rounded-full px-8 py-3 font-cinzel text-xs uppercase tracking-widest sm:w-auto',
-                    'transition-all duration-300 focus:outline-none focus-visible:ring-2',
+                    'w-full max-w-xs rounded-md px-8 py-3 font-pixel text-xs uppercase tracking-widest sm:w-auto',
+                    'focus:outline-none focus-visible:ring-2',
                     izuMode
-                      ? 'border border-purple-light/30 text-purple-light/60 hover:text-purple-light hover:border-purple-light/60 hover:bg-purple-mystic/10 focus-visible:ring-purple-light'
-                      : 'border border-gold/30 text-gold/60 hover:text-gold hover:border-gold/60 hover:bg-gold/5 focus-visible:ring-gold',
+                      ? 'pixel-btn-purple focus-visible:ring-izu-purple-soft'
+                      : 'pixel-btn-gold focus-visible:ring-izu-gold-soft',
                   ].join(' ')}
                 >
                   {language === 'th' ? 'ปิด' : 'Close'}

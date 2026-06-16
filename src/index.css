@@ -2,6 +2,24 @@
 @tailwind components;
 @tailwind utilities;
 
+:root {
+  --font-pixel-en: "Pixelify Sans", "Press Start 2P", "IBM Plex Sans Thai", "Noto Sans Thai", monospace;
+  --font-thai: "IBM Plex Sans Thai", "Noto Sans Thai", sans-serif;
+  --font-body: var(--font-thai);
+
+  --izu-bg: #090C1F;
+  --izu-panel: #11143A;
+  --izu-panel-soft: #171A45;
+  --izu-indigo: #2B235F;
+  --izu-purple: #7C3AED;
+  --izu-purple-soft: #A78BFA;
+  --izu-gold: #FBBF24;
+  --izu-gold-soft: #FDE68A;
+  --izu-cream: #FFF1C2;
+  --izu-text: #F8FAFC;
+  --izu-muted: #C4B5FD;
+}
+
 /* ── Base Reset & Body ── */
 @layer base {
   * {
@@ -17,9 +35,9 @@
   }
 
   body {
-    background-color: #0F172A;
-    color: #E2E8F0;
-    font-family: 'Inter', sans-serif;
+    background-color: var(--izu-bg);
+    color: var(--izu-text);
+    font-family: var(--font-body);
     -webkit-font-smoothing: antialiased;
   }
 }
@@ -288,4 +306,81 @@
     transform-origin: center bottom;
     margin-top: -100px;
   }
+}
+
+/* ── Pixel Fantasy RPG Styling Utilities ── */
+.rpg-panel-gold {
+  background-color: var(--izu-panel);
+  border: 2px solid var(--izu-gold);
+  box-shadow: 
+    inset -2px -2px 0 0 #D97706,
+    inset 2px 2px 0 0 var(--izu-gold-soft),
+    0 4px 16px rgba(0,0,0,0.5);
+}
+
+.rpg-panel-purple {
+  background-color: var(--izu-panel);
+  border: 2px solid var(--izu-purple);
+  box-shadow: 
+    inset -2px -2px 0 0 #5B21B6,
+    inset 2px 2px 0 0 var(--izu-purple-soft),
+    0 4px 16px rgba(0,0,0,0.5);
+}
+
+.pixel-btn-gold {
+  background: linear-gradient(to bottom, var(--izu-panel-soft), var(--izu-panel));
+  border: 2px solid var(--izu-gold);
+  color: var(--izu-gold-soft);
+  position: relative;
+  box-shadow: 
+    inset -1px -1px 0 0 #D97706,
+    inset 1px 1px 0 0 var(--izu-gold-soft),
+    0 2px 6px rgba(0,0,0,0.4);
+  transition: all 0.15s ease;
+}
+
+.pixel-btn-gold:hover:not(:disabled) {
+  background: linear-gradient(to bottom, var(--izu-indigo), var(--izu-panel-soft));
+  color: var(--izu-cream);
+  box-shadow: 
+    inset -1px -1px 0 0 #D97706,
+    inset 1px 1px 0 0 var(--izu-gold),
+    0 0 12px rgba(251,191,36,0.3);
+}
+
+.pixel-btn-gold:active:not(:disabled) {
+  transform: translateY(1px);
+  box-shadow: 
+    inset 1px 1px 0 0 #D97706,
+    inset -1px -1px 0 0 var(--izu-gold-soft),
+    0 1px 2px rgba(0,0,0,0.4);
+}
+
+.pixel-btn-purple {
+  background: linear-gradient(to bottom, var(--izu-panel-soft), var(--izu-panel));
+  border: 2px solid var(--izu-purple);
+  color: var(--izu-purple-soft);
+  position: relative;
+  box-shadow: 
+    inset -1px -1px 0 0 #5B21B6,
+    inset 1px 1px 0 0 var(--izu-purple-soft),
+    0 2px 6px rgba(0,0,0,0.4);
+  transition: all 0.15s ease;
+}
+
+.pixel-btn-purple:hover:not(:disabled) {
+  background: linear-gradient(to bottom, var(--izu-indigo), var(--izu-panel-soft));
+  color: var(--izu-muted);
+  box-shadow: 
+    inset -1px -1px 0 0 #5B21B6,
+    inset 1px 1px 0 0 var(--izu-purple),
+    0 0 12px rgba(124,58,237,0.3);
+}
+
+.pixel-btn-purple:active:not(:disabled) {
+  transform: translateY(1px);
+  box-shadow: 
+    inset 1px 1px 0 0 #5B21B6,
+    inset -1px -1px 0 0 var(--izu-purple-soft),
+    0 1px 2px rgba(0,0,0,0.4);
 }

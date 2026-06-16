@@ -13,18 +13,18 @@ const ReflectionContent: React.FC<ReflectionContentProps> = ({ reflection, title
   <>
     <h3
       id={titleId}
-      className="mb-2 font-cinzel text-xs uppercase tracking-widest text-gold sm:text-sm"
+      className="mb-2 font-pixel text-xs uppercase tracking-widest text-izu-gold sm:text-sm"
     >
       {reflection.title}
     </h3>
-    <p className="whitespace-pre-line font-inter text-sm font-normal leading-[1.7] text-slate-100 sm:text-[15px] md:text-base">
+    <p className="whitespace-pre-line font-body text-sm font-normal leading-[1.7] text-slate-100 sm:text-[15px] md:text-base">
       {reflection.message}
     </p>
   </>
 );
 
 const ReflectionDebugLabel: React.FC<IzuReflectionBubbleProps> = ({ reflection }) => (
-  <p className="font-inter  tracking-wider  text-white opacity-55 md:text-[11px]">
+  <p className="font-pixel tracking-wider text-white opacity-55 md:text-[10px]">
     Matched reflection group: {reflection.group}
   </p>
 );
@@ -44,7 +44,7 @@ const IzuReflectionBubble: React.FC<IzuReflectionBubbleProps> = ({ reflection })
         alt="Izu message bubble"
         className="h-auto w-full"
       />
-      <div className="-mt-5 rounded-xl border border-purple-light/20 bg-[#17183f]/95 px-4 py-4 shadow-[0_0_24px_rgba(124,58,237,0.18)]">
+      <div className="-mt-5 rounded-md border border-izu-purple-soft/25 bg-izu-panel-soft/95 px-4 py-4 shadow-[0_0_24px_rgba(124,58,237,0.15)]">
         <ReflectionContent
           reflection={reflection}
           titleId="izu-reflection-title-mobile"

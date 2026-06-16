@@ -31,7 +31,7 @@ const SelectedCardsTray: React.FC<SelectedCardsTrayProps> = ({
             'relative aspect-[2/3] w-[clamp(58px,18vw,76px)] flex-none',
             card
               ? 'bg-transparent'
-              : 'rounded-lg border border-dashed border-purple-light/20 bg-white/[0.025]',
+              : 'rounded-md border border-dashed border-izu-muted/25 bg-white/[0.025]',
           ].join(' ')}
         >
           <AnimatePresence mode="wait">
@@ -55,12 +55,12 @@ const SelectedCardsTray: React.FC<SelectedCardsTrayProps> = ({
                       : `Deselect card ${index + 1}`
                   }
                   className={[
-                    'absolute inset-0 block h-full w-full cursor-pointer overflow-hidden rounded-[10px] border p-0',
+                    'absolute inset-0 block h-full w-full cursor-pointer overflow-hidden rounded-md border p-0',
                     'box-border bg-gradient-to-br from-indigo-deep via-purple-mystic to-navy',
                     'transition-shadow duration-200 focus:outline-none focus-visible:ring-2',
                     izuMode
-                      ? 'border-purple-light/80 shadow-[0_0_18px_rgba(167,139,250,0.55),0_0_32px_rgba(124,58,237,0.28)] hover:shadow-[0_0_24px_rgba(167,139,250,0.72),0_0_40px_rgba(124,58,237,0.35)]'
-                      : 'border-gold/90 shadow-[0_0_18px_rgba(251,191,36,0.55),0_0_32px_rgba(251,191,36,0.24)] hover:shadow-[0_0_24px_rgba(251,191,36,0.75),0_0_40px_rgba(251,191,36,0.32)]',
+                      ? 'border-izu-purple-soft/80 shadow-[0_0_18px_rgba(167,139,250,0.45),0_0_32px_rgba(124,58,237,0.2)] hover:shadow-[0_0_24px_rgba(167,139,250,0.6),0_0_40px_rgba(124,58,237,0.3)] focus-visible:ring-izu-purple-soft'
+                      : 'border-izu-gold/90 shadow-[0_0_18px_rgba(251,191,36,0.45),0_0_32px_rgba(251,191,36,0.2)] hover:shadow-[0_0_24px_rgba(251,191,36,0.6),0_0_40px_rgba(251,191,36,0.25)] focus-visible:ring-izu-gold',
                   ].join(' ')}
                 >
                   <img
@@ -73,11 +73,11 @@ const SelectedCardsTray: React.FC<SelectedCardsTrayProps> = ({
                 <motion.span
                   initial={{ scale: 0 }}
                   animate={{ scale: 1 }}
-                  className="pointer-events-none absolute -right-2 -top-2 z-30 flex h-5 w-5 items-center justify-center rounded-full font-cinzel text-[10px] font-bold"
+                  className="pointer-events-none absolute -right-2 -top-2 z-30 flex h-5 w-5 items-center justify-center rounded-[4px] font-pixel text-[10px] font-bold"
                   style={{
                     background: izuMode
-                      ? 'radial-gradient(circle, #A78BFA 0%, #7C3AED 100%)'
-                      : 'radial-gradient(circle, #FBBF24 0%, #D97706 100%)',
+                      ? 'radial-gradient(circle, var(--izu-purple-soft) 0%, var(--izu-purple) 100%)'
+                      : 'radial-gradient(circle, var(--izu-gold-soft) 0%, var(--izu-gold) 100%)',
                     color: izuMode ? '#fff' : '#0F172A',
                     boxShadow: izuMode
                       ? '0 0 10px rgba(167,139,250,0.8)'
@@ -92,7 +92,7 @@ const SelectedCardsTray: React.FC<SelectedCardsTrayProps> = ({
                 key="empty"
                 initial={{ opacity: 0 }}
                 animate={{ opacity: 1 }}
-                className="font-cinzel text-xs text-purple-light/25"
+                className="font-pixel text-[11px] text-izu-muted/30"
               >
                 {index + 1}
               </motion.span>

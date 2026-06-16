@@ -114,8 +114,8 @@ const TarotBoard: React.FC<TarotBoardProps> = ({
         animate={{ opacity: 1, y: 0 }}
         transition={{ delay: 0.4, duration: 0.6 }}
         className={[
-          'font-cormorant italic text-base text-center px-4',
-          izuMode ? 'text-purple-glow/70' : 'text-purple-light/50',
+          'font-body text-base text-center px-4',
+          izuMode ? 'text-izu-purple-soft/70' : 'text-izu-muted/50',
         ].join(' ')}
       >
         {tagline}
@@ -130,8 +130,8 @@ const TarotBoard: React.FC<TarotBoardProps> = ({
           exit={{ opacity: 0, y: 6 }}
           transition={{ duration: 0.35 }}
           className={[
-            'min-h-[1.75rem] px-4 text-center font-cormorant text-base italic sm:text-lg',
-            izuMode ? 'text-purple-glow text-glow-purple' : 'text-purple-light/80',
+            'min-h-[1.75rem] px-4 text-center font-body text-base sm:text-lg',
+            izuMode ? 'text-izu-purple-soft text-glow-purple' : 'text-izu-muted/80',
           ].join(' ')}
         >
           {STATUS[language][selectedIds.length] ?? ''}
@@ -200,28 +200,22 @@ const TarotBoard: React.FC<TarotBoardProps> = ({
               id="reveal-btn"
               onClick={onReveal}
               className={[
-                'relative w-full max-w-sm rounded-full px-5 py-4 font-cinzel text-xs uppercase tracking-widest sm:px-10 sm:text-sm',
-                'transition-all duration-300',
+                'relative w-full max-w-sm rounded-md px-5 py-4 font-pixel text-xs uppercase tracking-widest sm:px-10 sm:text-sm',
                 'focus:outline-none focus-visible:ring-2 focus-visible:ring-offset-2',
                 izuMode
-                  ? 'bg-gradient-to-r from-purple-mystic to-indigo-deep text-purple-glow border border-purple-light/40 focus-visible:ring-purple-light'
-                  : 'bg-gradient-to-r from-gold-dark to-gold text-navy border border-gold/60 focus-visible:ring-gold',
+                  ? 'pixel-btn-purple focus-visible:ring-izu-purple-soft'
+                  : 'pixel-btn-gold focus-visible:ring-izu-gold-soft',
               ].join(' ')}
-              style={{
-                boxShadow: izuMode
-                  ? '0 0 30px rgba(124,58,237,0.5), 0 0 60px rgba(124,58,237,0.25)'
-                  : '0 0 30px rgba(251,191,36,0.5), 0 0 60px rgba(251,191,36,0.25)',
-              }}
             >
-              {/* Shimmer sweep — CSS class avoids background/backgroundSize inline conflict */}
+              {/* Shimmer sweep */}
               <span
                 className={[
-                  'absolute inset-0 rounded-full opacity-40 pointer-events-none',
+                  'absolute inset-0 rounded-md opacity-25 pointer-events-none',
                   izuMode ? 'shimmer-purple' : 'shimmer-gold',
                 ].join(' ')}
                 aria-hidden="true"
               />
-              <span className="relative z-10">
+              <span className="relative z-10 font-bold">
                 {izuMode
                   ? language === 'th' ? '✦ รับข้อความสะท้อนใจ ✦' : '✦ Receive Your Reflection ✦'
                   : language === 'th' ? '✦ เปิดข้อความจากไพ่ ✦' : '✦ Reveal My Reading ✦'}
@@ -232,7 +226,7 @@ const TarotBoard: React.FC<TarotBoardProps> = ({
             <button
               id="reset-btn"
               onClick={onReset}
-              className="font-inter text-xs text-white/30 hover:text-white/60 tracking-widest uppercase transition-colors duration-300 focus:outline-none focus-visible:ring-1 focus-visible:ring-white/30 rounded"
+              className="font-pixel text-xs text-white/30 hover:text-white/60 tracking-widest uppercase transition-colors duration-300 focus:outline-none focus-visible:ring-1 focus-visible:ring-white/30 rounded"
             >
               {language === 'th' ? '↺ เลือกไพ่ใหม่' : '↺ Start Over'}
             </button>

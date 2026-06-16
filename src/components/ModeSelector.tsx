@@ -22,7 +22,7 @@ const LABELS: Record<Language, Record<ReadingMode, string>> = {
 
 const ModeSelector: React.FC<ModeSelectorProps> = ({ mode, onChange, language }) => (
   <div
-    className="flex items-center rounded-full border border-white/10 bg-navy/60 p-1 shadow-lg backdrop-blur-sm"
+    className="flex items-center rounded-md border border-white/10 bg-izu-panel/80 p-1 shadow-lg backdrop-blur-sm"
     role="group"
     aria-label={language === 'th' ? 'เลือกรูปแบบการเปิดไพ่' : 'Choose reading mode'}
   >
@@ -36,10 +36,10 @@ const ModeSelector: React.FC<ModeSelectorProps> = ({ mode, onChange, language })
           onClick={() => onChange(option)}
           aria-pressed={isActive}
           className={[
-            'rounded-full px-3 py-1.5 font-inter text-[11px] transition-all duration-300 focus:outline-none focus-visible:ring-2 focus-visible:ring-gold',
+            'rounded-md px-3 py-1.5 font-pixel text-[11px] transition-all duration-300 focus:outline-none focus-visible:ring-2 focus-visible:ring-izu-gold',
             isActive
-              ? 'bg-gold/12 text-gold shadow-[0_0_14px_rgba(251,191,36,0.12)]'
-              : 'text-white/45 hover:text-white/75',
+              ? 'bg-izu-gold/15 text-izu-gold shadow-[0_0_14px_rgba(251,191,36,0.12)] border border-izu-gold/30'
+              : 'text-white/45 hover:text-white/75 border border-transparent',
           ].join(' ')}
         >
           {LABELS[language][option]}

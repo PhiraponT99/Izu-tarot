@@ -58,20 +58,20 @@ const AskIzuPanel: React.FC<AskIzuPanelProps> = ({ cards, language, izuMode }) =
       initial={{ opacity: 0, y: 12 }}
       animate={{ opacity: 1, y: 0 }}
       transition={{ delay: 0.35, duration: 0.45 }}
-      className="mx-4 mb-4 rounded-2xl border border-purple-light/20 bg-slate-950/35 p-4 text-left sm:mx-8 sm:p-5"
+      className="mx-4 mb-4 rounded-lg border border-izu-purple-soft/20 bg-izu-panel/40 p-4 text-left sm:mx-8 sm:p-5"
       aria-labelledby="ask-izu-heading"
     >
       <div className="text-center">
         <h3
           id="ask-izu-heading"
           className={[
-            'font-cinzel text-base tracking-widest',
-            izuMode ? 'text-purple-glow' : 'text-gold',
+            'font-pixel text-base tracking-widest',
+            izuMode ? 'text-izu-purple-soft' : 'text-izu-gold',
           ].join(' ')}
         >
           {copy.title}
         </h3>
-        <p className="mt-1 font-cormorant text-sm italic text-purple-light/65">
+        <p className="mt-1 font-body text-xs text-izu-muted/65">
           {copy.intro}
         </p>
       </div>
@@ -82,10 +82,10 @@ const AskIzuPanel: React.FC<AskIzuPanelProps> = ({ cards, language, izuMode }) =
             <div
               key={`${message.role}-${index}`}
               className={[
-                'max-w-[90%] rounded-xl px-3 py-2 text-sm leading-relaxed',
+                'max-w-[90%] rounded-md px-3 py-2 text-sm leading-relaxed font-body',
                 message.role === 'user'
-                  ? 'ml-auto bg-gold/10 text-slate-200'
-                  : 'mr-auto border border-purple-light/15 bg-purple-mystic/15 text-purple-light/90',
+                  ? 'ml-auto bg-izu-gold/10 text-slate-200'
+                  : 'mr-auto border border-izu-purple-soft/15 bg-izu-purple/15 text-izu-purple-soft/90',
               ].join(' ')}
             >
               {message.content}
@@ -106,7 +106,7 @@ const AskIzuPanel: React.FC<AskIzuPanelProps> = ({ cards, language, izuMode }) =
           maxLength={600}
           rows={3}
           disabled={isLoading || limitReached}
-          className="w-full resize-none rounded-xl border border-white/10 bg-navy/70 px-3 py-2 font-inter text-sm text-slate-200 outline-none transition placeholder:text-white/25 focus:border-purple-light/40 focus:ring-1 focus:ring-purple-light/30 disabled:cursor-not-allowed disabled:opacity-50"
+          className="w-full resize-none rounded-md border border-white/10 bg-izu-bg/75 px-3 py-2 font-body text-sm text-slate-200 outline-none transition placeholder:text-white/25 focus:border-izu-purple-soft/40 focus:ring-1 focus:ring-izu-purple-soft/30 disabled:cursor-not-allowed disabled:opacity-50"
         />
 
         <div className="flex flex-col items-center justify-between gap-2 sm:flex-row">
@@ -117,11 +117,11 @@ const AskIzuPanel: React.FC<AskIzuPanelProps> = ({ cards, language, izuMode }) =
             type="submit"
             disabled={!question.trim() || isLoading || limitReached}
             className={[
-              'rounded-full border px-5 py-2 font-cinzel text-[11px] uppercase tracking-widest transition',
+              'rounded-md px-5 py-2 font-pixel text-[11px] uppercase tracking-widest transition',
               'disabled:cursor-not-allowed disabled:opacity-40',
               izuMode
-                ? 'border-purple-light/35 text-purple-glow hover:bg-purple-mystic/15'
-                : 'border-gold/35 text-gold hover:bg-gold/10',
+                ? 'pixel-btn-purple focus-visible:ring-izu-purple-soft'
+                : 'pixel-btn-gold focus-visible:ring-izu-gold-soft',
             ].join(' ')}
           >
             {isLoading ? copy.sending : copy.send}
