@@ -168,7 +168,7 @@ function drawCelestialDecoration(context: CanvasRenderingContext2D) {
   context.strokeStyle = 'rgba(196, 181, 253, 0.24)';
   context.lineWidth = 2;
   context.beginPath();
-  context.arc(540, 151, 54, 0.18 * Math.PI, 1.82 * Math.PI);
+  context.arc(540, 196, 54, 0.18 * Math.PI, 1.82 * Math.PI);
   context.stroke();
   context.restore();
 }
@@ -188,7 +188,7 @@ export async function createReadingStoryImage({
       if (!card.image) throw new Error(`Card image is missing for ${card.name}.`);
       return loadImage(card.image);
     })),
-    loadImage('/ui/Ms1.png'),
+    loadImage('/ui/Ms2.png'),
     loadImage('/ui/izu.png'),
   ]);
 
@@ -219,20 +219,20 @@ export async function createReadingStoryImage({
   context.shadowBlur = 22;
   context.fillStyle = '#FDE68A';
   context.font = '700 66px "Pixelify Sans", "Press Start 2P", monospace';
-  context.fillText('IZU TAROT', 540, 145);
+  context.fillText('IZU TAROT', 540, 190);
   context.shadowBlur = 0;
 
   context.fillStyle = 'rgba(226, 232, 240, 0.78)';
   context.font = language === 'th'
     ? '400 31px "IBM Plex Sans Thai", "Noto Sans Thai", sans-serif'
     : '34px "Pixelify Sans", monospace';
-  context.fillText(STORY_COPY[language].subtitle, 540, 215);
+  context.fillText(STORY_COPY[language].subtitle, 540, 260);
 
   const cardWidth = 230;
-  const cardHeight = 384;
+  const cardHeight = 345;
   const cardGap = 58;
   const cardsStartX = (STORY_WIDTH - cardWidth * 3 - cardGap * 2) / 2;
-  const cardY = 350;
+  const cardY = 440;
 
   cards.forEach((card, index) => {
     const x = cardsStartX + index * (cardWidth + cardGap);
@@ -240,7 +240,7 @@ export async function createReadingStoryImage({
     context.font = language === 'th'
       ? '500 28px "IBM Plex Sans Thai", "Noto Sans Thai", sans-serif'
       : '600 25px "Pixelify Sans", monospace';
-    context.fillText(POSITION_LABELS[language][index], x + cardWidth / 2, 304);
+    context.fillText(POSITION_LABELS[language][index], x + cardWidth / 2, 390);
 
     context.save();
     context.shadowColor = index === 2
@@ -266,7 +266,7 @@ export async function createReadingStoryImage({
       context,
       card.name,
       x + cardWidth / 2,
-      785,
+      840,
       cardWidth,
       32,
       2,
@@ -274,7 +274,7 @@ export async function createReadingStoryImage({
   });
 
   const bubbleX = 90;
-  const bubbleY = 930;
+  const bubbleY = 1040;
   const bubbleWidth = 900;
   const bubbleHeight = bubbleWidth * (bubbleImage.naturalHeight / bubbleImage.naturalWidth);
   
@@ -313,29 +313,16 @@ export async function createReadingStoryImage({
     ? `400 ${fittedReflection.fontSize}px "IBM Plex Sans Thai", "Noto Sans Thai", sans-serif`
     : `400 ${fittedReflection.fontSize}px Inter, Arial, sans-serif`;
 
-  const startY = bubbleY + bubbleHeight * 0.34 + fittedReflection.lineHeight / 2;
+  const textCenterY = bubbleY + bubbleHeight * 0.46;
+  const firstLineY = textCenterY - ((fittedReflection.lines.length - 1) * fittedReflection.lineHeight) / 2;
 
   fittedReflection.lines.forEach((line, index) => {
     context.fillText(
       line,
       reflectionCenterX,
-      startY + index * fittedReflection.lineHeight,
+      firstLineY + index * fittedReflection.lineHeight,
     );
   });
-
-  context.strokeStyle = 'rgba(251, 191, 36, 0.45)';
-  context.lineWidth = 2;
-  context.beginPath();
-  context.moveTo(390, 1744);
-  context.lineTo(690, 1744);
-  context.stroke();
-
-  context.fillStyle = 'rgba(253, 230, 138, 0.84)';
-  context.font = '500 25px Inter, Arial, sans-serif';
-  context.fillText('izu-tarot.vercel.app', 540, 1795);
-  context.fillStyle = 'rgba(196, 181, 253, 0.58)';
-  context.font = '400 20px Inter, Arial, sans-serif';
-  context.fillText('REFLECT, NOT PREDICT', 540, 1842);
 
   return new Promise((resolve, reject) => {
     canvas.toBlob(

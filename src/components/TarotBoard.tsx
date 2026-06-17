@@ -99,7 +99,7 @@ const TarotBoard: React.FC<TarotBoardProps> = ({
       ? 'พื้นที่เงียบ ๆ ให้คุณได้พักและกลับมาฟังเสียงข้างใน'
       : 'A quiet space to pause and listen to yourself.'
     : language === 'th'
-      ? 'ให้ไพ่ทั้งสามใบชวนคุณมองเรื่องราวในใจจากมุมใหม่'
+      ? 'ไพ่กำลังรออยู่ สามใบจะสะท้อนความรู้สึกในใจคุณ'
       : 'The cards await. Three will speak your truth.';
 
   return (
@@ -203,7 +203,7 @@ const TarotBoard: React.FC<TarotBoardProps> = ({
               id="reveal-btn"
               onClick={onReveal}
               className={[
-                'relative w-full max-w-sm rounded-md px-5 py-4 font-pixel text-xs uppercase tracking-widest sm:px-10 sm:text-sm',
+                'relative w-full max-w-[300px] sm:max-w-sm rounded-md px-4 py-2.5 sm:px-10 sm:py-4 font-pixel text-[11px] sm:text-sm uppercase tracking-widest mt-8 sm:mt-0 mx-auto',
                 'focus:outline-none focus-visible:ring-2 focus-visible:ring-offset-2',
                 izuMode
                   ? 'pixel-btn-purple focus-visible:ring-izu-purple-soft'
